@@ -1,0 +1,271 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-GLOS1
+TITLE: Ochrona głosu człowieka w pracy z AI: szerokie przeszukanie rozwiązań
+SOURCE_SET: mechanizmy z literatury i dokumentacji dotyczące pochodzenia i oznaczania słów człowieka, drogi od materiału pochodnego do źródła, kolejności człowiek–model, pomiaru głosu autora i stabilności zachowania; pytanie: jak pracować z AI tak, aby słowa, tok myślenia i autorstwo człowieka pozostały odróżnialne od materiału modelu i przetrwały kompresję, streszczanie, wyszukiwanie i przepisywanie
+SOURCES:
+  - TEI P5 Guidelines
+  - Sabelfeld & Myers 2003 (Language-Based Information-Flow Security)
+  - CaMeL (Debenedetti et al., arXiv 2503.18813)
+  - CoAuthor (Lee, Liang, Yang; arXiv 2201.06796)
+  - Claude Platform Docs: Citations
+  - Clean Language article (Tompkins & Lawley, Rapport 35)
+  - Focusing Six Steps (focusing.org)
+  - Oliver, Serovich & Mason 2005 (PMC1400594)
+RUN: 1
+FOCUS: pochodzenie na poziomie atomu i droga do słów źródła (leady L-01, L-04, L-06, L-10, L-12, L-17, L-18, L-19)
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-04
+ACCESS_LIMITATIONS:
+  - artykuły i strony odczytane narzędziem pobierania; numery sekcji, tabel i rysunków pochodzą z odczytanego tekstu
+  - artefakty pierwotne leadów L-05 (raport Biby) i L-09 (specyfikacja C2PA 2.2) nie zostały otwarte
+  - strona TEI `att.global.responsibility` w odczycie zawiera głównie listę elementów-członków, bez widocznego typu danych atrybutów
+  - plik wejściowy profilu nie ma pola `TARGET`; w `target` użyto pola `ZASADA`; wersja profilu nieznana
+  - pola `FUNCTION_PRIOR` i `SEAM_QUESTION` z pliku wejściowego wskazują miejsce w źródle i nie są twierdzeniami o źródle
+TARGET_PROFILE:
+  id: GLOS-ROZWIAZANIA-SZEROKO
+  version: UNKNOWN
+  target: neuralcore to interfejs dostrojony do człowieka, a nie do maszyny; AI ma naprawdę wspomagać myślenie, a nie myśleć za człowieka
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+TEI P5: element `choice` | https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-choice.html | grupuje alternatywne kodowania tego samego punktu tekstu; przykłady `sic`/`corr` i `orig`/`reg`; odsyła do `app` dla wielu świadków tekstu
+TEI P5: klasa `att.global.responsibility` | https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.responsibility.html | definiuje atrybuty `@cert` i `@resp` dostępne na elementach globalnych
+Sabelfeld & Myers: sekcje II–III, IV.D | https://www.cs.cornell.edu/andru/papers/jsac/sm-jsac03.pdf | etykiety bezpieczeństwa, `label creep`, etykieta `pc`, system typów bezpieczeństwa, deklasyfikacja
+CaMeL: sekcje 3.1, 5.2–5.4, 6, 7, 9 | https://arxiv.org/pdf/2503.18813 | tagi `capabilities` z pochodzeniem i czytelnikami, graf zależności `NORMAL`/`STRICT`, polityki sprawdzane przed wywołaniem narzędzia
+CoAuthor: Tabele 1–3, sekcje 4.1, 5.1.3, 5.2.2 | https://arxiv.org/pdf/2201.06796 | dziennik zdarzeń z polem `source` {User, API}, bloki zdarzeń, miara `written-by-writers rate`
+Claude Platform Docs: Citations | https://platform.claude.com/docs/en/build-with-claude/citations | `cited_text` z położeniem w dokumencie, trzy typy lokalizacji, niezgodność ze `structured outputs`
+Clean Language: składnia i 9 pytań | https://cleanlanguage.com/less-is-more-the-art-of-clean-language/ | składnia `And [słowa klienta] + And as/when + [pytanie] + [odniesienie]`, pytania z dosłownymi słowami klienta
+Focusing: kroki 3 i 4, sekcja instrukcji | https://focusing.org/sixsteps | `Handle` i `Resonating`: słowo sprawdzane względem `felt sense`
+Oliver, Serovich & Mason 2005: Recommendations | https://pmc.ncbi.nlm.nih.gov/articles/PMC1400594 | dwie wersje transkrypcji (naturalizowana i denaturalizowana), książka kodowa, okres refleksji
+UNKNOWN_REGIONS:
+  - TEI P5: sekcja 3.5 (CO.html) i rozdział 13 (aparat krytyczny `app`, `lem`, `rdg`, `wit`)
+  - Claude Platform Docs: strona `long-context-tips` (przykład z `<quotes>` i `<info>`)
+  - CaMeL: kod w repozytorium google-research i dodatki
+  - CoAuthor: strona coauthor.stanford.edu i pola zapisu `jsonl`
+  - Focusing: kroki Thinking at the Edge (PDF z folio) i A Process Model
+  - Clean Language: protokół wywiadu badawczego Tosey, Lawley & Meese 2014
+  - Biba 1977 (L-05) i C2PA 2.2 (L-09) w całości
+OUTSIDE_SCOPE:
+  - leady spoza listy Runu 1: L-02, L-03, L-07, L-08, L-11, L-13 do L-16 oraz L-20 do L-50
+
+DELTA
+NEW
+UNIT_ID: U-001
+NAME: Alternative Encodings with Responsibility Attributes
+LENS: LENS_ARTIFACT
+TYPE: schema
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Grupuje w jednym punkcie tekstu co najmniej dwa alternatywne kodowania tego samego fragmentu (brzmienie zastane i poprawione albo znormalizowane); element i jego alternatywy mogą nieść atrybuty odpowiedzialności `@resp` i pewności `@cert`.
+MINIMAL_FORM:
+  - `<choice>` = co najmniej 2 elementy z `model.choicePart` albo zagnieżdżone `<choice>`
+  - przykład ze strony: `<choice><sic>1724</sic><corr>1728</corr></choice>` oraz `<choice><orig>favour</orig><reg>favor</reg></choice>`
+  - `@resp` i `@cert` należą do `att.global.responsibility` i są wymienione wśród atrybutów `<choice>`; klasa jest członkiem `att.global`, w tym dla `sic`, `corr`, `orig`, `reg`
+  - dla wielu świadków jednego dzieła strona wskazuje `<app>` z rozdziału 13.1 zamiast `<choice>`
+SOURCE_ANCHOR:
+  - source: TEI P5 Guidelines
+    locator: https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-choice.html
+    anchor: `choice`, Attributes, Content model, Example, Note
+    revision: P5 4.12.0, rev. 113e933e2
+  - source: TEI P5 Guidelines
+    locator: https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.responsibility.html
+    anchor: `att.global.responsibility`
+    revision: P5 4.12.0, rev. 113e933e2
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - moduł `core` (element `choice`) i moduł `tei` (klasa `att.global.responsibility`)
+ENFORCEMENT: SCHEMA_CONSTRAINED
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: DATA_STRUCTURE, SCHEMA
+ADOPTION_NOTES: Odpowiada punktowi (a) z `CO MA WYJŚĆ` w profilu: para brzmienie zastane / brzmienie poprawione z miejscem na wskazanie odpowiedzialnego. Źródło nie opisuje, jak taki zapis przetrwa streszczenie albo wyszukiwanie.
+UNKNOWN:
+  - evidence: typ danych i sposób wskazania odpowiedzialnego w `@resp` nie zostały odczytane
+  - evidence: wartości `@generatedBy` (klasa `att.cmc`, wymieniona wśród atrybutów `<choice>`) nie zostały otwarte
+LIMITS:
+  - przykłady na stronie nie używają `@resp` ani `@cert`
+  - strona nie pokazuje `@resp` jako obowiązkowego
+  - alternatywy w `<choice>` można traktować jako wzajemnie wykluczające się albo jako równoległe (uwaga na stronie)
+  - sekcja 3.5 i rozdział 13 nie zostały otwarte
+
+NEW
+UNIT_ID: U-002
+NAME: Capability-Tagged Values with Dependency-Tracked Provenance and Pre-Call Policy Check
+LENS: LENS_KNOWLEDGE, LENS_SYSTEM
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Przypisuje każdej wartości w interpretatorze tagi (`capabilities`) z pochodzeniem i zbiorem dozwolonych czytelników, śledzi zależności zmiennych w grafie przepływu danych i przed wywołaniem narzędzia stosuje politykę do argumentów oraz ich zależności; naruszenie blokuje wywołanie albo wymaga potwierdzenia użytkownika.
+MINIMAL_FORM:
+  - tag wartości: `sources` ∈ {`User` (literały w kodzie P-LLM), `CaMeL` (wyniki transformacji w interpretatorze), identyfikator narzędzia z opcjonalnym źródłem wewnętrznym}; `readers` ∈ {`Public`, zbiór użytkowników}
+  - `c = a + b` → `c` zależy od `a` i `b`; pełny graf budowany rekurencyjnie przy sprawdzaniu polityki
+  - tryb `STRICT`: test warunku albo iterowany obiekt bloku sterowania staje się zależnością każdej zmiennej przypisanej w bloku; instrukcje po wywołaniu `query_ai_assistant` zależą od jego argumentów; tryb `NORMAL` tego nie robi
+  - polityka `(tool_name, kwargs) → Allowed | Denied(reason)` wywoływana przed narzędziem; polityki są funkcjami Pythona
+SOURCE_ANCHOR:
+  - source: CaMeL (Debenedetti et al., arXiv 2503.18813)
+    locator: https://arxiv.org/pdf/2503.18813
+    anchor: 5.2 Security Policies, 5.3 Capabilities, 5.4 CaMeL Interpreter, Figure 6, Figure 7, Section 7
+    revision: v2, 24 Jun 2025
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - własny interpreter podzbioru Pythona oparty na `ast`, wykonujący kod napisany przez P-LLM
+  - narzędzia, które opatrują zwracane wartości tagami (np. odczyt poczty oznacza nadawcę jako źródło wewnętrzne)
+  - polityki zdefiniowane per narzędzie
+MUST_BE_TRUE:
+  - wszystkie narzędzia i usługi rozumieją `capabilities`, w przeciwnym razie użyteczność spada (sekcja 9.1)
+  - polityki są zapisane i utrzymywane przez użytkownika albo operatora (sekcja 9.3)
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: DATA_STRUCTURE, PROCESS_RULE
+ADOPTION_NOTES: Odnosi się do punktów (a), (b) i (c) z `CO MA WYJŚĆ`: tag `sources` mógłby nieść pochodzenie fragmentu (człowiek, model, narzędzie), a polityka rozstrzygałaby przed operacją, kto może ją wykonać. Źródło opisuje tylko wartości przekazywane narzędziom, nie tekst autorski.
+UNKNOWN:
+  - evidence: kod z repozytorium google-research nie został otwarty; implementacja interpretera niezweryfikowana
+LIMITS:
+  - poza zakresem modelu: ataki tekst-na-tekst bez skutku w przepływie danych, np. streszczenie e-maila inaczej niż jego treść; graf danych pozwala prześledzić pochodzenie treści pokazywanej użytkownikowi (sekcja 3.1)
+  - kanały boczne (sekcja 7) są ograniczone przez `STRICT` tylko częściowo; `STRICT` zwiększa odsetek wyzwolonych polityk (53,23% wobec 33,87% bez ataku, Tabela 8)
+  - wynik raportowany przez autorów na AgentDojo: 77% zadań z gwarancjami wobec 84% bez obrony; preprint
+  - interpreter nie zapewnia atomowości ani wycofywania operacji po błędzie (sekcja 5.4); mediana zadania zużywa 2,82× więcej tokenów wejściowych i 2,73× wyjściowych (sekcja 6.5)
+
+NEW
+UNIT_ID: U-003
+NAME: Event Log with Per-Event Source Field and Final-Text Authorship Rate
+LENS: LENS_KNOWLEDGE
+TYPE: data_structure
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Zapisuje sesję pisania jako ciąg zdarzeń (nazwa, znacznik czasu, zrzut edytora), w którym wstawienie tekstu niesie pole źródła {User, API}, i definiuje miarę `written-by-writers rate` jako odsetek tekstu końcowego napisany przez piszących, a nie przez system.
+MINIMAL_FORM:
+  - zdarzenie = (nazwa, znacznik czasu, zrzut edytora); `text-insert` i `text-delete` mają metadane `delta`, zdarzenia kursora mają `range`
+  - `text-insert.source` ∈ {`User`, `API`}; `text-delete` ← `User`; `suggestion-get` ← `User`; `suggestion-open` ← `API`; `suggestion-select` ← `User`
+  - blok `insert` = `(text-insert)+` ze źródłem `User`; blok `choose` = `suggestion-select` `suggestion-close` `text-insert` ze źródłami `User` `API` `API`
+  - akceptowana sugestia jest dołączana na końcu bieżącego tekstu
+  - miary sesji: `written-by-writers rate`, wskaźnik akceptacji, liczba zapytań
+SOURCE_ANCHOR:
+  - source: CoAuthor (Lee, Liang, Yang; arXiv 2201.06796)
+    locator: https://arxiv.org/pdf/2201.06796
+    anchor: Table 1, Table 2, Table 3, Section 4.1, Section 4.2.3, Section 5.1.3, Section 5.2.2, Appendix A.1
+    revision: v2, 25 Jan 2022
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - edytor oparty na Quill z rejestrowaniem zdarzeń oraz serwer Flask zapisujący zdarzenia sesji
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: DATA_STRUCTURE, EVALUATION_RULE
+ADOPTION_NOTES: Odpowiada punktowi (a) z `CO MA WYJŚĆ`: pole źródła na poziomie zdarzenia wstawienia tekstu. Źródło nie opisuje, jak pochodzenie przeżywa edycję przyjętej sugestii ani streszczenie tekstu.
+UNKNOWN:
+  - evidence: pola zapisu `jsonl` i sposób wyliczenia `written-by-writers rate` z dziennika nie są opisane w artykule; strona coauthor.stanford.edu nie została otwarta
+  - isolation: wpływ edycji przyjętej sugestii na przypisanie fragmentu piszącemu nie jest opisany
+LIMITS:
+  - dziennik dotyczy 63 piszących z Amazon Mechanical Turk, 1445 sesji i GPT-3 bez dostrojenia; średnio 72,6% tekstu końcowego od piszących, wskaźnik akceptacji 72,3% (Tabela 3)
+  - korelacja Pearsona 0,3 między odsetkiem tekstu piszących a poczuciem własności; autorzy opisują korelacje jako podstawę hipotez wymagających eksperymentów interwencyjnych (sekcja 5.2.2)
+  - wniosek, że pole `source` jest podstawą miary, jest DIRECT_INFERENCE; artykuł podaje definicję miary, nie sposób jej wyliczenia
+
+NEW
+UNIT_ID: U-004
+NAME: Citation Spans Returned as Pointers into Provided Documents
+LENS: LENS_SYSTEM
+TYPE: interface_contract
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Dzieli dostarczony dokument na jednostki cytowania (zdania albo bloki podane przez wywołującego) i zwraca przy każdym twierdzeniu modelu wskaźnik do fragmentu dokumentu: `cited_text` wyodrębniony przez API oraz położenie w dokumencie.
+MINIMAL_FORM:
+  - dokument `{source, title, context, citations: {enabled: true}}`; chunking: tekst i PDF → zdania, `content` → bloki bez dalszego dzielenia
+  - odpowiedź = ciąg bloków `text`; blok z twierdzeniem niesie listę `citations`
+  - `char_location` {`cited_text`, `document_index`, `document_title`, `start_char_index`, `end_char_index`}; `page_location` {…, `start_page_number`, `end_page_number`}; `content_block_location` {…, `start_block_index`, `end_block_index`}
+  - indeksy od 0 (strony od 1), koniec wyłączny
+  - `cited_text` nie liczy się do tokenów wyjściowych ani wejściowych przy odsyłaniu w kolejnych turach
+SOURCE_ANCHOR:
+  - source: Claude Platform Docs: Citations
+    locator: https://platform.claude.com/docs/en/build-with-claude/citations
+    anchor: How citations work, Citation indices, Token costs, Feature compatibility, Response structure
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - Messages API; dokumenty typu `text`, `base64` (PDF) albo `content`; PDF z wyodrębnialnym tekstem
+MUST_BE_TRUE:
+  - `citations.enabled` ustawione na wszystkich dokumentach w żądaniu albo na żadnym
+ENFORCEMENT: HOST_CONSTRAINED
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: INTERFACE, DATA_STRUCTURE
+ADOPTION_NOTES: Odpowiada punktowi (b) z `CO MA WYJŚĆ`: wskaźnik od twierdzenia do fragmentu źródła z `cited_text`, z granulacją zdania albo bloku własnego. Źródło nie opisuje, jak ścieżka działa przez kolejne poziomy streszczenia.
+UNKNOWN:
+  - evidence: przykład ekstrakcji cytatów z rozdziałem `<quotes>` i `<info>` leży na stronie `long-context-tips`, której nie otwarto
+  - evidence: dokumentacja nie opisuje, jak model wybiera fragmenty do cytowania
+LIMITS:
+  - cytowalny jest wyłącznie tekst; skany PDF bez tekstu i obrazy nie są cytowalne; `title` i `context` nie są cytowalne
+  - łączenie z `structured outputs` (`output_config.format`) przy włączonych cytowaniach daje błąd 400
+  - dokumentacja twierdzi, że cytaty zawierają poprawne wskaźniki do dokumentów i że w ewaluacjach Anthropic częściej wskazują najtrafniejsze fragmenty niż podejście promptowe (EFFECTIVENESS_CLAIM); ewaluacji nie opisano
+  - bloki z cytatami z odpowiedzi nie podlegają cache, dokumenty źródłowe podlegają
+
+NEW
+UNIT_ID: U-005
+NAME: Two-Copy Transcript Rule with Codebook
+LENS: LENS_KNOWLEDGE
+TYPE: method
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Utrzymuje dwie wersje transkrypcji tej samej rozmowy: naturalizowaną (kopia referencyjna z pełnym detalem mowy) i denaturalizowaną (oczyszczona, używana w przeglądzie przez uczestnika i do analizy treści), z książką kodową wyrównującą decyzje transkrybentów.
+MINIMAL_FORM:
+  - nagranie → wersja A (naturalizowana: szczegóły mowy, akcent, wypowiedzi pozasłowne) + wersja B (denaturalizowana: poprawiona gramatyka, usunięty szum rozmowy, ustandaryzowany akcent)
+  - wersja A → analiza komunikacji (akcent, styl, idiosynkrazje mowy); wersja B → przegląd uczestnika (member checking) i analiza treści informacyjnej
+  - książka kodowa: reguły włączania i pomijania zjawisk niewerbalnych (np. pominięte kichnięcie, włączone `((crying))` i `((laughing))`), przeglądana i aktualizowana
+  - pytanie z sesji refleksji nad wersją B: czy transkrypt wyglądałby inaczej, gdyby uczestnik sam był transkrybentem (przykład `wif dat` wobec `with that`)
+SOURCE_ANCHOR:
+  - source: Oliver, Serovich & Mason 2005 (PMC1400594)
+    locator: https://pmc.ncbi.nlm.nih.gov/articles/PMC1400594
+    anchor: Recommendations, Transcription in Practice, Pronunciation (Geo-ethnic Accent), Grammar
+    revision: Soc Forces 84(2):1273–1289, rękopis NIHMS8065
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - nagranie rozmowy; transkrybenci o różnym przygotowaniu (od studentów po zawodowców), stąd książka kodowa
+MUST_BE_TRUE:
+  - uczestnik bierze udział w przeglądzie i czyta wersję B; przy wersji A uczestnik może uznać zapis za lekceważący, jeśli sam zapisałby swoje słowa inaczej
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: UNKNOWN
+TRANSFER_FORM: PROCESS_RULE, DATA_STRUCTURE
+ADOPTION_NOTES: Odpowiada punktowi (b) z `CO MA WYJŚĆ`: wersja pochodna (B) obok wersji referencyjnej (A). Źródło nie opisuje wiązania fragmentów B z fragmentami A.
+UNKNOWN:
+  - dependency: sposób powiązania fragmentów wersji denaturalizowanej z wersją naturalizowaną nie jest opisany
+  - evidence: pomysł dwóch wersji jest w tekście przypisany niektórym badaczom jakościowym (przypis 2); źródło pierwotne nie zostało otwarte
+LIMITS:
+  - autorzy opisują własną decyzję o transkrypcji bardziej denaturalistycznej w badaniu z 57 uczestnikami o wrażliwej tematyce; skutków wyboru nie mierzono
+  - jako problem wymieniono korektę gramatyki u jednej strony rozmowy (badacza), a nie u drugiej (uczestnika)
+  - okres refleksji nad decyzjami transkrypcyjnymi poprzedza transkrypcję jako krok pośredni
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm: alternatywne kodowania z atrybutami odpowiedzialności
+C-002 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał otwarty (lead L-04, sekcje II–IV.D)
+C-003 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm: tagi pochodzenia z propagacją przez graf zależności i polityką przed wywołaniem
+C-004 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm: pole źródła na zdarzeniu wstawienia tekstu
+C-005 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm: wskaźnik od twierdzenia do fragmentu dokumentu
+C-006 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał otwarty (lead L-17, składnia i 9 pytań)
+C-007 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał otwarty (lead L-18, krok `Resonating`)
+C-008 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm: dwie wersje transkrypcji z książką kodową
+C-009 | NOT_PROBED | - | run 1 NOT_PROBED | LEAD_UNRESOLVED: raport techniczny Biby (lead L-05) nie został otwarty w tym Runie
+C-010 | NOT_PROBED | - | run 1 NOT_PROBED | LEAD_UNRESOLVED: specyfikacja C2PA 2.2 (lead L-09) nie została otwarta w tym Runie
+
+REJECTED INFERENCES
+- obecność `@resp` w klasie globalnej TEI nie oznacza wymogu jego użycia przy `<choice>`; strona nie pokazuje atrybutu jako obowiązkowego
+- pole `source` w dzienniku CoAuthor nie jest opisaną metodą przypisania autorstwa fragmentom tekstu końcowego po edycji
+- poprawność wskaźników zwracanych przez API cytowań nie jest gwarancją, że twierdzenie modelu wynika z cytowanego fragmentu
+- dwie wersje transkrypcji nie oznaczają opisanego powiązania fragmentów między wersjami
+- tagi `capabilities` w CaMeL nie obejmują ochrony przed zniekształceniem treści w tekście wynikowym (zakres wyłączony w sekcji 3.1)
+
+AUDIT DELTA
+- Opis leada L-19 mówi o teście «czy uczestnik przeczytałby własne słowa z szacunkiem»; w otwartym artykule występuje pytanie z sesji refleksji i uwaga o przeglądzie przez uczestnika, bez formalnego testu
+- SEAM_QUESTION leada L-04 odwołuje się do reguły przypisania `a1⊕…⊕an → b`; w otwartym artykule Sabelfeld & Myers jej nie odnaleziono (występują reguły `[E1–2]` i `[C1–7]` dla etykiet `high`/`low`)
+- Lead L-18 dotyczy Thinking at the Edge i Focusing; otwarto wyłącznie stronę z sześcioma krokami Focusing, kroki TAE nie zostały otwarte
+- Lead L-12 obejmuje technikę `<quotes>`/`<info>` ze strony `long-context-tips`; U-004 dotyczy wyłącznie funkcji Citations
+- Pola `jsonl` i sposób wyliczenia `written-by-writers rate` (lead L-10) nie są opisane w artykule
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostają trzej kandydaci DEFER (C-002, C-006, C-007) z otwartym materiałem oraz dwa leady NOT_PROBED i regiony nieotwarte w otwartych źródłach
+
+SYNTHESIS
+OBSERVATION: wszystkie pięć Unitów ma EVIDENCE_LAYER: DOCUMENTED_DESIGN; żaden nie opiera się na otwartym kodzie ani testach.
+OBSERVATION: w otwartych źródłach nie opisano, jak rozdział między wersją zastaną a poprawioną (U-001), tekstem piszącego a tekstem modelu (U-003) i wersją referencyjną a oczyszczoną (U-005) przeżywa streszczenie.
+INFERENCE: U-002 i U-004 wiążą wartość pochodną ze źródłem w różny sposób: U-002 przez zależności w grafie sprawdzane przed operacją, U-004 przez wskaźnik położenia w dokumencie dostarczonym przez wywołującego; porównanie wymaga `COMPARISON RUN`.
+OPEN_QUESTION: czy tag `sources` z U-002 może nieść oznaczenie autora (człowiek, model) dla fragmentów tekstu, a nie tylko źródło wartości z narzędzi.
+ASSESSMENT: priorytet dalszej pracy: C-002, C-006, C-007, następnie otwarcie artefaktów dla C-009 i C-010.
