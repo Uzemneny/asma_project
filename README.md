@@ -1,2 +1,2 @@
 # asma_project
-all/ai system mechanic analysis
+is an author's workspace for a project called neuralcore.
