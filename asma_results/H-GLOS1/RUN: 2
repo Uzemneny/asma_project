@@ -1,0 +1,289 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-GLOS1
+TITLE: Ochrona głosu człowieka w pracy z AI: szerokie przeszukanie rozwiązań
+SOURCE_SET: mechanizmy z literatury i dokumentacji dotyczące pochodzenia i oznaczania słów człowieka, drogi od materiału pochodnego do źródła, kolejności człowiek–model, pomiaru głosu autora i stabilności zachowania; pytanie: jak pracować z AI tak, aby słowa, tok myślenia i autorstwo człowieka pozostały odróżnialne od materiału modelu i przetrwały kompresję, streszczanie, wyszukiwanie i przepisywanie
+SOURCES:
+  - TEI P5 Guidelines
+  - Sabelfeld & Myers 2003 (Language-Based Information-Flow Security)
+  - CaMeL (Debenedetti et al., arXiv 2503.18813)
+  - CoAuthor (Lee, Liang, Yang; arXiv 2201.06796)
+  - Claude Platform Docs: Citations
+  - Clean Language article (Tompkins & Lawley, Rapport 35)
+  - Focusing Six Steps (focusing.org)
+  - Oliver, Serovich & Mason 2005 (PMC1400594)
+  - Buçinca et al. 2021 (arXiv 2102.09692, strona abstraktu)
+  - Fogliato et al. 2022 (Who Goes First?, arXiv 2205.09696)
+  - Li et al. 2024 (arXiv 2402.10962, strona abstraktu)
+  - Hoover 2004 (Testing Burrows's Delta)
+RUN: 2
+FOCUS: kolejność człowiek–model, pomiar głosu autora, stabilność w czasie oraz pogłębienie kandydatów DEFER z Runu 1
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-04
+ACCESS_LIMITATIONS:
+  - żądanie PDF arXiv 2402.10962 zwróciło stronę abstraktu; arXiv 2102.09692 otwarto na poziomie abstraktu
+  - artefakty Biby (L-05) i C2PA (L-09) nadal nieotwarte
+  - profil celu bez zmian: plik wejściowy nie ma pola `TARGET`, w `target` użyto pola `ZASADA`; wersja profilu nieznana
+TARGET_PROFILE:
+  id: GLOS-ROZWIAZANIA-SZEROKO
+  version: UNKNOWN
+  target: neuralcore to interfejs dostrojony do człowieka, a nie do maszyny; AI ma naprawdę wspomagać myślenie, a nie myśleć za człowieka
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Buçinca et al. 2021: abstrakt | https://arxiv.org/abs/2102.09692 | trzy interwencje wymuszające poznawczo wobec dwóch prostych podejść z wyjaśnieniami i wobec bazy bez AI; N=199; interwencje obniżyły nadmierne poleganie i dostały najmniej korzystne oceny subiektywne
+Fogliato et al. 2022: sekcje 3.2–3.3, 4.1–4.5, 5 | https://arxiv.org/pdf/2205.09696 | przepływ jednokrokowy i dwukrokowy; zgodność z flagami AI 91% i 89%; 70 rewizji na 10560 ustaleń
+Li et al. 2024: abstrakt v4 | https://arxiv.org/abs/2402.10962 | rozmowy dwóch instancji czatu z promptami systemowymi; dryf instrukcji w ośmiu rundach; hipoteza `attention decay`; metoda `split-softmax`
+Hoover 2004: sekcje 1–9 | https://mimno.infosci.cornell.edu/info3350/readings/delta.pdf | opis Delty Burrowsa, testy na 20–800 najczęstszych słowach, usuwanie zaimków i `culling at 70%`, symulacje atrybucji
+UNKNOWN_REGIONS:
+  - Buçinca et al.: pełny tekst (implementacja funkcji `on demand`, `update`, `wait`; miary nadmiernego polegania)
+  - Li et al.: pełny tekst (sekcje 3, 4, 6.2, 6.4)
+  - Fogliato et al.: platforma open source aka.ms/Exp-HAIC
+  - Hoover: praca Burrowsa 2002 i zadania PAN
+  - Sabelfeld & Myers: praca Denninga 1976 z listy alternatywnych lokalizacji
+  - Biba 1977 (L-05) i C2PA 2.2 (L-09) w całości
+OUTSIDE_SCOPE:
+  - leady planu Runu 2 poza tym Runem: L-24, L-25, L-36, L-40, L-44
+  - pozostałe leady listy wejściowej poza Runami 1–2: L-02, L-03, L-07, L-08, L-11, L-13 do L-16, L-20 do L-23, L-26 do L-29, L-32 do L-35, L-37 do L-39, L-41 do L-43, L-47 do L-50
+
+DELTA
+NEW
+UNIT_ID: U-006
+NAME: Program-Counter Label for Implicit Flows with Static Label Typing
+LENS: LENS_KNOWLEDGE
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Opatruje wyrażenia etykietą bezpieczeństwa, a polecenia kontekstem `pc`; przypisanie do zmiennej niskiej jest typowalne tylko dla wyrażenia o niskiej etykiecie w niskim kontekście, a gałęzie warunku o wysokim wyniku są typowane w kontekście wysokim, co blokuje przepływy jawne i niejawne.
+MINIMAL_FORM:
+  - wyrażenie: typ `high` dozwolony zawsze; typ `low` tylko wtedy, gdy w wyrażeniu nie ma zmiennych `high`
+  - `l := exp` typowalne tylko dla `exp : low` w kontekście `[low]`; `h := exp` w dowolnym kontekście
+  - `if exp then C1 else C2` i `while exp do C` z `exp : pc`: gałęzie typowane w `[pc]`; wysoki warunek wymusza kontekst `[high]` w gałęziach
+  - reguła podsumowania: `[high] ⊢ C` ⇒ `[low] ⊢ C`; pozwala zresetować `pc` do `low` po wysokim warunku
+  - nieinterferencja: `s1 =L s2 ⇒ ⟦C⟧s1 ≈L ⟦C⟧s2`
+SOURCE_ANCHOR:
+  - source: Sabelfeld & Myers 2003 (Language-Based Information-Flow Security)
+    locator: https://www.cs.cornell.edu/andru/papers/jsac/sm-jsac03.pdf
+    anchor: II.E, II.F, III.A, III.B, Fig. 1, Fig. 3 (reguły `[E1–2]`, `[C1–7]`)
+    revision: IEEE JSAC 21(1), January 2003
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - prosty język imperatywny z Fig. 2 (`skip`, przypisanie, kompozycja, `if`, `while`)
+  - kompilator sprawdzający typy; podejście zaimplementowane w kompilatorze Jif
+MUST_BE_TRUE:
+  - etykiety są statyczne, znane w czasie kompilacji; nie są obliczane w czasie wykonania
+ENFORCEMENT: SCHEMA_CONSTRAINED
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: ALGORITHM, PROCESS_RULE
+ADOPTION_NOTES: Odnosi się do punktu (b) z `CO MA WYJŚĆ`: etykieta wyniku zależy od etykiet argumentów, a kontekst `pc` odnotowuje zależność od warunku. Źródło dotyczy zmiennych programu, nie tekstu naturalnego.
+UNKNOWN:
+  - evidence: reguła złączenia `a1⊕…⊕an → b` z opisu leada nie występuje w odczytanym tekście; tekst opisuje maksimum dwóch etykiet przy przypisaniu w etykietowaniu dynamicznym (II.E)
+  - evidence: dowód, że typowalność gwarantuje nieinterferencję, jest przypisany w tekście pracy Volpano i in. (odnośnik [3]) i nie został otwarty
+LIMITS:
+  - etykietowanie dynamiczne powoduje monotoniczny wzrost etykiet (`label creep`), co ogranicza użyteczność (II.E)
+  - nieinterferencja odrzuca obniżanie poziomu (deklasyfikację); artykuł opisuje model etykiet zdecentralizowanych i `robust declassification` jako rozszerzenia, bez zapisu formalnego (IV.D)
+  - problem poufności dla programów jest nierozstrzygalny; analizy statyczne są konserwatywne (V.E)
+  - integralność jest opisana jako dual poufności (Biba); silne wymuszenie integralności wymaga dowodu poprawności programu (II.D)
+RELATES_TO:
+  - U-002
+
+NEW
+UNIT_ID: U-007
+NAME: Clean Language Question Syntax Preserving Client Words
+LENS: LENS_KNOWLEDGE
+TYPE: method
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Buduje pytanie z dosłownych słów rozmówcy według stałej składni (powtórzenie słów, pytanie, odniesienie do tego doświadczenia), aby prowadzący nie wprowadzał własnych założeń do opisu.
+MINIMAL_FORM:
+  - składnia: `And [słowa klienta] + And as/when + [pytanie] + [odniesienie do tego doświadczenia]`
+  - przykład z artykułu: `I've gone blank` → `And you've gone blank. And when you've gone blank, what kind of blank is that blank?`
+  - pytania podstawowe: atrybuty (2), położenie (2), przeszłość (2), przyszłość (2), jedno pytanie lateralne (`that's … like what?`); w miejscu `……` stoją dokładne słowa klienta
+  - około 25 pytań dodatkowych, zadawanych tylko wtedy, gdy klient podaje albo zakłada odpowiednią informację
+  - trzy składniki: cechy głosu (tempo poniżej połowy normalnego, głębsza tonacja, dopasowanie wymowy i akcentu klienta), składnia, pytania
+SOURCE_ANCHOR:
+  - source: Clean Language article (Tompkins & Lawley, Rapport 35)
+    locator: https://cleanlanguage.com/less-is-more-the-art-of-clean-language/
+    anchor: Syntax, The Basic Questions, Voice Qualities, 'Unclean' Language
+    revision: Rapport 35, February 1997; wersja v2 zmodyfikowana 30.12.2003
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+MUST_BE_TRUE:
+  - prowadzący pozostaje w metaforze klienta i nie wprowadza własnego modelu świata (cel opisany w artykule)
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: PROMPT_FRAGMENT, PROCESS_RULE
+ADOPTION_NOTES: Odnosi się do punktów (a) i (c) z `CO MA WYJŚĆ`: kolejność (człowiek mówi, prowadzący pyta jego słowami) i wyznaczone miejsce na dosłowne słowa rozmówcy. Źródło dotyczy rozmowy terapeutycznej, nie systemu z modelem.
+UNKNOWN:
+  - evidence: protokół audytu «czystości» pytań w wywiadzie badawczym (Tosey, Lawley & Meese 2014) nie został otwarty
+  - dependency: metafory, które prowadzący może wprowadzić (czas, przestrzeń, forma), nie są opisane w tym artykule; w tekście występuje tylko rysunek kompasu pytań
+LIMITS:
+  - artykuł opisuje terapię Davida Grove'a i jest tekstem Tompkins i Lawleya, nie Grove'a
+  - skuteczność opisano obserwacjami autorów i jednym przykładem transkryptu
+  - lista pytań podstawowych w artykule ma osiem pozycji, a tekst mówi o dziewięciu
+  - artykuł pokazuje, że nawet pytanie z większością słów klienta (przykład «Therapist 2») wprowadza założenie o rozwiązaniu
+  - autorzy zaznaczają, że składnia brzmiałaby nienaturalnie w zwykłej rozmowie
+
+NEW
+UNIT_ID: U-008
+NAME: Word-to-Felt-Sense Resonance Check
+LENS: LENS_KNOWLEDGE
+TYPE: method
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Sprawdza słowo, frazę albo obraz, które wyszły z odczucia (`felt sense`), przez przechodzenie tam i z powrotem między odczuciem a słowem, aż pasują; sygnałem dopasowania jest drobny sygnał cielesny.
+MINIMAL_FORM:
+  - krok 3 `Handle`: słowo, fraza albo obraz wychodzi z samego `felt sense`; osoba zostaje z jakością odczucia, aż coś pasuje
+  - krok 4 `Resonating`: ruch tam i z powrotem między odczuciem a słowem; sprawdzenie, czy jest mały sygnał cielesny dopasowania
+  - warunek: odczucie musi być obecne ponownie razem ze słowem
+  - dopuszczona zmiana odczucia i słowa albo obrazu do chwili, gdy oddają jakość odczucia
+SOURCE_ANCHOR:
+  - source: Focusing Six Steps (focusing.org)
+    locator: https://focusing.org/sixsteps
+    anchor: 3 Handle, 4 Resonating, Instructions for Not Following Instructions
+    revision: fragment rozdziału 4 «Focusing» (Gendlin 1978), lekko zredagowany
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - kroki 1 `Clearing a space` i 2 `Felt Sense`
+MUST_BE_TRUE:
+  - osoba ma dostęp do `felt sense` i rozpoznaje sygnał dopasowania; strona zaznacza, że większość osób uczy się z nauczycielem
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: UNKNOWN
+TRANSFER_FORM: PROCESS_RULE
+ADOPTION_NOTES: Odnosi się do punktu (c) i w części do (d) z `CO MA WYJŚĆ`: kryterium dopasowania słowa ustala człowiek, nie model. Źródło nie opisuje zapisu wyniku sprawdzenia ani miary zewnętrznej.
+UNKNOWN:
+  - evidence: zasady słuchacza i zapisu dosłownych słów mówiącego z opisu leada nie występują na otwartej stronie; kroki Thinking at the Edge nie zostały otwarte
+LIMITS:
+  - strona określa kroki jako rusztowanie, a nie jedyny sposób wykonywania Focusing; wielu nauczycieli stosuje własne style
+  - procedura jest wewnętrzna; strona nie opisuje obserwowalnego zapisu
+  - wskazówka ze strony: gdy wykonanie kroku jest sprzeczne z odczuciem w ciele, zatrzymać się i cofnąć
+
+NEW
+UNIT_ID: U-009
+NAME: Provisional Human Judgment Registered Before AI Reveal
+LENS: LENS_KNOWLEDGE
+TYPE: process_constraint
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Wymusza zapis wstępnej oceny człowieka na tych samych kontrolkach przed odsłonięciem wniosku AI i po odsłonięciu pozwala ją zmienić; zgodność z AI i rewizje są mierzone względem przepływu jednokrokowego.
+MINIMAL_FORM:
+  - przepływ jednokrokowy: obraz i wnioski AI (pewność i flaga przy pewności ≥ 0,6) widoczne jednocześnie
+  - przepływ dwukrokowy: ocena wstępna na tych samych kontrolkach (szansa 0–100%, obecne/nieobecne, druga opinia) przy ukrytych wnioskach AI → przycisk odsłania AI → rewizja dozwolona
+  - uczestnik nie może pomijać obrazów ani zmieniać diagnoz po przejściu dalej
+  - miary: zgodność diagnoz z flagami AI, skuteczność diagnostyczna, kappa Fleissa, czas, odsetek drugich opinii, ankieta (przydatność, obciążenie, przyszłe użycie)
+  - nieciągłość przy progu 0,6: regresja diagnoz względem pewności AI i zmiennej `1(AI confidence ≥ 0.6)` z interakcją z przepływem
+SOURCE_ANCHOR:
+  - source: Fogliato et al. 2022 (Who Goes First?, arXiv 2205.09696)
+    locator: https://arxiv.org/pdf/2205.09696
+    anchor: 3.2 Experimental Design, 3.3 Measures and Statistical Analysis, 4.1–4.5 Results 1–5, Fig. 1, Fig. 2
+    revision: v1, 19 May 2022 (FAccT '22)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - platforma webowa oparta na Django z logowaniem decyzji na obraz
+  - wnioski AI: średnia ośmiu sieci konwolucyjnych z progiem 0,6
+MUST_BE_TRUE:
+  - wnioski AI są ukryte w kroku wstępnym i widoczne dopiero po kliknięciu przycisku
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: WORKFLOW, EVALUATION_RULE
+ADOPTION_NOTES: Odnosi się do punktu (c) z `CO MA WYJŚĆ`: kolejność człowiek najpierw, z zapisem oceny wstępnej przed odsłonięciem modelu oraz mierzalną zgodnością i rewizjami. Źródło dotyczy decyzji klasyfikacyjnych radiologów, nie tekstu; nie opisuje wymogu uzasadnienia oceny wstępnej.
+UNKNOWN:
+  - evidence: platforma open source z odnośnika aka.ms/Exp-HAIC nie została otwarta
+LIMITS:
+  - zgodność z flagami AI: 91% w przepływie jednokrokowym wobec 89% w dwukrokowym (p=0,04); gdy flaga AI była obecna: 71% wobec 65% (p=0,07); nieciągłość przy 0,6: 0,24 wobec 0,11 (4.1)
+  - w przepływie dwukrokowym zmieniono 70 z 10560 diagnoz, co stanowi 5% ustaleń rozbieżnych z flagą AI (4.1)
+  - zgodność z AI była wyższa w przepływie jednokrokowym także wtedy, gdy AI się myliło (4.2)
+  - 19 weterynaryjnych radiologów (11 i 8 w grupach); moc analizy ok. 60% dla założonej różnicy (3.3); jeden obraz bez informacji klinicznej; ok. 7% ustaleń obecnych wg większości (3.1, 5)
+  - w przepływie dwukrokowym ocena przydatności AI była niższa (36% wobec 17% obrazów uznanych za przydatne w ankiecie po obrazie, p=0,11) (4.5)
+
+NEW
+UNIT_ID: U-010
+NAME: Delta Stylistic Distance over Z-Scored Frequent Words
+LENS: LENS_KNOWLEDGE
+TYPE: algorithm
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Mierzy różnicę stylu między tekstem testowym a tekstami kandydatów jako średnią wartość bezwzględną różnic z-score'ów częstości najczęstszych słów korpusu; najmniejsza Delta wskazuje autora najmniej niepodobnego w zbiorze podstawowym.
+MINIMAL_FORM:
+  - zbiór `N` najczęstszych słów korpusu (Burrows: 150; Hoover testuje 20–800)
+  - `z = (f_tekst − f_średnia_korpusu) / σ_korpusu` dla każdego słowa
+  - `Delta(A,B) = mean_i |z_i(A) − z_i(B)|`
+  - atrybucja: autor z najmniejszą `Delta` do tekstu testowego
+  - `Delta-Z`: z-score wartości `Delta` autora wśród wszystkich autorów; wskaźniki wiarygodności: mała `Delta`, duże `Delta-Z`, spójność przy różnych `N`, duża zmiana z rangi 1 do 2
+  - modyfikacje: usunięcie zaimków osobowych, usunięcie słów, których ponad 70% wystąpień pochodzi z jednego tekstu (`culling at 70%`), łączenie kilku tekstów autora w zbiorze podstawowym
+SOURCE_ANCHOR:
+  - source: Hoover 2004 (Testing Burrows's Delta)
+    locator: https://mimno.infosci.cornell.edu/info3350/readings/delta.pdf
+    anchor: 1 Introduction, 2 Design, 3, 4, 5, 9 Conclusion
+    revision: Literary and Linguistic Computing 19(4):453–475, 2004
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - zbiór podstawowy tekstów kandydatów i zbiór tekstów testowych
+  - listy częstości słów (Hoover: arkusz z makrami, dostępny na żądanie)
+MUST_BE_TRUE:
+  - wynik jest czytany jako «najmniej niepodobny w zbiorze podstawowym», a nie jako podobieństwo; autorstwo spoza zbioru wymaga progu `Delta-Z`
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: ALGORITHM, EVALUATION_RULE
+ADOPTION_NOTES: Odnosi się do punktu (d) z `CO MA WYJŚĆ`: miara zgodności tekstu ze stylem autora liczona względem tekstów referencyjnych tego autora. Źródło jest walidacją na prozie, nie badaniem tekstu pisanego z modelem.
+UNKNOWN:
+  - evidence: oryginalny opis Delty (Burrows 2002) i zadania weryfikacji autorstwa PAN nie zostały otwarte; implementacja `faststylometry` nie została otwarta
+LIMITS:
+  - otwarty dokument jest walidacją Hoovera, nie pracą Burrowsa; opis Delty jest streszczeniem
+  - proza amerykańska z lat 1890–1925, narracja trzecioosobowa ręcznie oczyszczona z dialogów, próbki ok. 10 000–39 000 słów
+  - najlepsze analizy: 23 z 25 tekstów przypisanych poprawnie, błędy dla The Europeans (James) i Virginia (Glasgow), tekstów z innego okresu stylu autora
+  - po zmianie wyboru zbioru podstawowego (test zaprojektowany jako trudny) poprawnie 16 z 25; w teście ślepym 22 z 30 poprawnie i dwa pewne błędy
+  - dokładność rosła do ok. 600–700 słów i spadała po usunięciu zbyt pewnych zaimków osobowych i słów jednego tekstu; zaimki i `culling` poprawiały wynik
+
+CURRENT INDEX
+U-001 | Alternative Encodings with Responsibility Attributes | SOURCE_SUPPORTED | last: run 1
+U-002 | Capability-Tagged Values with Dependency-Tracked Provenance and Pre-Call Policy Check | SOURCE_SUPPORTED | last: run 1
+U-003 | Event Log with Per-Event Source Field and Final-Text Authorship Rate | SOURCE_SUPPORTED | last: run 1
+U-004 | Citation Spans Returned as Pointers into Provided Documents | SOURCE_SUPPORTED | last: run 1
+U-005 | Two-Copy Transcript Rule with Codebook | SOURCE_SUPPORTED | last: run 1
+U-006 | Program-Counter Label for Implicit Flows with Static Label Typing | SOURCE_SUPPORTED | last: run 2
+U-007 | Clean Language Question Syntax Preserving Client Words | SOURCE_SUPPORTED | last: run 2
+U-008 | Word-to-Felt-Sense Resonance Check | SOURCE_SUPPORTED | last: run 2
+U-009 | Provisional Human Judgment Registered Before AI Reveal | SOURCE_SUPPORTED | last: run 2
+U-010 | Delta Stylistic Distance over Z-Scored Frequent Words | SOURCE_SUPPORTED | last: run 2
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm: alternatywne kodowania z atrybutami odpowiedzialności
+C-002 | UNITIZED | U-006 | run 2 NEW | odrębny mechanizm: etykiety statyczne z kontekstem `pc`
+C-003 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm: tagi pochodzenia z propagacją przez graf zależności i polityką przed wywołaniem
+C-004 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm: pole źródła na zdarzeniu wstawienia tekstu
+C-005 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm: wskaźnik od twierdzenia do fragmentu dokumentu
+C-006 | UNITIZED | U-007 | run 2 NEW | odrębny mechanizm: składnia pytań z dosłownych słów rozmówcy
+C-007 | UNITIZED | U-008 | run 2 NEW | odrębny mechanizm: sprawdzanie słowa względem odczucia
+C-008 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm: dwie wersje transkrypcji z książką kodową
+C-009 | NOT_PROBED | - | run 1 NOT_PROBED | LEAD_UNRESOLVED: raport techniczny Biby (lead L-05) nie został otwarty w tym Runie
+C-010 | NOT_PROBED | - | run 1 NOT_PROBED | LEAD_UNRESOLVED: specyfikacja C2PA 2.2 (lead L-09) nie została otwarta w tym Runie
+C-011 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; otwarto tylko stronę abstraktu (lead L-30, arXiv 2102.09692)
+C-012 | UNITIZED | U-009 | run 2 NEW | odrębny mechanizm: zapis oceny człowieka przed odsłonięciem AI
+C-013 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; otwarto tylko stronę abstraktu v4 (lead L-45, arXiv 2402.10962)
+C-014 | UNITIZED | U-010 | run 2 NEW | odrębny mechanizm: miara Delta na z-score'ach częstych słów
+
+REJECTED INFERENCES
+- zmniejszone zakotwiczenie w przepływie dwukrokowym nie oznacza przeniesienia efektu na pisanie tekstu; badanie dotyczy decyzji klasyfikacyjnych 19 radiologów
+- mała `Delta` nie oznacza podobieństwa; oznacza najmniejszą niepodobność w zbiorze podstawowym
+- zgodność słowa z odczuciem w kroku `Resonating` nie jest miarą zewnętrzną ani zapisem porównywalnym między osobami
+- ograniczenie założeń w składni Clean Language nie oznacza braku wpływu prowadzącego; artykuł pokazuje założenia wnoszone nawet przez pytanie złożone głównie ze słów klienta
+- wskazanie Sabelfeld & Myers jako podstawy CaMeL nie oznacza porównania funkcjonalnego U-006 z U-002; relacja nie była badana
+
+AUDIT DELTA
+- żądanie PDF arXiv 2402.10962 (lead L-45) zwróciło stronę abstraktu v4; pełny tekst nie został odczytany; tytuł na arXiv to obecnie `Measuring and Controlling Instruction (In)Stability in Language Model Dialogs`
+- lead L-30 otwarto tylko na poziomie abstraktu; implementacja funkcji `on demand`, `update`, `wait` nie została odczytana
+- lead L-46: otwarty dokument to Hoover 2004, nie praca Burrowsa; zadania PAN i implementacja `faststylometry` nie zostały otwarte
+- artykuł Clean Language mówi o dziewięciu pytaniach podstawowych, a jego lista zawiera osiem pozycji
+- lead L-18: pytanie o zasady słuchacza i zapis dosłowny nie ma pokrycia na otwartej stronie sześciu kroków; U-008 dotyczy wyłącznie kroków `Handle` i `Resonating`
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostają dwaj kandydaci DEFER (C-011, C-013) z otwartymi tylko abstraktami, dwa leady NOT_PROBED (C-009, C-010) oraz leady L-24, L-25, L-36, L-40, L-44 z planu Runu 2
+
+SYNTHESIS
+OBSERVATION: Run 2 dodał Unity dla punktów (c) i (d) z `CO MA WYJŚĆ`: U-009 (człowiek najpierw) i U-010 (miara stylu); punkt (e) nie ma Unitu, bo L-45 otwarto tylko na poziomie abstraktu.
+OBSERVATION: U-008 i U-009 ustalają kryterium decyzji po stronie człowieka (odczucie w ciele, zapis oceny wstępnej), a U-010 liczy zgodność względem tekstów referencyjnych autora; żadne z otwartych źródeł nie łączy tych trzech elementów.
+INFERENCE: wszystkie dziesięć Unitów ma EVIDENCE_LAYER: DOCUMENTED_DESIGN; żaden nie opiera się na otwartym kodzie ani testach.
+OPEN_QUESTION: czy miara typu `Delta` (U-010) daje się liczyć z tekstów referencyjnych jednego autora wobec fragmentów tekstu pisanego z modelem przy długościach próbek zbliżonych do opisanych przez Hoovera.
+ASSESSMENT: priorytet dalszej pracy: C-011 i C-013 (pełny tekst), L-24 i L-44, następnie Biba i C2PA.
