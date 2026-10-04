@@ -1,0 +1,293 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-GLOS1
+TITLE: Ochrona głosu człowieka w pracy z AI: szerokie przeszukanie rozwiązań
+SOURCE_SET: mechanizmy z literatury i dokumentacji dotyczące pochodzenia i oznaczania słów człowieka, drogi od materiału pochodnego do źródła, kolejności człowiek–model, pomiaru głosu autora i stabilności zachowania; pytanie: jak pracować z AI tak, aby słowa, tok myślenia i autorstwo człowieka pozostały odróżnialne od materiału modelu i przetrwały kompresję, streszczanie, wyszukiwanie i przepisywanie
+SOURCES:
+  - TEI P5 Guidelines
+  - Sabelfeld & Myers 2003 (Language-Based Information-Flow Security)
+  - CaMeL (Debenedetti et al., arXiv 2503.18813)
+  - CoAuthor (Lee, Liang, Yang; arXiv 2201.06796)
+  - Claude Platform Docs: Citations
+  - Clean Language article (Tompkins & Lawley, Rapport 35)
+  - Focusing Six Steps (focusing.org)
+  - Oliver, Serovich & Mason 2005 (PMC1400594)
+  - Buçinca et al. 2021 (To Trust or to Think, arXiv 2102.09692)
+  - Fogliato et al. 2022 (Who Goes First?, arXiv 2205.09696)
+  - Li et al. 2024 (Measuring and Controlling Instruction (In)Stability, arXiv 2402.10962)
+  - Hoover 2004 (Testing Burrows's Delta)
+  - Padmakumar & He 2024 (Does Writing with Language Models Reduce Content Diversity?, arXiv 2309.05196)
+  - Laban et al. 2025 (LLMs Get Lost In Multi-Turn Conversation, arXiv 2505.06120)
+RUN: 3
+FOCUS: stabilność zachowania w czasie, tarcie przy sugestiach AI, homogenizacja tekstu pisanego z modelem
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-04
+ACCESS_LIMITATIONS:
+  - żądania PDF arXiv 2402.10962 i 2505.06120 zwróciły stronę abstraktu; pełne teksty odczytano z wersji HTML
+  - wersje HTML obu prac urywają się w dodatku A; dodatki dalsze nie zostały odczytane
+  - artefakty Biby (L-05) i C2PA (L-09) nadal nieotwarte
+  - profil celu bez zmian: plik wejściowy nie ma pola `TARGET`, w `target` użyto pola `ZASADA`; wersja profilu nieznana
+TARGET_PROFILE:
+  id: GLOS-ROZWIAZANIA-SZEROKO
+  version: UNKNOWN
+  target: neuralcore to interfejs dostrojony do człowieka, a nie do maszyny; AI ma naprawdę wspomagać myślenie, a nie myśleć za człowieka
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Buçinca et al. 2021: sekcje 3–6, Tabele 1–6 | https://arxiv.org/pdf/2102.09692 | trzy funkcje wymuszające (`on demand`, `update`, `wait`) wobec prostych podejść z wyjaśnieniami i bazy bez AI; N=199; analiza według Need for Cognition
+Li et al. 2024: sekcje 3–6, Fig. 2–6 | https://arxiv.org/html/2402.10962v4 | protokół rozmowy dwóch instancji z sondą, pomiar `attention decay`, metoda `split-softmax`, baseliny `SPR` i `CFG`
+Padmakumar & He 2024: sekcje 2–6, Tabele 1–4 i 9–13 | https://arxiv.org/pdf/2309.05196 | zapis klawiszy z przypisaniem znaków użytkownikowi albo modelowi, wynik homogenizacji, różnorodność n-gramów i punktów kluczowych
+Laban et al. 2025: sekcje 3–7, 9, Tabele 1–4 | https://arxiv.org/html/2505.06120v1 | symulacja odłamków instrukcji, miary skuteczności, zdolności i niezawodności, warianty `Recap` i `Snowball`
+UNKNOWN_REGIONS:
+  - Li et al.: dodatki od A (część końcowa) do E, w tym dodatek C (wpływ RLHF) i E (formuła `split-softmax`)
+  - Laban et al.: dodatki B do O (definicja odłamków, proces dzielenia, prompty, implementacje zadań)
+  - Padmakumar & He: repozytorium kodu i danych (github.com/vishakhpk/hai-diversity)
+  - nadal: Fogliato et al. (platforma aka.ms/Exp-HAIC), Hoover (Burrows 2002, zadania PAN), Biba 1977 (L-05), C2PA 2.2 (L-09)
+OUTSIDE_SCOPE:
+  - leady planu Runu 2 nadal nieotwarte: L-25, L-36, L-40
+  - pozostałe leady listy wejściowej poza Runami 1–3: L-02, L-03, L-07, L-08, L-11, L-13 do L-16, L-20 do L-23, L-26 do L-29, L-32 do L-35, L-37 do L-39, L-41 do L-43, L-47 do L-50
+
+DELTA
+NEW
+UNIT_ID: U-011
+NAME: Cognitive Forcing Functions Delaying or Gating AI Suggestions
+LENS: LENS_KNOWLEDGE
+TYPE: process_constraint
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Opóźnia albo uzależnia od działania człowieka odsłonięcie sugestii AI w momencie decyzji: sugestia ukryta do kliknięcia (`on demand`), pokazywana po pierwszej decyzji człowieka z możliwością jej zmiany (`update`) albo po 30 sekundach komunikatu o przetwarzaniu (`wait`).
+MINIMAL_FORM:
+  - `on demand`: sugestia i wyjaśnienie ukryte; przycisk `See AI's suggestion` je odsłania
+  - `update`: pierwsza decyzja bez AI; potem sugestia i wyjaśnienie; użytkownik może zmienić decyzję
+  - `wait`: komunikat `AI is processing the image` przez 30 sekund, potem sugestia i wyjaśnienie
+  - bazy porównawcze: proste XAI (sugestia i wyjaśnienie od razu; wariant z podaną pewnością AI) oraz brak AI
+  - nadmierne poleganie = odsetek zgodności z AI, gdy sugestia AI jest błędna; osobno: błąd człowieka i decyzja poprawna
+SOURCE_ANCHOR:
+  - source: Buçinca et al. 2021 (To Trust or to Think, arXiv 2102.09692)
+    locator: https://arxiv.org/pdf/2102.09692
+    anchor: 3.2 Conditions, 3.6 Design and Analysis, 4.1–4.3, 5, 6, Tabele 1–2 i 4–6
+    revision: Proc. ACM HCI 5 CSCW1, Article 188, April 2021 (arXiv v1)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - symulowane AI o trafności 75% (kontrola typu i częstości błędów) z wyjaśnieniami opartymi na cechach (redukcja węglowodanów, podobieństwo smaku)
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: WORKFLOW, INTERFACE
+ADOPTION_NOTES: Odnosi się do punktu (c) z `CO MA WYJŚĆ`: kolejność i tarcie przy odsłonięciu sugestii ustala interfejs, nie model. Źródło mierzy wybór składnika posiłku, nie tekst; opisuje, że warianty były oceniane jako trudniejsze i mniej lubiane.
+UNKNOWN:
+  - evidence: wkład poszczególnych funkcji osobno nie jest rozdzielony; analizy dotyczą kategorii funkcji wymuszających
+LIMITS:
+  - przy błędnych sugestiach AI trafność wyboru ingrediencji do wymiany: 0,49 bez AI, 0,08 z prostym XAI, 0,27 z funkcjami wymuszającymi; nadmierne poleganie 0,64 (proste XAI) wobec 0,48 (funkcje wymuszające), p=.003 (Tabele 1–2)
+  - funkcje wymuszające nie poprawiły wyniku zespołu we wszystkich zadaniach łącznie (H1b niepotwierdzona); zespoły człowiek+AI pozostały gorsze od samego AI o trafności 75% (6)
+  - uczestnicy osiągali najlepsze wyniki w warunkach, które oceniali jako najtrudniejsze i najmniej lubiane (kompromis skuteczność–akceptowalność, 6)
+  - korzyść dla wyniku przy błędnych sugestiach dotyczyła głównie osób o wysokim Need for Cognition: ogólny wynik 0,02 → 0,11 (p=.002); u osób o niskim NFC różnica nieistotna (Tabele 4–5)
+  - jedno nietrudne zadanie żywieniowe, 199 uczestników Mechanical Turk po odrzuceniu 49 osób i 12 przypisanych do warunków eksploracyjnych, sztuczne AI (3.3, 3.5, 6)
+RELATES_TO:
+  - U-009
+
+NEW
+UNIT_ID: U-012
+NAME: Self-Chat Probe Protocol for Instruction Drift
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Mierzy stabilność instrukcji systemowej w trakcie rozmowy: dwie kopie czatu z różnymi promptami systemowymi rozmawiają przez ustaloną liczbę rund, a w wybranej rundzie wiadomość rozmówcy jest zastępowana pytaniem-sondą, na które odpowiedź ocenia deterministyczna funkcja stabilności z przedziału 0–1.
+MINIMAL_FORM:
+  - wejście: `s_A`, `s_B` (prompty systemowe), `a_1` (starter), `p_B` (sonda), `f_B(·)` (funkcja Pythona, wynik z [0,1], większy = instrukcja lepiej przestrzegana)
+  - krok 1: czaty A i B rozmawiają `N = 8` rund; badany jest agent B
+  - krok 2: w rundzie `i` wiadomość `a_i` jest zastąpiona sondą `p_B`; odpowiedź `b'_i` ocenia `f_B`
+  - wynik: średnia stabilność po rozmowach (200 losowych par promptów, LLaMA2-chat-70B)
+  - benchmark: 100 promptów systemowych w 5 kategoriach (odpowiedzi wielokrotnego wyboru, charakter agenta, wzorzec formatu odpowiedzi, zapamiętane fakty, języki)
+  - wariant kontrolny: `a_i` zastąpione sondą `p_A` mierzy, czy agent przejmuje instrukcję rozmówcy (`f_A`)
+SOURCE_ANCHOR:
+  - source: Li et al. 2024 (Measuring and Controlling Instruction (In)Stability, arXiv 2402.10962)
+    locator: https://arxiv.org/html/2402.10962v4
+    anchor: 3.1 Experimental Protocol, 3.2 Benchmark Dataset, 3.3 Experimental Results, Fig. 2, Fig. 3, Tabela 1
+    revision: v4, 25 Jul 2024 (COLM 2024)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - funkcje stabilności zapisane jako kod Pythona, bez sędziego-LLM i bez wywołań modeli zamkniętych
+  - zbiór danych na Hugging Face (nieotwarty)
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: TEST, EVALUATION_RULE
+ADOPTION_NOTES: Odnosi się do punktu (e) z `CO MA WYJŚĆ`: miara stabilności zachowania modelu względem instrukcji w kolejnych turach, liczona bez sędziego-LLM. Źródło mierzy przestrzeganie instrukcji, nie brzmienie autora.
+UNKNOWN:
+  - evidence: wyniki dla GPT-3.5 (dodatek D) nie zostały odczytane
+LIMITS:
+  - dryf zmierzono na LLaMA2-chat-70B w ciągu ośmiu rund; generacja z temperaturą 1,0 i próbkowaniem nucleus p=0,9
+  - wynik zawiera zjawisko przejmowania instrukcji rozmówcy (Fig. 3A); wariant z pustym promptem rozmówcy w Fig. 3B
+  - `attention decay` jest opisany jako hipoteza współwystępującą z dryfem; pokazano go na LLaMA2-7B (Fig. 4: plateau w obrębie tury i spadki między turami)
+RELATES_TO:
+  - U-015
+
+NEW
+UNIT_ID: U-013
+NAME: Keystroke-Level Authorship Attribution with Homogenization Score
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Przypisuje na podstawie zapisu klawiszy każdy znak eseju użytkownikowi albo modelowi i liczy wynik homogenizacji eseju jako średnie podobieństwo (Rouge-L albo BertScore) do pozostałych esejów na ten sam temat, na poziomie całego eseju i punktów kluczowych.
+MINIMAL_FORM:
+  - znak → `user` | `model` z zapisu klawiszy; token: większość znaków; punkt kluczowy: najbliższe zdanie według Rouge-L, przypisane modelowi, gdy ponad połowa znaków zdania pochodzi od modelu
+  - `hom(d | t) = mean_{d' ∈ D_t, d' ≠ d} sim(d, d')`; homogenizacja korpusu = średnia po esejach; `sim` ∈ {Rouge-L, BertScore}
+  - punkty kluczowe: streszczenie eseju promptem do `gpt-3.5-turbo` (średnio 6,86 punktu na esej)
+  - różnorodność: odsetek unikalnych n-gramów; unikalne punkty kluczowe = liczba klastrów (klasteryzacja aglomeracyjna, pełne wiązanie, odległość = 1 − Rouge-L) przy zadanym progu
+  - trzy warunki: `Solo`, `GPT3`, `InstructGPT`
+SOURCE_ANCHOR:
+  - source: Padmakumar & He 2024 (Does Writing with Language Models Reduce Content Diversity?, arXiv 2309.05196)
+    locator: https://arxiv.org/pdf/2309.05196
+    anchor: 2.1, 3, 4.1, 4.2, 5.1, 5.2, 6, Tabele 1–4, Tabele 10–13, Appendix B.1
+    revision: v3, 1 Jul 2024 (ICLR 2024)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - platforma CoAuthor z zapisem znaków oraz `gpt-3.5-turbo` do punktów kluczowych
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: DATA_STRUCTURE, EVALUATION_RULE
+ADOPTION_NOTES: Odnosi się do punktów (a) i (d) z `CO MA WYJŚĆ`: przypisanie znaków autorowi oraz porównanie rozkładu fraz tekstu wpisanego przez użytkowników z tekstem `Solo`. Źródło nie mierzy podobieństwa tekstu do wcześniejszych tekstów tego samego autora.
+UNKNOWN:
+  - evidence: kod i dane z repozytorium github.com/vishakhpk/hai-diversity nie zostały otwarte
+LIMITS:
+  - 38 autorów z Upwork (rodzimi użytkownicy angielskiego z USA), 300 esejów (po 100 na warunek, 10 tematów), jedna interakcja na esej; autorzy zastrzegają, że dynamika może się zmieniać przy powtarzanych interakcjach (6)
+  - homogenizacja korpusu na poziomie punktów kluczowych, Rouge-L: 0,1536 (Solo), 0,1578 (GPT3), 0,1660 (InstructGPT); istotna statystycznie tylko dla InstructGPT wobec obu pozostałych (4.2)
+  - rozkład 5-gramów tekstu wpisanego przez użytkowników jest podobny we wszystkich warunkach, a wzrost powtarzalności wiąże się z tekstem InstructGPT (Fig. 4b)
+  - udział tekstu modelu: 32,45% (InstructGPT) i 35,57% (GPT3); akceptacja sugestii 70,49% i 71,32% (Tabela 1)
+  - modele `davinci` i `text-davinci-003`; esej można było edytować po ukończeniu (A.1)
+RELATES_TO:
+  - U-003
+
+NEW
+UNIT_ID: U-014
+NAME: Sharded Conversation Simulation with Aptitude and Unreliability Metrics
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Dzieli w pełni określoną instrukcję na odłamki (`shards`) ujawniane po jednym na turę przez symulowanego użytkownika, porównuje wynik z wariantami jednoturowymi (`Full`, `Concat`) i liczy średnią skuteczność oraz miary zdolności i niezawodności po wielu symulacjach.
+MINIMAL_FORM:
+  - `Full`: instrukcja oryginalna w pierwszej turze; `Concat`: odłamki jako lista w jednej turze; `Sharded`: jeden odłamek na turę; `Recap`: `Sharded` plus końcowa tura z powtórzeniem wszystkich odłamków; `Snowball`: w każdej turze nowy odłamek plus powtórzenie wcześniejszych
+  - odłamek 1 niesie ogólną intencję; łącznie odłamki niosą całą informację instrukcji
+  - symulacja: asystent badany; użytkownik symulowany (GPT-4o-mini) ujawnia najwyżej jeden odłamek na turę; klasyfikator strategii odpowiedzi (siedem kategorii); ekstraktor odpowiedzi; koniec przy poprawnej odpowiedzi albo przy braku odłamków
+  - `P̄ = mean(S_i)`; `A90 = percentile_90(S)`; `U = percentile_90(S) − percentile_10(S)`; `R = 100 − U`; `N = 10` symulacji na (model, instrukcja, typ)
+SOURCE_ANCHOR:
+  - source: Laban et al. 2025 (LLMs Get Lost In Multi-Turn Conversation, arXiv 2505.06120)
+    locator: https://arxiv.org/html/2505.06120v1
+    anchor: 3.1–3.3, 4.2, 5, 6.1–6.3, 7.1, 7.2, 7.3, 9, Tabele 1–4
+    revision: v1, 9 May 2025
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - 600 instrukcji w sześciu zadaniach z istniejących benchmarków; pół-automatyczne dzielenie z udziałem GPT-4o i ręczną weryfikacją
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: TEST, EVALUATION_RULE, WORKFLOW
+ADOPTION_NOTES: Odnosi się do punktu (e) z `CO MA WYJŚĆ`: miara niezawodności jako rozstęp percentyli po powtórzeniach oraz wzorce przypominania informacji w rozmowie (`Recap`, `Snowball`). Źródło dotyczy zadań analitycznych (kod, SQL, matematyka), nie tekstu autorskiego.
+UNKNOWN:
+  - evidence: dodatki B do O (w tym definicja odłamków, proces dzielenia, prompty) oraz kod z repozytorium Microsoft/lost_in_conversation nie zostały otwarte
+LIMITS:
+  - średni spadek skuteczności `Sharded` wobec `Full`: 39% dla 15 modeli i sześciu zadań; `Concat` średnio 95,1% wartości `Full` (6.1)
+  - zdolność (`A`) spada średnio o 16%, a niezawodność (`U`) rośnie średnio o 112% (6.2)
+  - `Snowball` ogranicza spadek o 15–20%; `Recap` poprawia bardziej (GPT-4o: 59,1 → 76,6 wobec 93,0 w `Full`), lecz interwencja w ostatniej turze nie jest możliwa w realnej rozmowie (7.1, Tabela 2)
+  - obniżenie temperatury nie usuwa niezawodności w `Sharded`: ok. 30% przy temperaturze 0,0 po obu stronach (7.2, Tabela 3)
+  - symulacja w pełni automatyczna; błędy użytkownika symulowanego i klasyfikatorów w mniej niż 5% przejrzanych rozmów; zadania analityczne, angielski, sam tekst (rozdz. 9)
+  - zadanie tłumaczenia dokumentu (epizodyczne) nie wykazało spadku w `Sharded` (7.3, Tabela 4)
+
+NEW
+UNIT_ID: U-015
+NAME: Split-Softmax Attention Reweighting Toward System Prompt
+LENS: LENS_KNOWLEDGE
+TYPE: algorithm
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Zwiększa udział uwagi na tokeny promptu systemowego przez reskalowanie rozkładu uwagi w każdej operacji uwagi w czasie wnioskowania, bez trenowania.
+MINIMAL_FORM:
+  - `π(t) = Σ_{i ≤ |s_B|} α_{t,i}` (udział uwagi na prompt systemowy)
+  - `α'_{t,i} = π^k(t)/π(t) · α_{t,i}` dla `i ≤ |s_B|`; `α'_{t,i} = (1 − π^k(t))/(1 − π(t)) · α_{t,i}` dla `i > |s_B|`; `0 ≤ k ≤ 1`, `k = 1` wyłącza interwencję
+  - kalibracja: spadek dokładności MMLU w turze 4 jako budżet; stabilność mierzona w rozmowie 16-turowej
+  - baseliny: `SPR` (powtórzenie promptu systemowego z prawdopodobieństwem `p` przed każdą wypowiedzią użytkownika), `CFG` (`log p̂ = log p(w|·) + α(log p(w|·,s_B) − log p(w|·))`, `α ≥ 1`)
+SOURCE_ANCHOR:
+  - source: Li et al. 2024 (Measuring and Controlling Instruction (In)Stability, arXiv 2402.10962)
+    locator: https://arxiv.org/html/2402.10962v4
+    anchor: 6.1 Baseline Methods, 6.2 Split-softmax, 6.3 Calibration Using MMLU, 6.4 Experimental Results, Fig. 5, Fig. 6, Twierdzenie 5.1
+    revision: v4, 25 Jul 2024 (COLM 2024)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - dostęp do rozkładu uwagi w modelu (eksperymenty na LLaMA2-70B-chat)
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: ALGORITHM
+ADOPTION_NOTES: Odnosi się do punktu (e) z `CO MA WYJŚĆ`: wzmocnienie wpływu instrukcji na kolejne tury. Metoda wymaga dostępu do wnętrza modelu, więc nie dotyczy pracy przez API; źródło nie opisuje jej użycia dla instrukcji stylu autora.
+UNKNOWN:
+  - evidence: dodatek E (omówienie formuły) i dodatek C (wpływ RLHF) nie zostały odczytane; wartości liczbowe z Fig. 5–6 nie zostały odczytane (wyniki podano w tekście jako wykresy)
+LIMITS:
+  - eksperymenty na LLaMA2-70B-chat, po jednym prompcie systemowym z pięciu kategorii, 20 uporządkowanych par (6.4)
+  - wszystkie trzy metody pokazują odwrotną zależność między stabilnością a wynikiem MMLU (6.3)
+  - `SPR` działa lepiej przy dużej liczbie tur i zużywa okno kontekstu; `split-softmax` działa lepiej na początku rozmowy; `CFG` pomaga głównie w pierwszej rundzie (6.4)
+  - uzasadnienie teoretyczne to uproszczony model stożka z założeniami o osadzeniach (rozdz. 5)
+RELATES_TO:
+  - U-012
+
+CURRENT INDEX
+U-001 | Alternative Encodings with Responsibility Attributes | SOURCE_SUPPORTED | last: run 1
+U-002 | Capability-Tagged Values with Dependency-Tracked Provenance and Pre-Call Policy Check | SOURCE_SUPPORTED | last: run 1
+U-003 | Event Log with Per-Event Source Field and Final-Text Authorship Rate | SOURCE_SUPPORTED | last: run 1
+U-004 | Citation Spans Returned as Pointers into Provided Documents | SOURCE_SUPPORTED | last: run 1
+U-005 | Two-Copy Transcript Rule with Codebook | SOURCE_SUPPORTED | last: run 1
+U-006 | Program-Counter Label for Implicit Flows with Static Label Typing | SOURCE_SUPPORTED | last: run 2
+U-007 | Clean Language Question Syntax Preserving Client Words | SOURCE_SUPPORTED | last: run 2
+U-008 | Word-to-Felt-Sense Resonance Check | SOURCE_SUPPORTED | last: run 2
+U-009 | Provisional Human Judgment Registered Before AI Reveal | SOURCE_SUPPORTED | last: run 2
+U-010 | Delta Stylistic Distance over Z-Scored Frequent Words | SOURCE_SUPPORTED | last: run 2
+U-011 | Cognitive Forcing Functions Delaying or Gating AI Suggestions | SOURCE_SUPPORTED | last: run 3
+U-012 | Self-Chat Probe Protocol for Instruction Drift | SOURCE_SUPPORTED | last: run 3
+U-013 | Keystroke-Level Authorship Attribution with Homogenization Score | SOURCE_SUPPORTED | last: run 3
+U-014 | Sharded Conversation Simulation with Aptitude and Unreliability Metrics | SOURCE_SUPPORTED | last: run 3
+U-015 | Split-Softmax Attention Reweighting Toward System Prompt | SOURCE_SUPPORTED | last: run 3
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm: alternatywne kodowania z atrybutami odpowiedzialności
+C-002 | UNITIZED | U-006 | run 2 NEW | odrębny mechanizm: etykiety statyczne z kontekstem `pc`
+C-003 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm: tagi pochodzenia z propagacją przez graf zależności i polityką przed wywołaniem
+C-004 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm: pole źródła na zdarzeniu wstawienia tekstu
+C-005 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm: wskaźnik od twierdzenia do fragmentu dokumentu
+C-006 | UNITIZED | U-007 | run 2 NEW | odrębny mechanizm: składnia pytań z dosłownych słów rozmówcy
+C-007 | UNITIZED | U-008 | run 2 NEW | odrębny mechanizm: sprawdzanie słowa względem odczucia
+C-008 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm: dwie wersje transkrypcji z książką kodową
+C-009 | NOT_PROBED | - | run 1 NOT_PROBED | LEAD_UNRESOLVED: raport techniczny Biby (lead L-05) nie został otwarty w tym Runie
+C-010 | NOT_PROBED | - | run 1 NOT_PROBED | LEAD_UNRESOLVED: specyfikacja C2PA 2.2 (lead L-09) nie została otwarta w tym Runie
+C-011 | UNITIZED | U-011 | run 3 NEW | odrębny mechanizm: funkcje wymuszające opóźniające lub bramkujące sugestię AI
+C-012 | UNITIZED | U-009 | run 2 NEW | odrębny mechanizm: zapis oceny człowieka przed odsłonięciem AI
+C-013 | UNITIZED | U-012 | run 3 NEW | odrębny mechanizm: protokół sondy dla dryfu instrukcji
+C-014 | UNITIZED | U-010 | run 2 NEW | odrębny mechanizm: miara Delta na z-score'ach częstych słów
+C-015 | UNITIZED | U-013 | run 3 NEW | odrębny mechanizm: przypisanie znaków na poziomie klawiszy z wynikiem homogenizacji
+C-016 | UNITIZED | U-014 | run 3 NEW | odrębny mechanizm: symulacja odłamków z miarami zdolności i niezawodności
+C-017 | UNITIZED | U-015 | run 3 NEW | odrębny mechanizm: reskalowanie uwagi na prompt systemowy (lead L-45)
+
+REJECTED INFERENCES
+- wynik homogenizacji u Padmakumar & He mierzy podobieństwo między autorami na jeden temat, a nie zgodność tekstu z wcześniejszymi tekstami tego samego autora
+- podobny rozkład 5-gramów tekstu wpisanego przez użytkowników w jednej interakcji nie oznacza stabilności po powtarzanych interakcjach; autorzy to zastrzegają
+- współwystępowanie dryfu instrukcji i `attention decay` nie jest wykazaną przyczyną; autorzy nazywają je hipotezą
+- spadek skuteczności w wieloturowych rozmowach u Laban et al. dotyczy zadań analitycznych i nie przenosi się na utrzymanie stylu autora
+- poprawa stabilności metodą `split-softmax` nie obejmuje pracy przez API bez dostępu do uwagi modelu
+- efekt funkcji wymuszających u Buçinca et al. dotyczy jednego zadania żywieniowego z symulowanym AI i nie jest przeniesiony na pisanie
+
+AUDIT DELTA
+- żądania PDF arXiv 2402.10962 (v4 i bez wersji) oraz 2505.06120 zwróciły stronę abstraktu; pełne teksty odczytano z wersji HTML
+- wersja HTML 2402.10962v4 urywa się w dodatku A; dodatki C do E nie zostały odczytane, a wyniki `split-softmax` pochodzą z opisu w sekcji 6.4 bez wartości liczbowych
+- wersja HTML 2505.06120v1 urywa się w dodatku A; dodatki B do O nie zostały odczytane, a wartości w U-014 pochodzą z tekstu głównego i Tabel 1–4
+- nazwy źródeł Buçinca et al. i Li et al. w `SOURCES` zaktualizowano po otwarciu pełnych tekstów (usunięto dopisek o stronie abstraktu)
+- różnice między `on demand`, `update` i `wait` nie były istotne w obrębie kategorii (Buçinca et al., 4.1), dlatego U-011 opisuje je łącznie
+- C-013 i C-017 pochodzą z jednego leada (L-45) i dwóch odrębnych mechanizmów: pomiaru dryfu (U-012) i interwencji na uwadze (U-015)
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostają leady L-25, L-36 i L-40 z planu Runu 2, dwa leady NOT_PROBED (C-009, C-010) oraz dodatki nieodczytane w dwóch otwartych źródłach
+
+SYNTHESIS
+OBSERVATION: Run 3 dodał Unity dla punktu (e) z `CO MA WYJŚĆ` (U-012, U-014, U-015) oraz kolejny dla punktu (c) (U-011); wszystkie piętnaście Unitów ma EVIDENCE_LAYER: DOCUMENTED_DESIGN.
+OBSERVATION: U-012 mierzy przestrzeganie instrukcji funkcją deterministyczną w kodzie, U-014 liczy rozstęp percentyli po powtórzeniach, a U-010 liczy zgodność względem tekstów autora; żadne z otwartych źródeł nie łączy miary stabilności z miarą głosu autora.
+INFERENCE: U-011 w wariancie `update` i U-009 opisują zbliżony układ kolejności (człowiek decyduje pierwszy) w różnych zadaniach; U-009 mierzy zgodność z flagą AI, U-011 nadmierne poleganie przy błędnych sugestiach; relacja nie była porównywana formalnie.
+HYPOTHESIS: miary `A90` i `U` z U-014 dałyby się liczyć dla wyniku miary Delta (U-010) po powtórzeniach generacji z tym samym promptem stylu; otwarte źródła nie badały tego połączenia.
+OPEN_QUESTION: czy brak zmiany rozkładu fraz w tekście wpisanym przez użytkowników (U-013) utrzymuje się przy powtarzanych interakcjach, skoro autorzy badali pojedyncze interakcje.
+ASSESSMENT: priorytet dalszej pracy: L-25, L-36 i L-40, następnie Biba i C2PA oraz dodatki w pracach Li et al. i Laban et al.
