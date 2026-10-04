@@ -1,0 +1,308 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-GLOS1
+TITLE: Ochrona głosu człowieka w pracy z AI: szerokie przeszukanie rozwiązań
+SOURCE_SET: mechanizmy z literatury i dokumentacji dotyczące pochodzenia i oznaczania słów człowieka, drogi od materiału pochodnego do źródła, kolejności człowiek–model, pomiaru głosu autora i stabilności zachowania; pytanie: jak pracować z AI tak, aby słowa, tok myślenia i autorstwo człowieka pozostały odróżnialne od materiału modelu i przetrwały kompresję, streszczanie, wyszukiwanie i przepisywanie
+SOURCES:
+  - TEI P5 Guidelines
+  - Sabelfeld & Myers 2003 (Language-Based Information-Flow Security)
+  - CaMeL (Debenedetti et al., arXiv 2503.18813)
+  - CoAuthor (Lee, Liang, Yang; arXiv 2201.06796)
+  - Claude Platform Docs: Citations
+  - Clean Language article (Tompkins & Lawley, Rapport 35)
+  - Focusing Six Steps (focusing.org)
+  - Oliver, Serovich & Mason 2005 (PMC1400594)
+  - Buçinca et al. 2021 (To Trust or to Think, arXiv 2102.09692)
+  - Fogliato et al. 2022 (Who Goes First?, arXiv 2205.09696)
+  - Li et al. 2024 (Measuring and Controlling Instruction (In)Stability, arXiv 2402.10962)
+  - Hoover 2004 (Testing Burrows's Delta)
+  - Padmakumar & He 2024 (Does Writing with Language Models Reduce Content Diversity?, arXiv 2309.05196)
+  - Laban et al. 2025 (LLMs Get Lost In Multi-Turn Conversation, arXiv 2505.06120)
+  - Biba 1977 (Integrity Considerations for Secure Computer Systems, ESD-TR-76-372)
+  - Appleton 2023 (Language Model Sketchbook)
+  - Bastani et al. (Generative AI Without Guardrails Can Harm Learning, kopia autora)
+RUN: 4
+FOCUS: integralność jako dual poufności, ruchy krytyczne wobec tekstu piszącego, ochrona w prompcie i pomiar uczenia po usunięciu AI
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-04
+ACCESS_LIMITATIONS:
+  - tekst raportu DTIC jest wynikiem OCR skanu; relacje porządku zapisano jako `≤` na podstawie `leq` i kontekstu aksjomatów
+  - w wyodrębnionym tekście raportu nie ma nazwiska autora (strona tytułowa wymienia MITRE Corporation)
+  - praca Bastani et al. odczytana z kopii hostowanej przez autora; zgodność z wersją PNAS niepotwierdzona
+  - filmy i zrzuty ekranu ze strony Appleton nie były oglądane
+  - specyfikacja C2PA 2.2 (L-09) nadal nieotwarta
+  - profil celu bez zmian: plik wejściowy nie ma pola `TARGET`, w `target` użyto pola `ZASADA`; wersja profilu nieznana
+TARGET_PROFILE:
+  id: GLOS-ROZWIAZANIA-SZEROKO
+  version: UNKNOWN
+  target: neuralcore to interfejs dostrojony do człowieka, a nie do maszyny; AI ma naprawdę wspomagać myślenie, a nie myśleć za człowieka
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Biba 1977: sekcje II–V, Fig. 5–7 i 11–13 | https://apps.dtic.mil/sti/tr/pdf/ADA039324.pdf | trzy polityki mandatoryjne integralności (low-water mark, ring, strict integrity) z aksjomatami A3.1–A3.8 i twierdzeniami T3.1–T3.2; polityki uznaniowe (ACL, pierścienie); dodatek o polityce uprawnień
+Appleton 2023: sekcje Daemons, Branches, Epi | https://maggieappleton.com/lm-sketchbook | trzy prototypy interfejsów: sugestie w tle (`daemons`), łańcuchy przyczyn i skutków, menu kontekstowe `Epi`
+Bastani et al.: sekcje 2–5, Tabele 1–2, dodatki A–C | https://hamsabastani.github.io/education_llm.pdf | RCT z trzema warunkami (kontrola, `GPT Base`, `GPT Tutor`), prompt z rozwiązaniami od nauczyciela, egzamin bez AI sparowany z zadaniami ćwiczeń
+UNKNOWN_REGIONS:
+  - Biba: dodatek I (polityka uprawnień) oraz fragmenty o ACL i pierścieniach polityki uznaniowej nie weszły do Unitów
+  - Appleton: filmy i zrzuty ekranu prototypów; prototyp `Branches` poza Unitem
+  - Bastani et al.: wersja PNAS; wpisy o erracie i krytyce cytowalności z listy wejściowej
+  - nadal: C2PA 2.2 (L-09), dodatki prac Li et al. i Laban et al., platforma Fogliato et al., Burrows 2002 i zadania PAN
+OUTSIDE_SCOPE:
+  - lead planu Runu 2 nadal nieotwarty: L-36
+  - pozostałe leady listy wejściowej poza Runami 1–4: L-02, L-03, L-07, L-08, L-11, L-13 do L-16, L-20 do L-23, L-26 do L-29, L-32 do L-35, L-37 do L-39, L-41 do L-43, L-47 do L-50
+
+DELTA
+NEW
+UNIT_ID: U-016
+NAME: Strict Integrity Policy with No Read-Down and No Write-Up
+LENS: LENS_KNOWLEDGE
+TYPE: invariant
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Wymusza, aby podmiot odczytywał tylko obiekty o poziomie integralności nie niższym niż własny, modyfikował tylko obiekty o poziomie nie wyższym i wywoływał tylko podmioty o poziomie nie wyższym; twierdzenie T3.2 wiąże to z brakiem ścieżki transferu informacji od niższego poziomu integralności do wyższego.
+MINIMAL_FORM:
+  - `s o o ⇒ il(s) ≤ il(o)`; `s m o ⇒ il(o) ≤ il(s)`; `s1 i s2 ⇒ il(s2) ≤ il(s1)` (A3.6–A3.8)
+  - poziom integralności = klasa (przykład: `C ≤ S ≤ TS`, określona szkodą dla bezpieczeństwa narodowego po sabotażu informacji) i zbiór przedziałów (compartments); porządek częściowy tworzy kratę
+  - hierarchia plików: `il(b) ≤ il(d)` dla gałęzi `b` katalogu `d`, czyli poziom nierosnący od korzenia do liści
+  - przykłady zastosowania: wywołanie procesu `il(p') ≤ il(p)`; gniazdo `sk`: wysyłanie przy `il(sk) ≤ il(p)`, odbiór przy `il(p') ≤ il(sk')`; segment: odczyt i wykonanie przy `il(p) ≤ il(s)`, zapis przy `il(s') ≤ il(p')`
+  - T3.2: ścieżka transferu od `o[1]` do `o[n+1]` wymusza `il(o[n+1]) ≤ il(o[1])`
+SOURCE_ANCHOR:
+  - source: Biba 1977 (Integrity Considerations for Secure Computer Systems, ESD-TR-76-372)
+    locator: https://apps.dtic.mil/sti/tr/pdf/ADA039324.pdf
+    anchor: III The Strict Integrity Policy (A3.6–A3.8, T3.2), IV Virtual Environment Impact, Fig. 7, Fig. 11–13
+    revision: MTR-3153 Rev. 1, April 1977
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - jądro bezpieczeństwa jako monitor referencyjny: kompletny, chroniony, o dowodliwie poprawnym zachowaniu
+  - zewnętrzne względem systemu przypisanie poziomów integralności podmiotom i obiektom
+MUST_BE_TRUE:
+  - poziomy integralności są przypisane poprawnie przez czynnik zewnętrzny; ochrona obowiązuje tylko w tym zakresie
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: PROCESS_RULE, DATA_STRUCTURE
+ADOPTION_NOTES: Odnosi się do punktów (a) i (c) z `CO MA WYJŚĆ`. Interpretacja, nie twierdzenie źródła: każdy fragment i każda operacja mogłyby nieść poziom zaufania, a zapis do materiału o wyższym poziomie byłby dozwolony tylko podmiotowi o co najmniej takim poziomie. Źródło nie rozważa tekstu naturalnego ani streszczeń.
+UNKNOWN:
+  - evidence: raport opisuje projekt dla jądra opartego na Multics; wyniki z wdrożenia nie są podane
+LIMITS:
+  - polityka chroni przed złośliwą modyfikacją, nie przed przypadkową; skuteczność zależy od poprawnego zewnętrznego przypisania poziomów (IV)
+  - cena: część obiektów staje się nieobserwowalna dla podmiotu (Fig. 12); polityka ma największą użyteczność przy dużej współdzielności międzypoziomowej, w innych środowiskach bywa zbyt uciążliwa (IV)
+  - dowód T3.2 jest w źródle; brak implementacji i pomiaru efektu
+  - zagrożenia wewnętrzne podsystemu (np. kod modyfikujący samego siebie) są poza zakresem polityk i należą do weryfikacji programów (II)
+RELATES_TO:
+  - U-006
+  - U-017
+
+NEW
+UNIT_ID: U-017
+NAME: Low-Water Mark Integrity Policy
+LENS: LENS_KNOWLEDGE
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Obniża poziom integralności podmiotu do minimum z jego poziomu i poziomu obserwowanego obiektu po każdym odczycie, a modyfikację dopuszcza tylko wobec obiektów o poziomie nie wyższym niż bieżący poziom podmiotu.
+MINIMAL_FORM:
+  - `il'(s) = min(il(s), il(o))` po odczycie obiektu `o` (A3.1)
+  - `s m o ⇒ il(o) ≤ il(s)` (A3.2); `s1 i s2 ⇒ il(s2) ≤ il(s1)` (A3.3)
+  - poziom podmiotu jest monotonicznie nierosnący
+  - T3.1: ścieżka transferu informacji od `o[1]` do `o[n+1]` wymusza `il(o[n+1]) ≤ il(o[1])`
+  - warianty: obniżanie poziomu modyfikowanego obiektu (`il'(o) = min(il(s), il(o))`) oraz wariant audytowy z `cl` («poziom skażenia») bez egzekwowania
+SOURCE_ANCHOR:
+  - source: Biba 1977 (Integrity Considerations for Secure Computer Systems, ESD-TR-76-372)
+    locator: https://apps.dtic.mil/sti/tr/pdf/ADA039324.pdf
+    anchor: III The Low-Water Mark Policy (A3.1–A3.3, D3.1, T3.1), A Low-Water Mark for Objects, A Low-Water Mark Integrity Audit Policy, Fig. 5
+    revision: MTR-3153 Rev. 1, April 1977
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - jądro bezpieczeństwa egzekwujące politykę przy każdym dostępie (dynamiczne wymuszanie)
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: PROCESS_RULE, ALGORITHM
+ADOPTION_NOTES: Odnosi się do punktów (a) i (b) z `CO MA WYJŚĆ`: poziom zaufania podmiotu «skażony» odczytem materiału niższego poziomu, w analogii do propagacji pochodzenia w U-002. Źródło opisuje mechanizm jako niewygodny w programowaniu ogólnym.
+UNKNOWN:
+  - evidence: brak wyników z wdrożenia; polityka opisana aksjomatami i jednym dowodem (T3.1)
+LIMITS:
+  - zbiór obiektów modyfikowalnych przez podmiot zmienia się po każdym odczycie; podmiot może przypadkowo odciąć sobie dostęp do obiektów potrzebnych do funkcji, a odzyskanie wymaga ponownej inicjalizacji podmiotu (III)
+  - wariant z obniżaniem poziomu obiektów nie zapobiega niewłaściwej modyfikacji, tylko ją uwidacznia; autorzy oceniają go jako źle dopasowany do środowiska systemowego (III)
+  - wariant audytowy nie chroni; daje powiadomienie po fakcie (IV)
+  - w rozdziale IV autorzy wybierają `strict integrity` jako prostszą do zrozumienia i certyfikacji (IV)
+RELATES_TO:
+  - U-002
+  - U-016
+
+NEW
+UNIT_ID: U-018
+NAME: Role-Typed Critique Moves Invoked or Ignored by the Writer
+LENS: LENS_KNOWLEDGE
+TYPE: process_constraint
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Udostępnia piszącemu ruchy krytyczne wobec jego tekstu jako sugestie w tle od ról (`daemons`) albo jako polecenia wywoływane prawym przyciskiem myszy (`Epi`); piszący może sugestię zignorować.
+MINIMAL_FORM:
+  - `daemons`: role w tle (adwokat diabła, zachęcający, syntetyzujący w krótsze twierdzenia, szukający dowodów, rozwijający niewyjaśnione punkty); sugestia = podświetlone zdanie z propozycją zmiany albo prośbą o obronę twierdzenia; zignorowana sugestia zanika
+  - `Epi`: menu kontekstowe prawego przycisku z ruchami: przeformułowanie zdań, krytyka pomysłów, szukanie dowodów dla twierdzeń, generowanie pytań badawczych, wskazanie założeń
+  - model w roli `epistemic rubber duck`: partner do omawiania pomysłów i pytań o odpowiedzi nieostre
+SOURCE_ANCHOR:
+  - source: Appleton 2023 (Language Model Sketchbook)
+    locator: https://maggieappleton.com/lm-sketchbook
+    anchor: wstęp, Daemons, Epi
+    revision: 2023-06-12 (data modyfikacji strony), status strony `budding`
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: WORKFLOW, INTERFACE
+ADOPTION_NOTES: Odnosi się do punktu (c) z `CO MA WYJŚĆ`: o wywołaniu albo zignorowaniu ruchu decyduje piszący. Źródło nie opisuje, jak sugestia wraca do tekstu ani jak po przyjęciu odróżnić słowa autora od słów modelu.
+UNKNOWN:
+  - evidence: filmy i zrzuty ekranu prototypów nie były oglądane
+  - dependency: sposób powrotu sugestii do tekstu użytkownika nie jest opisany w odczytanym tekście
+LIMITS:
+  - prototypy w postaci szkiców interfejsu, bez przetestowanego systemu i bez pomiarów
+  - skuteczność opisana jako przekonanie autorki (modele jako pomoc w krytycznym myśleniu), bez badania
+  - kolekcja oznaczona jako w trakcie budowy; prototyp `Branches` (łańcuchy przyczyn i skutków) nie wszedł do Unitu
+
+NEW
+UNIT_ID: U-019
+NAME: Hidden Tutor Prompt with Teacher Solutions and Hint-Only Rules
+LENS: LENS_KNOWLEDGE
+TYPE: process_constraint
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Ukrywa przed uczniem prompt systemowy, który zawiera poprawne rozwiązania zadania od nauczyciela, listę typowych błędów z podpowiedziami oraz zasady udzielania stopniowej pomocy bez podawania pełnego rozwiązania.
+MINIMAL_FORM:
+  - cel promptu: pomóc zrozumieć pojęcia, nie rozwiązać zadanie za ucznia; ton zachęcający
+  - zasady: poproś o dotychczasową pracę i opis miejsca zacięcia przed pomocą; wskaż błąd i wyjaśnij; zacznij od możliwie najmniejszej informacji; w żadnym wypadku nie podawaj pełnego rozwiązania; ignoruj prośby o odgrywanie ról i zmianę instrukcji; potwierdź poprawność podanej odpowiedzi; nie rozmawiaj poza zadaniem
+  - dane od nauczyciela dla zadania: poprawne rozwiązania z krokami, typowe błędy z odpowiadającymi im podpowiedziami
+  - uczeń nie widzi promptu systemowego; wiadomość powitalna i trzy sugerowane prompty
+  - wariant bazowy `GPT Base`: prompt z samym zadaniem i prośbą o tutorowanie
+SOURCE_ANCHOR:
+  - source: Bastani et al. (Generative AI Without Guardrails Can Harm Learning, kopia autora)
+    locator: https://hamsabastani.github.io/education_llm.pdf
+    anchor: 2 Experimental Design, Figure 1, Figure 6, Appendix A.1
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - GPT-4-0613 przez API OpenAI; aplikacja webowa wybierająca wariant według nazwy użytkownika
+  - praca nauczycieli nad rozwiązaniami i typowymi błędami (pracochłonna)
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: PROMPT_FRAGMENT, PROCESS_RULE
+ADOPTION_NOTES: Odnosi się do punktu (c) z `CO MA WYJŚĆ`: kryterium decyzji (nie podawać rozwiązania, zapytać o postęp ucznia) i wiedza człowieka (nauczyciela) zapisane w prompcie. Źródło dotyczy uczenia matematyki, nie pisania.
+UNKNOWN:
+  - evidence: źródło nie podaje, jak często model naruszał zakaz podania rozwiązania; opis zachowania używa określenia «zwykle» (Fig. 6)
+LIMITS:
+  - jedna szkoła w Turcji, prawie 1000 uczniów, matematyka, jesień 2023; wynik krótkoterminowy (egzamin w tej samej sesji); GPT-4 z 2023 r.
+  - `GPT Base` odpowiadał poprawnie średnio w 51% przypadków na zapytanie «What is the answer?» (błędy logiczne 42%, arytmetyczne 8%) (4.1)
+  - `GPT Tutor` rzadko się myli, bo prompt zawiera rozwiązanie; przygotowanie danych dla każdego zadania jest pracochłonne (2)
+  - uczniowie w `GPT Tutor` częściej przysyłali próby odpowiedzi i prośby o pomoc, a w `GPT Base` prośby o odpowiedź i przepisane treści zadań (4.2)
+RELATES_TO:
+  - U-020
+
+NEW
+UNIT_ID: U-020
+NAME: Paired Practice and Unassisted Exam Design for Measuring Learning
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Mierzy uczenie osobno od wyniku z pomocą AI: faza ćwiczeń z przypisanym warunkiem dostępu do AI, a po niej zamknięty egzamin bez urządzeń z zadaniami pojęciowo sparowanymi z zadaniami ćwiczeń, oceniany ślepo przez niezależnych oceniających.
+MINIMAL_FORM:
+  - trzy części sesji: wykład nauczyciela → ćwiczenia z przypisanym warunkiem (kontrola, `GPT Base`, `GPT Tutor`) → egzamin zamknięty; każde zadanie egzaminu ma sparowane zadanie ćwiczeniowe
+  - przypisanie warunków klasom programem całkowitoliczbowym z ograniczeniami harmonogramu; analiza intention-to-treat; błędy standardowe klastrowane na poziomie klasy
+  - `Outcome = β1·GPT_Base + β2·GPT_Tutor + β3·PrevGPA + efekty stałe (sesja, ocena, rok, nauczyciel)`
+  - wskaźnik błędów AI na zadaniu: 10 zapytań «What is the answer?» na zadanie, błędy klasyfikowane jako logiczne albo arytmetyczne; interakcje z warunkiem, także dla zadania egzaminu przez sparowane zadanie ćwiczeniowe
+  - ocenianie ślepe według rubryki; ankieta percepcji uczenia i wyniku
+SOURCE_ANCHOR:
+  - source: Bastani et al. (Generative AI Without Guardrails Can Harm Learning, kopia autora)
+    locator: https://hamsabastani.github.io/education_llm.pdf
+    anchor: 2, 3 Table 1, 4.1 Table 2, Appendix A.4, A.5, A.6, B.3, C.1
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - zadania egzaminu parowane z zadaniami ćwiczeń przez nauczycieli; niezależni oceniający spoza szkoły
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: TEST, EVALUATION_RULE, WORKFLOW
+ADOPTION_NOTES: Odnosi się do punktu (c) i w części do (e) z `CO MA WYJŚĆ`: układ oddziela wynik z pomocą od zachowanych umiejętności bez pomocy; analogicznie mógłby wyglądać sprawdzian pisania bez AI po wcześniejszej pracy z AI. Źródło dotyczy zadań matematycznych z obiektywną oceną.
+UNKNOWN:
+  - evidence: wersja PNAS pracy nie została otwarta; zgodność kopii autora z wersją opublikowaną niepotwierdzona
+LIMITS:
+  - wynik w ćwiczeniach: `GPT Base` +0,137 (+48%), `GPT Tutor` +0,361 (+127%) wobec kontroli (średnia 0,284); wynik egzaminu: `GPT Base` −0,054 (−17%), `GPT Tutor` −0,004 (nieodróżnialny od kontroli) (Tabela 1)
+  - wpływ błędów logicznych AI na sparowane zadanie egzaminu jest nieistotny statystycznie (Tabela 2); autorzy czytają to razem z analizą zaangażowania jako dowód, że uczniowie przepisują odpowiedzi (4)
+  - uczniowie w grupie `GPT Base` nie spostrzegali spadku uczenia; w grupie `GPT Tutor` oceniali swój wynik egzaminu jako lepszy mimo braku poprawy (3, B.3)
+  - pięć sesji niezgodnych z przypisaniem (analiza intention-to-treat); główną zaplanowaną analizą w rejestracji był wynik egzaminu bez AI (A.6)
+  - jedna szkoła, matematyka; autorzy zaznaczają, że obiektywna ocena nie jest dostępna w przedmiotach twórczych (5)
+RELATES_TO:
+  - U-019
+
+CURRENT INDEX
+U-001 | Alternative Encodings with Responsibility Attributes | SOURCE_SUPPORTED | last: run 1
+U-002 | Capability-Tagged Values with Dependency-Tracked Provenance and Pre-Call Policy Check | SOURCE_SUPPORTED | last: run 1
+U-003 | Event Log with Per-Event Source Field and Final-Text Authorship Rate | SOURCE_SUPPORTED | last: run 1
+U-004 | Citation Spans Returned as Pointers into Provided Documents | SOURCE_SUPPORTED | last: run 1
+U-005 | Two-Copy Transcript Rule with Codebook | SOURCE_SUPPORTED | last: run 1
+U-006 | Program-Counter Label for Implicit Flows with Static Label Typing | SOURCE_SUPPORTED | last: run 2
+U-007 | Clean Language Question Syntax Preserving Client Words | SOURCE_SUPPORTED | last: run 2
+U-008 | Word-to-Felt-Sense Resonance Check | SOURCE_SUPPORTED | last: run 2
+U-009 | Provisional Human Judgment Registered Before AI Reveal | SOURCE_SUPPORTED | last: run 2
+U-010 | Delta Stylistic Distance over Z-Scored Frequent Words | SOURCE_SUPPORTED | last: run 2
+U-011 | Cognitive Forcing Functions Delaying or Gating AI Suggestions | SOURCE_SUPPORTED | last: run 3
+U-012 | Self-Chat Probe Protocol for Instruction Drift | SOURCE_SUPPORTED | last: run 3
+U-013 | Keystroke-Level Authorship Attribution with Homogenization Score | SOURCE_SUPPORTED | last: run 3
+U-014 | Sharded Conversation Simulation with Aptitude and Unreliability Metrics | SOURCE_SUPPORTED | last: run 3
+U-015 | Split-Softmax Attention Reweighting Toward System Prompt | SOURCE_SUPPORTED | last: run 3
+U-016 | Strict Integrity Policy with No Read-Down and No Write-Up | SOURCE_SUPPORTED | last: run 4
+U-017 | Low-Water Mark Integrity Policy | SOURCE_SUPPORTED | last: run 4
+U-018 | Role-Typed Critique Moves Invoked or Ignored by the Writer | SOURCE_SUPPORTED | last: run 4
+U-019 | Hidden Tutor Prompt with Teacher Solutions and Hint-Only Rules | SOURCE_SUPPORTED | last: run 4
+U-020 | Paired Practice and Unassisted Exam Design for Measuring Learning | SOURCE_SUPPORTED | last: run 4
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm: alternatywne kodowania z atrybutami odpowiedzialności
+C-002 | UNITIZED | U-006 | run 2 NEW | odrębny mechanizm: etykiety statyczne z kontekstem `pc`
+C-003 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm: tagi pochodzenia z propagacją przez graf zależności i polityką przed wywołaniem
+C-004 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm: pole źródła na zdarzeniu wstawienia tekstu
+C-005 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm: wskaźnik od twierdzenia do fragmentu dokumentu
+C-006 | UNITIZED | U-007 | run 2 NEW | odrębny mechanizm: składnia pytań z dosłownych słów rozmówcy
+C-007 | UNITIZED | U-008 | run 2 NEW | odrębny mechanizm: sprawdzanie słowa względem odczucia
+C-008 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm: dwie wersje transkrypcji z książką kodową
+C-009 | UNITIZED | U-016 | run 4 NEW | odrębny mechanizm: polityka ścisłej integralności (lead L-05)
+C-010 | NOT_PROBED | - | run 1 NOT_PROBED | LEAD_UNRESOLVED: specyfikacja C2PA 2.2 (lead L-09) nie została otwarta w tym Runie
+C-011 | UNITIZED | U-011 | run 3 NEW | odrębny mechanizm: funkcje wymuszające opóźniające lub bramkujące sugestię AI
+C-012 | UNITIZED | U-009 | run 2 NEW | odrębny mechanizm: zapis oceny człowieka przed odsłonięciem AI
+C-013 | UNITIZED | U-012 | run 3 NEW | odrębny mechanizm: protokół sondy dla dryfu instrukcji
+C-014 | UNITIZED | U-010 | run 2 NEW | odrębny mechanizm: miara Delta na z-score'ach częstych słów
+C-015 | UNITIZED | U-013 | run 3 NEW | odrębny mechanizm: przypisanie znaków na poziomie klawiszy z wynikiem homogenizacji
+C-016 | UNITIZED | U-014 | run 3 NEW | odrębny mechanizm: symulacja odłamków z miarami zdolności i niezawodności
+C-017 | UNITIZED | U-015 | run 3 NEW | odrębny mechanizm: reskalowanie uwagi na prompt systemowy (lead L-45)
+C-018 | UNITIZED | U-017 | run 4 NEW | odrębny mechanizm: polityka low-water mark (lead L-05)
+C-019 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał otwarty (lead L-05, polityka ring, sekcja III)
+C-020 | UNITIZED | U-018 | run 4 NEW | odrębny mechanizm: ruchy krytyczne wywoływane lub ignorowane przez piszącego (lead L-40)
+C-021 | UNITIZED | U-019 | run 4 NEW | odrębny mechanizm: ukryty prompt tutora z rozwiązaniami nauczyciela (lead L-25)
+C-022 | UNITIZED | U-020 | run 4 NEW | odrębny mechanizm: sparowane ćwiczenia i egzamin bez AI (lead L-25)
+
+REJECTED INFERENCES
+- polityka ścisłej integralności z raportu Biby chroni przed złośliwą modyfikacją, nie przed przypadkową; nie jest gwarancją poprawności treści
+- poziomy integralności nie są poziomami poufności: raport uzasadnia osobne kryteria przypisania, bo ten sam obiekt może być obserwowalny dla wszystkich i modyfikowalny dla nielicznych
+- wynik egzaminu `GPT Tutor` nieodróżnialny od kontroli nie jest dowodem poprawy uczenia
+- poprawa wyniku w ćwiczeniach z AI (+48% i +127%) nie jest dowodem uczenia
+- możliwość zignorowania sugestii `daemons` nie dowodzi braku wpływu sugestii na tekst; strona tego nie bada
+- szkice prototypów Appleton nie są przetestowanym protokołem
+
+AUDIT DELTA
+- tekst raportu DTIC jest wynikiem OCR; w wyodrębnionym tekście brak nazwiska autora, a przypisanie Bibie pochodzi z odnośnika [34] w Sabelfeld & Myers (otwarty w Runie 1) i z notatki w pliku wejściowym
+- SEAM_QUESTION leada L-05 o poziomie podmiotu po odczycie obiektu niższego poziomu ma odpowiedź w aksjomacie A3.1 (`il'(s) = min(il(s), il(o))`), zapisanym w U-017
+- lead L-25: otwarto kopię autora, a nie wersję PNAS; tytuł w tekście to «Generative AI Without Guardrails Can Harm Learning: Evidence from High School Mathematics»
+- lead L-40: opis prototypów oparty na tekście strony; filmy i zrzuty ekranu nie były oglądane
+- lead L-05 dostarczył trzy odrębne polityki: dwie weszły do Unitów (U-016, U-017), polityka ring pozostała `DEFER`
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostają lead L-36 z planu Runu 2, kandydat DEFER C-019 z otwartym materiałem oraz kandydat NOT_PROBED C-010 (C2PA)
+
+SYNTHESIS
+OBSERVATION: Sabelfeld & Myers (II.D) opisują integralność jako dual poufności i wskazują Bibę; U-016 jest tym dualem w postaci zasad «bez odczytu w dół» i «bez zapisu w górę», a U-017 wariantem dynamicznym.
+OBSERVATION: dwadzieścia Unitów ma EVIDENCE_LAYER: DOCUMENTED_DESIGN; żaden nie opiera się na otwartym kodzie ani testach.
+INFERENCE: U-019 i U-020 tworzą parę (zasady w prompcie i pomiar uczenia po usunięciu AI); w badaniu zakaz podawania rozwiązania zniósł spadek wyniku egzaminu, ale nie dał poprawy.
+HYPOTHESIS: porządek poziomów w stylu U-016 (człowiek ponad model) mógłby wyrażać zakaz modyfikacji słów człowieka przez model i zakaz odczytu w dół; wymaga to rozstrzygnięcia niedostępności obiektów (Fig. 12) oraz zasad dla streszczeń, których źródło nie opisuje.
+OPEN_QUESTION: czy układ z U-020 (ćwiczenie z AI i późniejszy sprawdzian bez AI) da się przenieść na pisanie, skoro źródło opiera się na obiektywnej ocenie zadań matematycznych.
+ASSESSMENT: priorytet dalszej pracy: L-36, polityka ring (C-019), C2PA (C-010), następnie dodatki w pracach Li et al. i Laban et al.
