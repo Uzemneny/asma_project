@@ -1,0 +1,336 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-GLOS1
+TITLE: Ochrona głosu człowieka w pracy z AI: szerokie przeszukanie rozwiązań
+SOURCE_SET: mechanizmy z literatury i dokumentacji dotyczące pochodzenia i oznaczania słów człowieka, drogi od materiału pochodnego do źródła, kolejności człowiek–model, pomiaru głosu autora i stabilności zachowania; pytanie: jak pracować z AI tak, aby słowa, tok myślenia i autorstwo człowieka pozostały odróżnialne od materiału modelu i przetrwały kompresję, streszczanie, wyszukiwanie i przepisywanie
+SOURCES:
+  - TEI P5 Guidelines
+  - Sabelfeld & Myers 2003 (Language-Based Information-Flow Security)
+  - CaMeL (Debenedetti et al., arXiv 2503.18813)
+  - CoAuthor (Lee, Liang, Yang; arXiv 2201.06796)
+  - Claude Platform Docs: Citations
+  - Clean Language article (Tompkins & Lawley, Rapport 35)
+  - Focusing Six Steps (focusing.org)
+  - Oliver, Serovich & Mason 2005 (PMC1400594)
+  - Buçinca et al. 2021 (To Trust or to Think, arXiv 2102.09692)
+  - Fogliato et al. 2022 (Who Goes First?, arXiv 2205.09696)
+  - Li et al. 2024 (Measuring and Controlling Instruction (In)Stability, arXiv 2402.10962)
+  - Hoover 2004 (Testing Burrows's Delta)
+  - Padmakumar & He 2024 (Does Writing with Language Models Reduce Content Diversity?, arXiv 2309.05196)
+  - Laban et al. 2025 (LLMs Get Lost In Multi-Turn Conversation, arXiv 2505.06120)
+  - Biba 1977 (Integrity Considerations for Secure Computer Systems, ESD-TR-76-372)
+  - Appleton 2023 (Language Model Sketchbook)
+  - Bastani et al. (Generative AI Without Guardrails Can Harm Learning, kopia autora)
+  - Mitchell & Johnson 2009 (Source Monitoring 15 Years Later, Psychological Bulletin 135(4))
+  - Hines et al. 2024 (Defending Against Indirect Prompt Injection Attacks With Spotlighting, arXiv 2403.14720v1)
+  - Horvitz (Principles of Mixed-Initiative User Interfaces; plik chi99horvitz.pdf)
+  - Anthropic (Disempowerment patterns in real-world AI usage, wpis z 2026-01-28)
+RUN: 5
+FOCUS: źródłowe ramy przypisywania pochodzenia, oznaczanie niezaufanego wejścia w kanale tekstowym, progi decyzyjne ingerencji AI i pomiar utraty autonomii użytkownika
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-04
+ACCESS_LIMITATIONS:
+  - lead L-36 wskazywał artykuł z 1993 (Johnson, Hashtroudi, Lindsay); otwarto przegląd z 2009 (Mitchell & Johnson) jako źródło zastępcze, a artykuł z 1993 nie był otwierany
+  - odczytany tekst przeglądu z 2009 urywa się w sekcji «Aging and Source Memory»
+  - w odczytanym tekście pracy Horvitza nie ma roku publikacji; nazwa pliku `chi99horvitz.pdf` sugeruje konferencję CHI 1999, ale tekst tego nie potwierdza
+  - rysunki w pracach Hines et al. i Horvitza dostępne tylko jako podpisy i etykiety osi; wartości odczytano z tekstu i podpisów
+  - wpis Anthropic odczytano w wersji bieżącej (strona zmodyfikowana 2026-09-09, publikacja 2026-01-28); artykuł arXiv 2601.19062 nie był otwierany
+  - specyfikacja C2PA 2.2 (L-09) nadal nieotwarta
+  - profil celu bez zmian: wersja nieznana
+TARGET_PROFILE:
+  id: GLOS-ROZWIAZANIA-SZEROKO
+  version: UNKNOWN
+  target: neuralcore to interfejs dostrojony do człowieka, a nie do maszyny; AI ma naprawdę wspomagać myślenie, a nie myśleć za człowieka
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Mitchell & Johnson 2009: «A Theoretical Perspective», «Brain Regions Involved in Source Memory», «Errors, Deficits, and Pathologies» (początek) | https://memlab.yale.edu/sites/default/files/files/2009_Mitchell_Johnson_PsychBull.pdf | ramy source monitoring: cechy wspomnienia, elastyczne ważenie, sądy heurystyczne i systematyczne, błędy źródła
+Hines et al. 2024: sekcje 1–8, Fig. 1–9, dodatki 8.1–8.2 | https://arxiv.org/pdf/2403.14720 | trzy przekształcenia niezaufanego wejścia (delimiting, datamarking, encoding), miara ASR, wyniki, zalecenia
+Horvitz: sekcje o zasadach, «From Beliefs to Actions», «Dialog as an Option for Action», «User Attention and the Timing of Service» | https://erichorvitz.com/chi99horvitz.pdf | dwanaście zasad inicjatywy mieszanej, reguła decyzyjna z dwoma progami, system LookOut
+Anthropic: «Measuring disempowerment», «Prevalence and patterns», «What these interactions look like», «How users perceive disempowerment», «Limitations» | https://www.anthropic.com/research/disempowerment-patterns | trzy wymiary utraty autonomii, czynniki wzmacniające, klasyfikatory, rozpowszechnienie
+Biba 1977: III The Ring Policy (A3.4–A3.5), Fig. 6; IV A Recommended Policy | https://apps.dtic.mil/sti/tr/pdf/ADA039324.pdf | polityka ring: ograniczenie modyfikacji bez ograniczenia odczytu
+UNKNOWN_REGIONS:
+  - Mitchell & Johnson: sekcje po «Aging and Source Memory» (starzenie, depresja, PTSD, schizofrenia, wnioski) nieodczytane; artykuł z 1993 nieotwarty
+  - Hines et al.: dodatek 8.2 (few-shot) odczytano, ale nie weszło do Unitów
+  - Anthropic: artykuł arXiv 2601.19062 (tabele definicji, wartości walidacji klasyfikatorów) nieotwarty
+  - Biba: dodatek I (polityka uprawnień) oraz polityki uznaniowe (ACL, pierścienie) nie weszły do Unitów
+  - nadal: C2PA 2.2 (L-09), dodatki prac Li et al. i Laban et al., platforma Fogliato et al., Burrows 2002 i zadania PAN
+OUTSIDE_SCOPE:
+  - leady listy wejściowej poza Runami 1–5: L-02, L-03, L-08, L-11, L-13 do L-16, L-20 do L-23, L-26 do L-28, L-32, L-33, L-35, L-37 do L-39, L-41 do L-43, L-47 do L-50
+
+DELTA
+NEW
+UNIT_ID: U-021
+NAME: Ring Integrity Policy Limiting Modification and Invocation but Not Observation
+LENS: LENS_KNOWLEDGE
+TYPE: invariant
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Dopuszcza modyfikację tylko obiektów o poziomie integralności nie wyższym niż poziom podmiotu i wywołanie tylko podmiotów o poziomie nie wyższym, bez ograniczenia odczytu; walidacja odczytanych danych spada na podmiot.
+MINIMAL_FORM:
+  - `s m o ⇒ il(o) ≤ il(s)` (A3.4); `s1 i s2 ⇒ il(s2) ≤ il(s1)` (A3.5)
+  - poziomy integralności podmiotów i obiektów są stałe przez czas ich życia
+  - odczyt (observe) dozwolony na każdym poziomie; kontrola poprawności odczytanych danych należy do podmiotu (kontrole wewnętrzne, weryfikacja programu)
+  - polityka nie blokuje pośredniej modyfikacji (przypadek konia trojańskiego)
+SOURCE_ANCHOR:
+  - source: Biba 1977 (Integrity Considerations for Secure Computer Systems, ESD-TR-76-372)
+    locator: https://apps.dtic.mil/sti/tr/pdf/ADA039324.pdf
+    anchor: III The Ring Policy (A3.4–A3.5), Fig. 6; IV A Recommended Policy
+    revision: MTR-3153 Rev. 1, April 1977
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - jądro bezpieczeństwa egzekwujące politykę przy każdym dostępie
+  - zewnętrzne przypisanie poziomów integralności
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: PROCESS_RULE
+ADOPTION_NOTES: Odnosi się do punktu (a) z `CO MA WYJŚĆ`. Interpretacja, nie twierdzenie źródła: materiał niższego poziomu mógłby być czytany, ale nie mógłby zmieniać obiektów wyższego poziomu; odpowiedzialność za sprawdzenie odczytanego materiału spadałaby na podmiot.
+UNKNOWN:
+  - evidence: brak wyników z wdrożenia; polityka opisana aksjomatami
+LIMITS:
+  - polityka nie zapobiega pośredniemu sabotażowi (np. umieszczeniu konia trojańskiego); według źródła odpowiada za to konwencja programistyczna lub kontrole w czasie wykonania (IV)
+  - brak ograniczeń odczytu zostawia podmiotowi pełną odpowiedzialność za ocenę odczytanych danych i procedur (III)
+  - autorzy rekomendują ring jako alternatywę tam, gdzie ścisła integralność jest zbyt uciążliwa; same aksjomaty dają słabsze gwarancje (IV)
+  - poziomy są stałe, więc polityka nie opisuje zmiany zaufania w czasie
+RELATES_TO:
+  - U-016
+  - U-017
+
+NEW
+UNIT_ID: U-022
+NAME: Source Monitoring Framework with Feature-Weighted Source Attribution
+LENS: LENS_KNOWLEDGE
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Opisuje, że człowiek przypisuje źródło doznania umysłowego (percepcja, pamięć, wyobraźnia, myśl) na podstawie cech wspomnienia ważonych elastycznie według bieżącego zadania; błędy źródła rosną, gdy cechy źródeł są podobne albo kryteria luźne.
+MINIMAL_FORM:
+  - cechy wspomnienia: percepcyjne, przestrzenne, czasowe, semantyczne, emocjonalne oraz zapisy operacji poznawczych (np. wyobrażanie, rachowanie)
+  - atrybucja źródła = zestawienie cech z oczekiwanymi średnimi różnicami między źródłami (więcej szczegółów percepcyjnych dla zdarzeń doświadczonych, więcej operacji poznawczych dla wyobrażonych)
+  - ważenie cech zależy od zadania: pytanie «Czy to wygenerowałeś?» podnosi wagę operacji poznawczych, «Czy to przeczytałeś?» wagę cech percepcyjnych
+  - sądy heurystyczne (szybkie, na słabo zróżnicowanej informacji: znajomość, płynność, świeżość) i systematyczne (wolniejsze, kontrolowane, na zróżnicowanej informacji)
+  - czynniki zwiększające błędy: podobieństwo źródeł, luźne kryteria, mało diagnostyczne cechy, ograniczony czas, rozproszona uwaga
+  - narzędzie pomiaru: subiektywne oceny cech wspomnienia (Memory Characteristics Questionnaire)
+SOURCE_ANCHOR:
+  - source: Mitchell & Johnson 2009 (Source Monitoring 15 Years Later, Psychological Bulletin 135(4))
+    locator: https://memlab.yale.edu/sites/default/files/files/2009_Mitchell_Johnson_PsychBull.pdf
+    anchor: A Theoretical Perspective: The Source Monitoring Framework; Prefrontal Cortex (agenda-driven); Errors, Deficits, and Pathologies: False Memories as Source Errors
+    revision: 2009, s. 638–677 (przegląd; ramy pierwotne: Johnson, Hashtroudi, Lindsay 1993)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DATA_STRUCTURE, EVALUATION_RULE
+ADOPTION_NOTES: Odnosi się do punktów (a) i (b) z `CO MA WYJŚĆ`. Interpretacja, nie twierdzenie źródła: przegląd stwierdza, że własne myśli i procesy ich wytwarzania zostawiają zapisy, po których rozpoznaje się pochodzenie informacji, więc projekt mógłby chronić ślad własnych operacji autora. Przegląd nie bada tekstu ani AI.
+UNKNOWN:
+  - evidence: artykuł z 1993 nie był otwierany; przegląd streszcza ramy i cytuje badania, które nie zostały tu powtórzone
+  - evidence: odczytany tekst urywa się w sekcji o starzeniu się
+LIMITS:
+  - przegląd dotyczy pamięci źródłowej człowieka i obrazowania mózgu (fMRI); ram nie zastosowano do tekstu ani do AI
+  - autorzy zestawiają ramy z modelami dwuprocesowymi, z którymi różnią się w ujęciu fałszywych wspomnień; poczucie przypominania nie gwarantuje prawdziwości wspomnienia
+  - błędy źródła rosną przy podobieństwie źródeł, luźnych kryteriach, ograniczonym czasie i rozproszeniu; wyobrażenia o dużej wyrazistości bywają mylone z percepcją (sekcja o fałszywych wspomnieniach)
+  - ta sama decyzja o źródle («Kto to powiedział?») może opierać się na cechach mniej lub bardziej zróżnicowanych, zależnie od okoliczności
+RELATES_TO:
+  - U-003
+
+NEW
+UNIT_ID: U-023
+NAME: Spotlighting Transformations of Untrusted Input with Matching System-Prompt Notice
+LENS: LENS_KNOWLEDGE
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Przekształca niezaufane wejście tak, aby jego pochodzenie pozostało stale widoczne dla modelu (delimitery, znacznik przeplatany w całym tekście, kodowanie), a prompt systemowy opisuje przekształcenie i zakazuje wykonywania instrukcji z oznaczonego bloku.
+MINIMAL_FORM:
+  - delimiting: znaczniki początku i końca bloku (`<<` … `>>`) i instrukcja w prompcie
+  - datamarking: zamiana białych znaków znakiem specjalnym w całym tekście (przykład: `^`); prompt ostrzega model o przekształceniu; początkowy wybór znaku: Unicode U+E000 (Private Use Area); warianty dynamiczne: znacznik jako losowany k-gram przy każdym wywołaniu, losowe miejsca wstawiania
+  - encoding: tekst kodowany (np. base64); model dekoduje i wykonuje zadanie; kodowanie musi być niewykonalne do zinterpretowania przez atakującego w drugą stronę (ROT13 podatne)
+  - miara: `ASR` = odsetek dokumentów z korpusu 1000 syntetycznych dokumentów (ładunek: zwróć jedno słowo-klucz), w których atak przejął zadanie
+  - wyniki (GPT-3.5-Turbo, jeśli niepodano inaczej): bazowy ASR ok. 50–60%; delimiting ok. połowa redukcji; datamarking: 3,10% (streszczanie), 8,0% (Q&A; GPT-4: 1,0%); encoding: 0,0% (streszczanie), 1,8% (Q&A)
+  - zadania NLP (SQuAD, IMDB, SuperGLUE WiC i BoolQ): datamarking bez pogorszenia; encoding pogarsza wyniki GPT-3.5, nie GPT-4
+SOURCE_ANCHOR:
+  - source: Hines et al. 2024 (Defending Against Indirect Prompt Injection Attacks With Spotlighting)
+    locator: https://arxiv.org/pdf/2403.14720
+    anchor: 3 Spotlighting; 4.2; 5.1–5.4; Fig. 3–8; 8.1
+    revision: arXiv 2403.14720v1, 20 Mar 2024
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - kod po stronie hosta wstawiający znaczniki lub kodujący tekst przed umieszczeniem w prompcie
+  - modele GPT (text-davinci-003, GPT-3.5-Turbo, GPT-4; wersje z czerwca 2023); dla encoding model zdolny do dekodowania
+MUST_BE_TRUE:
+  - znacznik nie występuje w tekście wejściowym; delimitery wymagają, aby atakujący nie znał promptu systemowego
+  - dla encoding: model dekoduje bez utraty jakości zadania
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: ALGORITHM, PROMPT_FRAGMENT
+ADOPTION_NOTES: Odnosi się do punktu (a) z `CO MA WYJŚĆ`: oznaczenie pochodzenia fragmentu wewnątrz kanału tekstowego. Interpretacja, nie twierdzenie źródła: autorzy oddzielają instrukcje od danych; użycie znacznika do ochrony słów człowieka przed przepisaniem przez model nie jest w źródle. Kolejność wykonania: przekształcenie po stronie hosta, zachowanie modelu poza kontrolą hosta.
+UNKNOWN:
+  - evidence: autorzy piszą, że nie rozumieją, dlaczego spotlighting działa; przedstawiają analogię do sygnalizacji w paśmie w telekomunikacji (6)
+LIMITS:
+  - ASR zmierzono na jednym typie ataku (warianty prostego ładunku z jednym słowem-kluczem) i na korpusie syntetycznym 1000 dokumentów (4.2, 8.1)
+  - delimiting można obejść, jeśli atakujący zna prompt systemowy; autorzy go nie rekomendują (5.3, 5.4)
+  - datamarking oparty na białych znakach można ominąć tekstem bez spacji; autorzy proponują znaczniki i miejsca dynamiczne (5.4)
+  - encoding wymaga zdolnych modeli; GPT-3.5 traci jakość zadań na zakodowanym tekście (5.2)
+  - autorzy opisują spotlighting jako separację, nie jako wydzielony kanał sterujący; kanał osobny byłby zmianą architektury modelu (6)
+  - streszczenie podaje ASR poniżej 2%; w ciele pracy wartości dla datamarkingu w Q&A dla GPT-3.5-Turbo to 8,0%, a poniżej 2% dotyczy kodowania i datamarkingu w Q&A dla GPT-4
+RELATES_TO:
+  - U-002
+
+NEW
+UNIT_ID: U-024
+NAME: Two-Threshold Expected-Utility Rule for Acting, Asking, or Staying Silent
+LENS: LENS_KNOWLEDGE
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Wybiera między brakiem działania, pytaniem użytkownika a działaniem automatycznym na podstawie szacowanego prawdopodobieństwa celu `p(G|E)` i progów wynikających z oczekiwanych użyteczności czterech lub sześciu wyników.
+MINIMAL_FORM:
+  - `eu(A|E) = p(G|E)·u(A,G) + [1 − p(G|E)]·u(A,¬G)` (równ. 2); `eu(¬A|E) = p(G|E)·u(¬A,G) + [1 − p(G|E)]·u(¬A,¬G)` (równ. 3)
+  - próg `p*` z równości `eu(A|E) = eu(¬A|E)`; działanie, gdy `p(G|E) > p*`
+  - dialog jako trzecia opcja z użytecznościami `u(D,G)` i `u(D,¬G)`; dwa progi: `p*(¬A,D)` (nic ↔ dialog) i `p*(D,A)` (dialog ↔ działanie)
+  - użytkownik może ustawić użyteczności albo bezpośrednio dwa progi; progi przesuwają się wraz z kontekstem (głębokość skupienia użytkownika podnosi próg działania)
+  - zasady towarzyszące: skalowanie precyzji do niepewności («robić mniej, ale poprawnie»), łatwe wywołanie i zakończenie, limit czasu zależny od `p(G|E)`, wydłużanie czasu przy oznakach namysłu, szybkie zniknięcie po odrzuceniu
+  - czas oferty: sigmoidalna zależność między długością wiadomości i czasem przed przyjęciem usługi (Fig. 7)
+SOURCE_ANCHOR:
+  - source: Horvitz (Principles of Mixed-Initiative User Interfaces; plik chi99horvitz.pdf)
+    locator: https://erichorvitz.com/chi99horvitz.pdf
+    anchor: Principles for Mixed-Initiative UI (1)–(12); From Beliefs to Actions; Dialog as an Option for Action; Handling Invocation Failures; User Attention and the Timing of Service
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - model szacujący `p(G|E)` (w LookOut: liniowy SVM trenowany na ok. 1000 wiadomości, po 500 istotnych i nieistotnych)
+  - wartości użyteczności domyślne lub ustawione przez użytkownika
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: ALGORITHM, PROCESS_RULE
+ADOPTION_NOTES: Odnosi się do punktu (c) z `CO MA WYJŚĆ`: kryterium, kiedy model ma milczeć, pytać albo działać, wyrażone progami. Interpretacja, nie twierdzenie źródła: trzy tryby ingerencji w tekst autora mogłyby być sterowane tak samo; źródło dotyczy planowania spotkań z poczty, nie pisania.
+UNKNOWN:
+  - evidence: odczytany tekst nie podaje wyników badania użytkowników dla skuteczności progów ani wartości domyślnych użyteczności
+LIMITS:
+  - przykład (LookOut) dotyczy celu «zaplanować spotkanie» w e-mailu; źródło nie odnosi progów do tekstu autora
+  - progi zależą od jakości oszacowania `p(G|E)`; jakość klasyfikatora nie jest tu raportowana
+  - figura o czasie oczekiwania przedstawia próbkę jednego użytkownika (Fig. 7)
+  - zasady 11 i 12 (pamięć robocza, uczenie przez obserwację) opisano ogólnie, bez mechanizmu
+RELATES_TO:
+  - U-009
+  - U-011
+
+NEW
+UNIT_ID: U-025
+NAME: Disempowerment Potential Classifiers over Beliefs, Values, and Actions
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Mierzy potencjał utraty autonomii użytkownika w rozmowach z AI klasyfikatorami, które oceniają każdą rozmowę od `none` do `severe` w trzech wymiarach (przekonania, osądy wartości, działania) oraz w czterech czynnikach wzmacniających, po odfiltrowaniu rozmów czysto technicznych.
+MINIMAL_FORM:
+  - trzy wymiary: zniekształcenie rzeczywistości (przekonania mniej trafne), zniekształcenie osądów wartości, zniekształcenie działań (działania niezgodne z wartościami; przykład: wysłanie napisanego przez AI listu w niezmienionej postaci)
+  - skala `none` … `severe` na wymiar; klasyfikatory (Claude Opus 4.5) po filtrowaniu rozmów technicznych, walidowane względem ocen ludzi
+  - czynniki wzmacniające: projekcja autorytetu, przywiązanie, zależność, podatność
+  - analiza narzędziem zachowującym prywatność na ok. 1,5 mln rozmów Claude.ai z jednego tygodnia grudnia 2025; grupowanie wzorców zachowań
+  - «uaktualniony» potencjał: rozmowy z oznakami, że użytkownik działał na podstawie odpowiedzi
+  - zestawienie z oceną kciukiem (thumbs up/down) w osobnej próbie rozmów zgłoszonych
+  - wyniki: ciężki potencjał ok. 1 na 1300 (rzeczywistość), 1 na 2100 (osądy), 1 na 6000 (działania); łagodny od 1 na 50 do 1 na 70
+SOURCE_ANCHOR:
+  - source: Anthropic (Disempowerment patterns in real-world AI usage, wpis z 2026-01-28)
+    locator: https://www.anthropic.com/research/disempowerment-patterns
+    anchor: Measuring disempowerment; Prevalence and patterns; What these interactions look like; How users perceive disempowerment; Limitations
+    revision: opublikowano 2026-01-28; strona zmodyfikowana 2026-09-09
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - model oceniający rozmowy; narzędzie zachowujące prywatność; dostęp do rozmów; etykiety ludzkie do walidacji
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: TEST, EVALUATION_RULE, ALGORITHM
+ADOPTION_NOTES: Odnosi się do punktów (c) i (d) z `CO MA WYJŚĆ`. Interpretacja, nie twierdzenie źródła: wymiar działań obejmuje przypadek wysłania tekstu napisanego przez AI bez zmian, bliski pytaniu o odróżnialność głosu autora; źródło mierzy potencjał utraty autonomii w rozmowie, nie zgodność tekstu z głosem autora.
+UNKNOWN:
+  - evidence: wartości walidacji klasyfikatorów względem ocen ludzi i tabela definicji poziomów są w artykule arXiv 2601.19062, który nie był otwierany
+LIMITS:
+  - mierzy potencjał utraty autonomii, nie potwierdzoną szkodę; klasyfikacja automatyczna dla zjawisk subiektywnych (Limitations)
+  - dane z konsumenckiego ruchu Claude.ai, jeden tydzień; wyłączono rozmowy czysto techniczne (np. kod); definicja nie obejmuje form strukturalnych
+  - próba z kciukami może nadreprezentować skrajności; rozmowy o umiarkowanym lub ciężkim potencjale miały wyższy odsetek kciuków w górę, a po «uaktualnieniu» osądów i działań odsetek spadał poniżej bazowego (wyjątek: zniekształcenie rzeczywistości)
+  - rosnący trend między końcem 2024 a końcem 2025 mierzony na próbie kciuków; autorzy nie potrafią wskazać przyczyny
+  - autorzy opisują zjawisko jako interakcję: użytkownicy sami proszą o gotowe odpowiedzi i przyjmują je z niewielkim oporem
+RELATES_TO:
+  - U-003
+  - U-013
+
+CURRENT INDEX
+U-001 | Alternative Encodings with Responsibility Attributes | SOURCE_SUPPORTED | last: run 1
+U-002 | Capability-Tagged Values with Dependency-Tracked Provenance and Pre-Call Policy Check | SOURCE_SUPPORTED | last: run 1
+U-003 | Event Log with Per-Event Source Field and Final-Text Authorship Rate | SOURCE_SUPPORTED | last: run 1
+U-004 | Citation Spans Returned as Pointers into Provided Documents | SOURCE_SUPPORTED | last: run 1
+U-005 | Two-Copy Transcript Rule with Codebook | SOURCE_SUPPORTED | last: run 1
+U-006 | Program-Counter Label for Implicit Flows with Static Label Typing | SOURCE_SUPPORTED | last: run 2
+U-007 | Clean Language Question Syntax Preserving Client Words | SOURCE_SUPPORTED | last: run 2
+U-008 | Word-to-Felt-Sense Resonance Check | SOURCE_SUPPORTED | last: run 2
+U-009 | Provisional Human Judgment Registered Before AI Reveal | SOURCE_SUPPORTED | last: run 2
+U-010 | Delta Stylistic Distance over Z-Scored Frequent Words | SOURCE_SUPPORTED | last: run 2
+U-011 | Cognitive Forcing Functions Delaying or Gating AI Suggestions | SOURCE_SUPPORTED | last: run 3
+U-012 | Self-Chat Probe Protocol for Instruction Drift | SOURCE_SUPPORTED | last: run 3
+U-013 | Keystroke-Level Authorship Attribution with Homogenization Score | SOURCE_SUPPORTED | last: run 3
+U-014 | Sharded Conversation Simulation with Aptitude and Unreliability Metrics | SOURCE_SUPPORTED | last: run 3
+U-015 | Split-Softmax Attention Reweighting Toward System Prompt | SOURCE_SUPPORTED | last: run 3
+U-016 | Strict Integrity Policy with No Read-Down and No Write-Up | SOURCE_SUPPORTED | last: run 4
+U-017 | Low-Water Mark Integrity Policy | SOURCE_SUPPORTED | last: run 4
+U-018 | Role-Typed Critique Moves Invoked or Ignored by the Writer | SOURCE_SUPPORTED | last: run 4
+U-019 | Hidden Tutor Prompt with Teacher Solutions and Hint-Only Rules | SOURCE_SUPPORTED | last: run 4
+U-020 | Paired Practice and Unassisted Exam Design for Measuring Learning | SOURCE_SUPPORTED | last: run 4
+U-021 | Ring Integrity Policy Limiting Modification and Invocation but Not Observation | SOURCE_SUPPORTED | last: run 5
+U-022 | Source Monitoring Framework with Feature-Weighted Source Attribution | SOURCE_SUPPORTED | last: run 5
+U-023 | Spotlighting Transformations of Untrusted Input with Matching System-Prompt Notice | SOURCE_SUPPORTED | last: run 5
+U-024 | Two-Threshold Expected-Utility Rule for Acting, Asking, or Staying Silent | SOURCE_SUPPORTED | last: run 5
+U-025 | Disempowerment Potential Classifiers over Beliefs, Values, and Actions | SOURCE_SUPPORTED | last: run 5
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm: alternatywne kodowania z atrybutami odpowiedzialności
+C-002 | UNITIZED | U-006 | run 2 NEW | odrębny mechanizm: etykiety statyczne z kontekstem `pc`
+C-003 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm: tagi pochodzenia z propagacją przez graf zależności i polityką przed wywołaniem
+C-004 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm: pole źródła na zdarzeniu wstawienia tekstu
+C-005 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm: wskaźnik od twierdzenia do fragmentu dokumentu
+C-006 | UNITIZED | U-007 | run 2 NEW | odrębny mechanizm: składnia pytań z dosłownych słów rozmówcy
+C-007 | UNITIZED | U-008 | run 2 NEW | odrębny mechanizm: sprawdzanie słowa względem odczucia
+C-008 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm: dwie wersje transkrypcji z książką kodową
+C-009 | UNITIZED | U-016 | run 4 NEW | odrębny mechanizm: polityka ścisłej integralności (lead L-05)
+C-010 | NOT_PROBED | - | run 1 NOT_PROBED | LEAD_UNRESOLVED: specyfikacja C2PA 2.2 (lead L-09) nie została otwarta w tym Runie
+C-011 | UNITIZED | U-011 | run 3 NEW | odrębny mechanizm: funkcje wymuszające opóźniające lub bramkujące sugestię AI
+C-012 | UNITIZED | U-009 | run 2 NEW | odrębny mechanizm: zapis oceny człowieka przed odsłonięciem AI
+C-013 | UNITIZED | U-012 | run 3 NEW | odrębny mechanizm: protokół sondy dla dryfu instrukcji
+C-014 | UNITIZED | U-010 | run 2 NEW | odrębny mechanizm: miara Delta na z-score'ach częstych słów
+C-015 | UNITIZED | U-013 | run 3 NEW | odrębny mechanizm: przypisanie znaków na poziomie klawiszy z wynikiem homogenizacji
+C-016 | UNITIZED | U-014 | run 3 NEW | odrębny mechanizm: symulacja odłamków z miarami zdolności i niezawodności
+C-017 | UNITIZED | U-015 | run 3 NEW | odrębny mechanizm: reskalowanie uwagi na prompt systemowy (lead L-45)
+C-018 | UNITIZED | U-017 | run 4 NEW | odrębny mechanizm: polityka low-water mark (lead L-05)
+C-019 | UNITIZED | U-021 | run 5 DEEPENED | odrębny mechanizm: polityka ring bez ograniczenia odczytu (lead L-05); wcześniej DEFER BUDGET w Runie 4
+C-020 | UNITIZED | U-018 | run 4 NEW | odrębny mechanizm: ruchy krytyczne wywoływane lub ignorowane przez piszącego (lead L-40)
+C-021 | UNITIZED | U-019 | run 4 NEW | odrębny mechanizm: ukryty prompt tutora z rozwiązaniami nauczyciela (lead L-25)
+C-022 | UNITIZED | U-020 | run 4 NEW | odrębny mechanizm: sparowane ćwiczenia i egzamin bez AI (lead L-25)
+C-023 | UNITIZED | U-022 | run 5 NEW | odrębny mechanizm: atrybucja źródła według ważonych cech wspomnienia (lead L-36, źródło zastępcze z 2009)
+C-024 | UNITIZED | U-023 | run 5 NEW | odrębny mechanizm: przekształcenia wejścia z opisem w prompcie systemowym (lead L-07)
+C-025 | UNITIZED | U-024 | run 5 NEW | odrębny mechanizm: reguła z dwoma progami dla działania, pytania i milczenia (lead L-34)
+C-026 | UNITIZED | U-025 | run 5 NEW | odrębny mechanizm: klasyfikatory potencjału utraty autonomii (lead L-29)
+
+REJECTED INFERENCES
+- ramy source monitoring opisują człowieka; przegląd nie bada atrybucji źródła dla tekstu AI, więc nie wynika z niego, jak człowiek odróżnia sugestię modelu od własnej myśli
+- niski ASR spotlightingu dotyczy jednego typu ładunku (jedno słowo-klucz); nie dowodzi odporności na atak dostosowany do mechanizmu
+- próg `p*` z pracy Horvitza nie jest ustalony dla pisania; użyteczności zależą od kontekstu i nie są podane
+- rzadkość ciężkich przypadków (1 na 1300 do 1 na 6000 rozmów) nie jest oceną ryzyka dla pojedynczego użytkownika: miara dotyczy rozmów i potencjału, nie ludzi i szkody
+- polityka ring nie jest prostym osłabieniem ścisłej integralności: nie blokuje pośredniego sabotażu, ale też nie odcina odczytu
+
+AUDIT DELTA
+- lead L-36: otwarto przegląd z 2009 zamiast artykułu z 1993; odczytany tekst urywa się w sekcji o starzeniu się
+- Hines et al.: streszczenie podaje ASR poniżej 2%, a w tekście wartości różnią się według zadania i modelu (datamarking w Q&A dla GPT-3.5-Turbo: 8,0%); w rozdziale 5.1 tekst podaje «poniżej 3%» dla datamarkingu w streszczaniu, a podpis Fig. 4: 3,10%; bazowy ASR GPT-3.5-Turbo opisany jako «około 50%» w tekście i «około 60%» w podpisie Fig. 3
+- Horvitz: odczytany tekst nie zawiera roku publikacji; rok z nazwy pliku nie jest potwierdzony
+- wpis Anthropic zmodyfikowano po publikacji (2026-09-09); odczytano wersję bieżącą, wartości liczbowe mogły się zmienić względem wersji pierwotnej
+- C-019 zamknięto: polityka ring weszła do Unitów w tym Runie
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostaje kandydat NOT_PROBED C-010 (C2PA) oraz leady z OUTSIDE_SCOPE
+
+SYNTHESIS
+OBSERVATION: Run 5 dodał pięć Unitów: polityka ring (U-021), źródła pamięci (U-022), oznaczanie niezaufanego wejścia (U-023), progi decyzyjne ingerencji (U-024) i miara utraty autonomii (U-025); dwadzieścia pięć Unitów ma EVIDENCE_LAYER: DOCUMENTED_DESIGN.
+OBSERVATION: U-016, U-017 i U-021 to trzy polityki z jednego raportu, a U-023 jest jedynym Unitem, w którym znacznik pochodzenia wchodzi do samego tekstu podawanego modelowi.
+INFERENCE: U-022 i U-003 odpowiadają na to samo pytanie (kto wytworzył fragment) z dwóch stron: ślad własnych operacji w pamięci człowieka i zapis zdarzenia w systemie; relacja nie była porównywana w żadnym źródle.
+HYPOTHESIS: miara działań z U-025 (wysłanie tekstu AI bez zmian) i wynik homogenizacji z U-013 mogłyby być liczone razem; żadne otwarte źródło tego nie zestawia.
+OPEN_QUESTION: czy progi z U-024 da się oszacować dla ingerencji w tekst autora, skoro źródło nie podaje, skąd brać `p(G|E)` poza klasyfikatorem celu użytkownika.
+ASSESSMENT: priorytet dalszej pracy: L-26 do L-28, L-33, L-35, następnie C2PA (C-010) oraz dodatki w pracach Li et al. i Laban et al.
