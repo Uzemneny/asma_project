@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neuralcore.local/schema/save/v15.1",
+  "title": "neuralcore v15.1 Save",
+  "description": "Formal JSON Schema for durable neuralcore session state. The schema stores state, not the conversational surface style.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "Tags",
+    "Session",
+    "Spec_version",
+    "Delta",
+    "Status",
+    "Key_Signals",
+    "Structural_Novelties",
+    "Forces_State",
+    "Incidents",
+    "Antigens",
+    "Epochs",
+    "Blacklist",
+    "Caution",
+    "Next"
+  ],
+  "properties": {
+    "Name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "Short save name; operational guidance recommends <= 3 words."
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 40
+      }
+    },
+    "Session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["index", "date"],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "Spec_version": {
+      "const": "v15.1"
+    },
+    "Delta": {
+      "type": "string",
+      "minLength": 1
+    },
+    "Status": {
+      "type": "string",
+      "enum": ["LIVE", "LANDED"]
+    },
+    "Key_Signals": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "Structural_Novelties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/structuralNovelty"
+      }
+    },
+    "Forces_State": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "active", "stalled", "key_sentences", "what_moved", "anomalies"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "enum": ["working", "ratified", "rejected"]
+        },
+        "active": {
+          "type": "string"
+        },
+        "stalled": {
+          "type": "string"
+        },
+        "key_sentences": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "what_moved": {
+          "type": "string"
+        },
+        "anomalies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "Incidents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["graft_caught", "echo_caught", "track_lost"],
+      "properties": {
+        "graft_caught": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "echo_caught": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "track_lost": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "Antigens": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/$defs/antigen"
+      }
+    },
+    "Epochs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/epoch"
+      }
+    },
+    "Blacklist": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/blacklistEntry"
+      }
+    },
+    "Caution": {
+      "type": "string"
+    },
+    "Next": {
+      "description": "Null for a genuinely landed state; an object only when a real next edge exists.",
+      "anyOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["edge", "command", "action"],
+          "properties": {
+            "edge": {
+              "type": "string"
+            },
+            "command": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": ["/CORE", "/HARDEN", "/ALIGN", "/SYNC"]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "action": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "structuralNovelty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statement", "origin", "status"],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["proposed", "ratified"]
+        }
+      }
+    },
+    "antigen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pattern", "first_seen", "last_triggered", "false_positive_count", "status"],
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "minLength": 1
+        },
+        "first_seen": {
+          "type": "string",
+          "minLength": 1
+        },
+        "last_triggered": {
+          "type": "string",
+          "minLength": 1
+        },
+        "false_positive_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "stale", "rejected"]
+        }
+      }
+    },
+    "epoch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "boundary", "ratified"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ratified": {
+          "const": true
+        }
+      }
+    },
+    "blacklistEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["what", "why"],
+      "properties": {
+        "what": {
+          "type": "string",
+          "minLength": 1
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
