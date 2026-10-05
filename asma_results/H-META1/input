@@ -1,0 +1,570 @@
+[ASMA INPUT]
+
+INPUT_ID: META-ASMA-METODOLOGIA
+TITLE: Metodologia harvestowania: ocena źródeł szarych, pewność, zatrzymanie, niezawodność wydobycia, synteza i rekord twierdzenia
+DATE: 2026-10-05
+STATUS_PLIKU: SZKIC DO TWOJEJ KOREKTY. Pola odtworzone z wyników harvestów, jak w poprzednim pliku (GLOS-ROZWIAZANIA-SZEROKO). ZMIANY wobec poprzedniego: (1) TARGET_PROFILE ma jawne pola TARGET i VERSION (harvester zgłaszał brak TARGET w każdym runie); (2) każdy lead ma pole WERYFIKACJA ze stanem odczytu; (3) plan Runów ogranicza się do 5 leadów na Run, bo budżet pogłębień wynosi ok. 5.
+WERYFIKACJA: dla każdego leada otwarto stronę źródła narzędziem odczytu (sześć równoległych zwiadów) i sprawdzono istnienie, tytuł, autorów, rok, adres i dostęp; ID ryzykowne (LACA, Yang et al., Liu et al.) sprawdzono dodatkowo osobno. Treści czytano przez narzędzia streszczające. To NIE jest harvest; to materiał wejściowy.
+
+TARGET_PROFILE:
+  id: META-ASMA-METODOLOGIA
+  version: 1.0
+  TARGET: ustalone metody wydobywania twierdzeń i mechanizmów z niejednorodnych źródeł (także nierecenzowanych i bez historii zmian), oceniania wiarygodności źródła i pewności wydobycia oraz kończenia otwartych poszukiwań, opisane tak, żeby dało się je zastosować (pola, skale, kroki, progi).
+  PROBLEM: Jak wydobywać twierdzenia i mechanizmy z wielu różnych źródeł tak, żeby każdy wynik niósł ocenę źródła, ocenę pewności z uzasadnieniem, ślad do miejsca w źródle i informację o tym, kto go wydobył, oraz jak rozstrzygać, kiedy otwarte poszukiwanie i kolejne przebiegi mają się zakończyć.
+  ZASADA: źródło ma pierwszeństwo przed oczekiwaniem. Metodę opisujemy tak, jak podaje ją źródło, razem z jej ograniczeniami dziedzinowymi (zdrowie, wywiad, inżynieria oprogramowania, edukacja); przeniesienie na inne dziedziny nie jest twierdzeniem źródła.
+  CO MA WYJŚĆ: mechanizmy (struktury danych, pola rekordu, skale, reguły, algorytmy, miary, metody krok po kroku), które: (a) określają, co musi zawierać zapis mechanizmu lub wzorca (pola, szablon, próg powtarzalności); (b) oceniają źródło niezależnie od informacji z niego, w tym źródła nierecenzowane i bez historii zmian; (c) rozkładają pewność twierdzenia na składniki z zapisanym uzasadnieniem obniżenia; (d) rozstrzygają, kiedy kończyć otwarte poszukiwania lub przebieg (reguły zatrzymania, saturacja, szybkie przeglądy z jawnymi skrótami); (e) mierzą niezawodność wydobycia, w tym zgodność przy dzieleniu tekstu na jednostki i zgodność człowiek-LLM; (f) sprawdzają, czy twierdzenie wynika ze wskazanego miejsca w źródle (atrybucja, twierdzenia atomowe, znane błędy sędziów); (g) łączą wyniki wielu źródeł lub przebiegów w ustalenia ponad pojedynczym źródłem (kroki syntezy); (h) zapisują twierdzenie razem z proweniencją i relacją wspierania lub podważania (pola rekordu).
+  CZEGO NIE SZUKAĆ: ocen samego ASMA ani porównań protokołów; ogólnych porad 'jak zrobić przegląd literatury'; list narzędzi do zarządzania literaturą; metod bez kroków, pól lub progów; wyników skuteczności z jednej dziedziny przedstawianych jako dowód dla promptów i systemów AI.
+  ZASADA CZYTANIA: SOURCE_ONLY. FUNCTION_PRIOR i SEAM_QUESTION wskazują miejsce w źródle i nie są twierdzeniami o źródle; pytania celowo nie zawierają hipotez. Skale, progi i liczby cytuj wyłącznie z odczytanego tekstu. Liczby w FUNCTION_PRIOR pochodzą z wstępnego odczytu narzędziem streszczającym i wymagają sprawdzenia; jeśli ich w tekście nie ma, zapisz to jako UNKNOWN.
+
+UWAGI OPERACYJNE:
+  - Priorytety: A = źródło czytelne i metoda wprost wskazuje pola, skalę, próg albo kroki dla jednego z punktów (a) do (h); B = metoda użyteczna, ale pośrednia, redundantna wobec A albo dostęp częściowy; C = nie użyto.
+  - Liczby: 43 leadów (A=16, B=27, C=0). Dostęp: otwarty 34, częściowy 9, wtórny 0.
+  - Stan odczytu (pole WERYFIKACJA): [PEŁNY TEKST] = odczytano tekst główny; [ABSTRAKT] = tylko streszczenie; [TYLKO METADANE] = potwierdzono istnienie i adres.
+  - Proponowane Runy (limit ok. 5 pogłębień na Run; kolejność tematyczna): Run 1 = M-01, M-03, M-05, M-06 (definicja zapisu mechanizmu i katalogi wzorców). Run 2 = M-08, M-09, M-12, M-13, M-17 (ocena źródła i składniki pewności). Run 3 = M-21, M-22, M-28, M-30, M-33 (zatrzymanie, niezawodność wydobycia, atrybucja). Run 4 = M-37, M-41, M-38, M-42, M-39 (synteza i rekord twierdzenia; dwa A i trzy B). Pozostałe leady (B) w kolejnych Runach: M-02, M-04, M-07, M-10, M-11, M-14, M-15, M-16, M-18, M-19, M-20, M-23, M-24, M-25, M-26, M-27, M-29, M-31, M-32, M-34, M-35, M-36, M-40, M-43.
+  - Brak dostępu do źródła głównego: zapisz w ACCESS_LIMITATIONS i spróbuj ALT; zamianę źródła zgłoś wprost (jak w H-GLOS1, L-36).
+  - Strony GitHub są odrzucane przez narzędzie odczytu; ten plik nie zawiera tropów zależnych od GitHuba. Kodu z PyPI w tym wejściu nie ma: źródła to metody i specyfikacje, nie oprogramowanie.
+  - Poprawione identyfikatory względem notatek wstępnych: LACA (Chew et al.) to arXiv 2306.14924 (arXiv 2309.01000 to inna praca); ORKG ma ID 1901.10816 (nie 2006.01921; trop pominięty); Toulmin nie z Purdue OWL (uproszczona wersja z 'counterclaim', trop pominięty).
+  - Rozbieżności między zwiadami do rozstrzygnięcia z tekstu: punktacja poziomów źródeł w Garousi et al. (M-12); brzmienie poziomów w kopiach STANAG/FM 2-22.3 (M-08); czy Konet et al. i Gartlehner et al. nie zlały wartości 96,3% (M-32).
+  - Brak w liście z premedytacją (sprawdzone, ale zbędne lub nieczytane): PRISMA 2020 i PRISMA-ScR, AMSTAR 2, OCEBM, RoB 2, Toulmin, ORKG, SciFact, AttrScore, Matsubara & Conte 2025, Schluntz & Zhang 'Building effective agents', JBI listy dla tekstów eksperckich, Godin et al. 2015, Carroll 2013 'best fit', Heuer ACH (jako ALT w M-11), Tricco 2015 (ALT w M-24), Callaghan & Müller-Hansen (ALT w M-22).
+  - Dziedziny źródeł: większość tropów pochodzi ze zdrowia, wywiadu i inżynierii oprogramowania; ograniczenie dziedzinowe zapisuj w LIMITS.
+
+=== GRUPA 1: CO MUSI ZAWIERAĆ ZAPIS MECHANIZMU I WZORCA ===
+
+LEAD: M-01
+NAZWA: Machamer, Darden & Craver: Thinking about mechanisms
+PRIORYTET: A
+TYP: paper (filozofia nauki)
+LOKALIZACJA: https://mechanism.ucsd.edu/bill/teaching/w10/machamer.darden.craver.pdf
+ALT: https://plato.stanford.edu/entries/science-mechanisms/ (SEP, źródło wtórne; zestawia też Glennan 2002 i Bechtel)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] kopia UCSD czytana; SEP czytane jako wtórne
+UWAGA: Przykłady z biologii i neuronauki, bez szablonu dla oprogramowania ani promptów. Glennan 2002 (Phil. Sci. 69 S3, S342 i dalej) znany tylko z cytatu w SEP.
+FUNCTION_PRIOR: Opis mechanizmu nazywa byty i ich własności, aktywności, warunki początkowe, etapy pośrednie i warunki zakończenia; opis bywa szkicem, schematem albo pełnym opisem, z lukami oznaczanymi jako czarne skrzynki.
+SEAM_QUESTION: Jakie elementy musi nazwać opis mechanizmu według źródła; jak źródło rozróżnia szkic, schemat i pełny opis oraz jak oznacza luki; co oznacza 'bottom-out'?
+
+LEAD: M-02
+NAZWA: Bechtel & Abrahamsen: Explanation: a mechanist alternative
+PRIORYTET: B
+TYP: paper (filozofia nauki)
+LOKALIZACJA: https://mechanism.ucsd.edu/bill/research/explanation.mechanisticalternative.pdf
+ALT: Stud. Hist. Phil. Biol. Biomed. Sci. 36:421-441 (2005)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Nie Trends in Cognitive Sciences (błędny wydawca w pierwszych notatkach). Przykłady biologiczne.
+FUNCTION_PRIOR: Mechanizm jako organizacja części i operacji, z warunkami zewnętrznymi i osadzeniem w większym systemie.
+SEAM_QUESTION: Jaką listę elementów opisu mechanizmu podaje źródło (części, operacje, organizacja przestrzenna i czasowa, warunki, osadzenie) i jak definiuje mechanizm na stronie 424?
+
+LEAD: M-03
+NAZWA: Appleton: Patterns and Software: Essential Concepts and Terminology
+PRIORYTET: A
+TYP: esej praktyka
+LOKALIZACJA: https://www.bradapp.com/docs/patterns-intro.html
+ALT: kopia PDF: https://sci.brooklyn.cuny.edu/~sklar/teaching/s08/cis20.2/papers/appleton-patterns-intro.pdf
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Esej z 2000 r. Reguła trzech jest podana jako konwencja środowiska bez wskazanego autora.
+FUNCTION_PRIOR: Wzorzec uznaje się dopiero po potwierdzeniu powtarzalności (reguła trzech znanych użyć); forma wzorca ma wyróżnione sekcje (Name, Problem, Context, Forces, Solution, Examples, Resulting Context, Rationale, Related Patterns, Known Uses).
+SEAM_QUESTION: Jakie sekcje ma forma wzorca i co znaczy każda; jak źródło określa próg powtarzalności i komu go przypisuje; co oznaczają Forces i Known Uses?
+
+LEAD: M-04
+NAZWA: Wong, Greenhalgh, Westhorp, Buckingham & Pawson: RAMESES publication standards: realist syntheses
+PRIORYTET: B
+TYP: standard raportowania
+LOKALIZACJA: BMC Medicine 11:21 (2013); kopia: https://ora.ox.ac.uk/objects/uuid:d6343445-f785-43b0-a647-d66a0029a83d
+ALT: współpublikacja: J Adv Nurs 69(5):1005-1022
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] przez kopię Oxford ORA; strona BMC zwracała 429
+UWAGA: Dziedzina: zdrowie i polityka. Raportowanie, nie schemat pól mechanizmu. Kolejny trop o CMO (Pawson & Tilley 1997) znany tylko z pamięci.
+FUNCTION_PRIOR: Standardy raportowania syntez realistycznych: wyniki ujęte jako konfiguracje kontekst-mechanizm-wynik (CMO), ocena włączanych źródeł pod względem trafności i rygoru, pozycja o tym, co wydobyto i dlaczego.
+SEAM_QUESTION: Jak źródło definiuje konfigurację CMO; które z 19 pozycji dotyczą oceny włączanych źródeł (relevance, rigour) i uzasadnienia wydobycia; co jest wymagane, a co zalecane?
+
+=== GRUPA 2: KATALOGI WZORCÓW WYDOBYTYCH Z PRAKTYKI W DOMENIE LLM ===
+
+LEAD: M-05
+NAZWA: Liu et al.: Agent Design Pattern Catalogue
+PRIORYTET: A
+TYP: paper + katalog
+LOKALIZACJA: https://arxiv.org/abs/2405.10467
+ALT: https://arxiv.org/pdf/2405.10467
+DOSTĘP: OPEN
+WERYFIKACJA: [ABSTRAKT potwierdzony niezależnie; sekcja metod tylko przejrzana przez skauta]
+UWAGA: Wyszukiwanie, bazy i ciągi zapytań nie były widoczne w odczycie. 'Extended template [20]' niezidentyfikowany.
+FUNCTION_PRIOR: Katalog 18 wzorców architektonicznych dla agentów opartych na modelach fundamentalnych, wyprowadzony z systematycznego przeglądu literatury (snowballing w przód i w tył, ocena jakości); wpis ma szablon z kontekstem, siłami i znanymi użyciami.
+SEAM_QUESTION: Jak przebiegały wyszukiwanie, selekcja, ocena jakości i ekstrakcja wzorców z badań; jakie pola ma szablon wpisu; czy 'known uses' jest wymagane dla każdego wzorca?
+
+LEAD: M-06
+NAZWA: Schulhoff et al.: The Prompt Report: A Systematic Survey of Prompting Techniques
+PRIORYTET: A
+TYP: paper przeglądowy
+LOKALIZACJA: https://arxiv.org/abs/2406.06608
+ALT: https://arxiv.org/pdf/2406.06608
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] przez narzędzie streszczające
+UWAGA: Technika jest tu zdefiniowana taksonomicznie, nie polami mechanizmu. Dowody skuteczności tylko częściowe.
+FUNCTION_PRIOR: PRISMA zastosowane do technik promptowania: wyszukiwanie w arXiv, Semantic Scholar i ACL, selekcja ręczna z podwójną adnotacją części prac i filtr automatyczny na GPT-4; wynik to taksonomia technik.
+SEAM_QUESTION: Jak zdefiniowano kryteria włączenia i kroki selekcji; jak zmierzono zgodność adnotatorów i skuteczność screeningu automatycznego; jak z prac wydobyto i sklasyfikowano techniki?
+
+LEAD: M-07
+NAZWA: White et al.: A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT
+PRIORYTET: B
+TYP: paper + katalog
+LOKALIZACJA: https://arxiv.org/abs/2302.11382
+ALT: https://arxiv.org/pdf/2302.11382
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Wzorce 'zidentyfikowane' z promptów społeczności i własnego użycia; brak reguły włączenia i dowodu skuteczności. Preprint bez ustalonego miejsca publikacji. Liczba kategorii niejednoznaczna w odczycie.
+FUNCTION_PRIOR: Katalog 16 wzorców promptów; wpis ma pola: nazwa i klasyfikacja, cel i kontekst, motywacja, struktura i kluczowe idee, przykład, konsekwencje.
+SEAM_QUESTION: Jak autorzy identyfikowali wzorce w źródłach społeczności i czy podano regułę włączenia; jakie pola ma wpis i które są obowiązkowe?
+
+=== GRUPA 3: OCENA ŹRÓDŁA ODDZIELNIE OD INFORMACJI; ŹRÓDŁA SZARE ===
+
+LEAD: M-08
+NAZWA: STANAG 2511 / US Army FM 2-22.3 dodatek B: skale wiarygodności źródła i informacji
+PRIORYTET: A
+TYP: standard wojskowy
+LOKALIZACJA: https://redanalysis.org/wp-content/uploads/2016/09/Appendix-B-reliability-of-information.pdf
+ALT: https://eturwg.c4i.gmu.edu/?q=node%2F128 ; FM 2-22.3: https://www.marines.mil/Portals/1/Publications/FM%202-22.3%20%20Human%20Intelligence%20Collector%20Operations_1.pdf ; krytyka empiryczna: Irwin & Mandel 2019, Intelligence and National Security 34(4), DOI 10.1080/02684527.2019.1569343 (nieczytane)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] transkrypcje i dodatek podręcznika; oryginał STANAG 2511 nieczytany
+UWAGA: Dwie kopie różnią się brzmieniem poziomów (np. 'confirmed by other sources' vs 'by other independent sources'; opis F). Cytować skale z jednego tekstu. Ocena źródła zakłada historię wiarygodności, której anonimowe źródła nie mają.
+FUNCTION_PRIOR: Dwie niezależne skale: wiarygodność źródła (A do F) i wiarygodność informacji (1 do 6), łączone w oznaczenie typu 'B2'.
+SEAM_QUESTION: Jak definiowane są poziomy każdej skali; na czym opiera się ocena źródła, a na czym informacji; co oznaczają F i 6; jak skale łączy się w jedną ocenę?
+
+LEAD: M-09
+NAZWA: Kelly, Budescu, Dhami & Mandel: The effect of source reliability and information credibility on judgments of information quality in intelligence analysis
+PRIORYTET: A
+TYP: paper empiryczny
+LOKALIZACJA: https://www.cambridge.org/core/journals/judgment-and-decision-making/article/effect-of-source-reliability-and-information-credibility-on-judgments-of-information-quality-in-intelligence-analysis/E67548E8010A47345C3439D45D9EC6B3
+ALT: DOI 10.1017/jdm.2025.10007 ; preprint: https://osf.io/preprints/psyarxiv/m8yxb_v3
+DOSTĘP: OPEN
+WERYFIKACJA: [ABSTRAKT] przeczytany; pełny PDF otwarty, nieczytany w głąb
+UWAGA: Uczestnicy i zadania w stylu analizy wywiadowczej, nie wydobywania mechanizmów.
+FUNCTION_PRIOR: Eksperyment nad ocenami jakości informacji przy dwóch osiach (źródło, informacja); według abstraktu oceny zależą bardziej od wiarygodności źródła niż informacji.
+SEAM_QUESTION: Jak badano wpływ obu osi, jakie były warunki i wnioski o niezależności osi; jakie zalecenia dotyczące stosowania skali wynikają z badania?
+
+LEAD: M-10
+NAZWA: ODNI: Intelligence Community Directive 203, Analytic Standards
+PRIORYTET: B
+TYP: dyrektywa
+LOKALIZACJA: https://archive.dni.gov/files/documents/ICD/ICD-203.pdf
+ALT: ICD 206 (opis źródeł): https://archive.dni.gov/files/documents/ICD/ICD-206.pdf lub https://irp.fas.org/dni/icd/icd-206.pdf (tekst nieodczytany)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] z nieczytelną tabelą słownika prawdopodobieństwa
+UWAGA: Pasma słownika prawdopodobieństwa pochodzą z pamięci skauta (tabela zniekształcona). Szczegóły opisu źródeł odsyłają do ICD 206.
+FUNCTION_PRIOR: Dziewięć standardów analitycznych, w tym opis jakości i wiarygodności źródeł oraz rozróżnienie informacji od założeń i osądów; słownik wyrażania prawdopodobieństwa.
+SEAM_QUESTION: Które standardy dotyczą opisu źródeł i rozróżnienia informacji od osądów i jak są sformułowane; jak źródło definiuje wyrażanie niepewności i pewności?
+
+LEAD: M-11
+NAZWA: CIA: A Tradecraft Primer: Structured Analytic Techniques
+PRIORYTET: B
+TYP: podręcznik
+LOKALIZACJA: https://www.cia.gov/resources/csi/static/Tradecraft-Primer-apr09.pdf
+ALT: Heuer, Psychology of Intelligence Analysis, rozdz. 8 (ACH): http://all.net/journal/deception/ciabook2/www.cia.gov/csi/books/19104/art11.html
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Data dokumentu: marzec 2009 (nazwa pliku mówi 'apr09'). Opis prozą, bez skali punktowej.
+FUNCTION_PRIOR: Techniki diagnostyczne: Key Assumptions Check, Quality of Information Check, Indicators or Signposts of Change, Analysis of Competing Hypotheses.
+SEAM_QUESTION: Jakie kroki ma Quality of Information Check i co dokładnie sprawdza; kiedy ma być stosowana; jak odnosi się do pozostałych technik w rozdziale?
+
+LEAD: M-12
+NAZWA: Garousi, Felderer & Mäntylä: Guidelines for including grey literature and conducting multivocal literature reviews in software engineering
+PRIORYTET: A
+TYP: wytyczne metodyczne
+LOKALIZACJA: https://arxiv.org/abs/1707.02553
+ALT: https://arxiv.org/pdf/1707.02553 ; Information and Software Technology 106 (2019) ; Adams, Smart & Huff 2017, IJMR 19(4):432-454, DOI 10.1111/ijmr.12102 (odczytany tylko abstrakt)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] preprint i przyjęty rękopis
+UWAGA: Skauci rozbieżnie opisali punktację poziomów źródeł (jeden: poziomy punktowane 1/0,5/0; drugi: kryteria nieważone). Rozstrzygnąć z tekstu. Dziedzina: inżynieria oprogramowania; brak walidacji na repozytoriach promptów.
+FUNCTION_PRIOR: Tabele wytycznych: pytania o włączanie literatury szarej, osiem kryteriów jakości źródła, trzy poziomy typu miejsca publikacji, trzy reguły zatrzymania.
+SEAM_QUESTION: Jak zdefiniowano kryteria jakości źródła, poziomy typu źródła i ich ewentualną punktację; jak sformułowano reguły zatrzymania; co autorzy mówią o ocenie źródła w odróżnieniu od oceny pojedynczego twierdzenia?
+
+LEAD: M-13
+NAZWA: Rainer & Williams: Practitioner-generated blog posts as evidence for SE research: attitudinal survey and preliminary checklist
+PRIORYTET: A
+TYP: paper + lista kontrolna
+LOKALIZACJA: https://arxiv.org/abs/2103.01845
+ALT: recenzowana wcześniejsza praca: EASE 2019, DOI 10.1145/3319008.3319013 ; Williams & Rainer EASE 2017, DOI 10.1145/3084226.3084268 (płatne, nieczytane)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] (ar5iv)
+UWAGA: Dotyczy tylko blogów; lista kontrolna wyraźnie wstępna i celowo bez punktacji. Rok i miejsce publikacji arXiv niejednoznaczne (strona: czerwiec 2020).
+FUNCTION_PRIOR: Ankieta badaczy o kryteriach wiarygodności postów praktyków oraz wstępna lista kontrolna z kategoriami (autorytet, metodologia, obiektywność, data i inne).
+SEAM_QUESTION: Jakie kryteria oceniali badacze i jak je uporządkowano; jakie kategorie ma lista kontrolna i dlaczego nie ma punktacji; jakie ograniczenia podają autorzy?
+
+LEAD: M-14
+NAZWA: Caulfield: SIFT (The Four Moves) i czytanie boczne (lateral reading)
+PRIORYTET: B
+TYP: metoda krok po kroku + badanie
+LOKALIZACJA: https://hapgood.us/2019/06/19/sift-the-four-moves/
+ALT: Wineburg & McGrew 2019, Teachers College Record 121(11), DOI 10.1177/016146811912101102 (pełny tekst nieczytany) ; SHEG 2016: https://stacks.stanford.edu/file/druid:fv751yt5934/SHEG%20Evaluating%20Information%20Online.pdf
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] SIFT i raport SHEG; Wineburg & McGrew tylko metadane
+UWAGA: Cel: informacje w sieci i wiadomości, nie dokumentacja techniczna. Raport SHEG pokazuje błąd oceniających, nie metodę.
+FUNCTION_PRIOR: Cztery ruchy: Stop, Investigate the source, Find better coverage, Trace claims, quotes and media to the original context.
+SEAM_QUESTION: Co dokładnie robi się w ruchach 'Investigate the source' i 'Trace'; jaki czas przewidziano na sprawdzenie źródła; do jakich typów źródeł metoda jest przeznaczona?
+
+LEAD: M-15
+NAZWA: Zhang et al.: An Empirical Study of Obsolete Answers on Stack Overflow
+PRIORYTET: B
+TYP: paper empiryczny
+LOKALIZACJA: https://arxiv.org/abs/1903.12282
+ALT: IEEE Transactions on Software Engineering 2019
+DOSTĘP: OPEN
+WERYFIKACJA: [ABSTRAKT / odczyt arXiv skauta]
+UWAGA: Tylko Stack Overflow. Dotyczy problemu daty w źródłach bez historii zmian.
+FUNCTION_PRIOR: Badanie nieaktualnych odpowiedzi: odsetek odpowiedzi nieaktualnych już w chwili publikacji i rzadkość późniejszych aktualizacji.
+SEAM_QUESTION: Jak zdefiniowano 'obsolete answer' i jak mierzono moment, od którego odpowiedź była nieaktualna; jakie sygnały (komentarze, daty, edycje) wykorzystano; jakie zalecenia podano?
+
+LEAD: M-16
+NAZWA: Tyndall: AACODS Checklist
+PRIORYTET: B
+TYP: lista kontrolna
+LOKALIZACJA: Flinders University, 2010 (PDF AACODS; adres do ustalenia przez ALT)
+ALT: https://libguides.csu.edu.au/grey/evaluating (potwierdza sześć wymiarów)
+DOSTĘP: PARTIAL
+WERYFIKACJA: [TYLKO METADANE] PDF nieczytelny, brzmienie pytań niepotwierdzone
+UWAGA: Pochodzenie: biblioteki zdrowia. Wymiar 'Date' bywa bezużyteczny dla źródeł bez historii zmian.
+FUNCTION_PRIOR: Sześć wymiarów: Authority, Accuracy, Coverage, Objectivity, Date, Significance.
+SEAM_QUESTION: Jakie pytania przypisano każdemu wymiarowi; jak stosuje się listę (tak/nie, punktacja)? Jeśli brzmienie niedostępne, zgłosić to wprost.
+
+=== GRUPA 4: PEWNOŚĆ SKŁADNIKOWA I POZIOMY DOWODÓW ===
+
+LEAD: M-17
+NAZWA: GRADE-CERQual (Lewin et al.): pewność ustaleń z syntez jakościowych
+PRIORYTET: A
+TYP: schemat pewności
+LOKALIZACJA: https://doi.org/10.1186/s13012-017-0689-2 (Implementation Science 13:10, 2018, 'paper 2')
+ALT: oryginał: PLoS Med 12(10):e1001895 (2015) ; wstęp serii: DOI 10.1186/s13012-017-0688-3 ; papers 3 i 4 (limitacje metodologiczne, spójność): DOI 10.1186/s13012-017-0690-9 i 10.1186/s13012-017-0691-8 (nieczytane)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] paper 2 i oryginał 2015; reszta serii metadane
+UWAGA: Zbudowany dla syntez jakościowych w zdrowiu; ocenia ustalenie zsyntezowane, nie pojedynczy zapis. Definicje poziomów leżą w paper 1.
+FUNCTION_PRIOR: Cztery składniki (limitacje metodologiczne, spójność, adekwatność danych, trafność); ustalenie zaczyna jako 'high' i jest obniżane według poziomu zastrzeżeń; uzasadnienie zapisane; tabela Summary of Qualitative Findings.
+SEAM_QUESTION: Jak definiowane są składniki i poziomy zastrzeżeń; co musi zawierać zapisane uzasadnienie obniżenia; jakie kolumny ma tabela; co jest jednostką oceny?
+
+LEAD: M-18
+NAZWA: Munn, Porritt, Lockwood, Aromataris & Pearson: ConQual (JBI)
+PRIORYTET: B
+TYP: schemat pewności
+LOKALIZACJA: BMC Medical Research Methodology 14:108 (2014)
+ALT: https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/1471-2288-14-108
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Arytmetyka obniżania bez wymaganego pisemnego uzasadnienia. Ocena ustalenia, nie pojedynczego zapisu.
+FUNCTION_PRIOR: Dependability oceniana pięcioma pytaniami z regułą obniżania według liczby odpowiedzi 'tak'; credibility w trzech kategoriach; start 'high'; poziomy High/Moderate/Low/Very Low.
+SEAM_QUESTION: Jak liczba odpowiedzi 'tak' przekłada się na obniżenie; jak łączy się dependability z credibility; jakie kolumny ma tabela podsumowania i co jest jednostką oceny?
+
+LEAD: M-19
+NAZWA: Kitchenham & Charters: Guidelines for performing systematic literature reviews in software engineering (EBSE-2007-01)
+PRIORYTET: B
+TYP: wytyczne metodyczne
+LOKALIZACJA: https://legacyfileshare.elsevier.com/promis_misc/525444systematicreviewsguide.pdf
+ALT: Dybå & Dingsøyr 2008, IST 50(9-10):833-859, DOI 10.1016/j.infsof.2008.01.006 (przegląd agile, PDF czytany) ; Dybå & Dingsøyr, 'Strength of evidence in systematic reviews in software engineering', ESEM 2008, DOI 10.1145/1414004.1414034 (nieczytane)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] Kitchenham i przegląd agile; ESEM 2008 nieczytane
+UWAGA: Odrzuca sztywną hierarchię dowodów jako zbyt uproszczoną. Podział sum kryteriów w przeglądzie agile niepotwierdzony.
+FUNCTION_PRIOR: Protokół przeglądu z dziesięcioma elementami, lista pytań jakościowych, kappa Cohena dla niezawodności selekcji i ekstrakcji.
+SEAM_QUESTION: Jakie elementy ma protokół i jak oceniana jest jakość badań (liczba pytań, skale); jak raportowana niezawodność selekcji i ekstrakcji; co źródło mówi o hierarchii dowodów?
+
+LEAD: M-20
+NAZWA: GRADE: Guyatt et al. 2008 i Balshem et al. 2011
+PRIORYTET: B
+TYP: schemat pewności
+LOKALIZACJA: BMJ 336:924-926 (2008), DOI 10.1136/bmj.39489.470347.AD
+ALT: Balshem et al., J Clin Epidemiol 64:401-406 (2011), DOI 10.1016/j.jclinepi.2010.07.015
+DOSTĘP: PARTIAL
+WERYFIKACJA: [TYLKO METADANE i wstęp] czynniki obniżające z pamięci skauta
+UWAGA: Czynniki obniżające i podwyższające NIE zostały odczytane w tekście; cytować wyłącznie po odczycie. Wstęp z 2008 jest krótki; lista czynników jest w serii J Clin Epidemiol.
+FUNCTION_PRIOR: Poziomy pewności (high do very low) oraz czynniki obniżające i podwyższające pewność.
+SEAM_QUESTION: Jakie czynniki obniżają, a jakie podwyższają pewność (lista dosłownie z odczytanego tekstu); jaka jest jednostka oceny?
+
+=== GRUPA 5: KIEDY KOŃCZYĆ OTWARTE POSZUKIWANIA; OGRANICZONA GŁĘBOKOŚĆ ===
+
+LEAD: M-21
+NAZWA: Francis et al.: What is an adequate sample size? Operationalising data saturation for theory-based interview studies
+PRIORYTET: A
+TYP: paper metodyczny
+LOKALIZACJA: https://openaccess.city.ac.uk/id/eprint/1732/1/What%20is%20an%20adequate%20sample%20size.pdf
+ALT: Psychology & Health 25(10):1229-1245 (2010) ; Guest, Bunce & Johnson 2006, Field Methods 18(1):59-82, DOI 10.1177/1525822X05279903 (tylko abstrakt)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] Francis; Guest tylko abstrakt
+UWAGA: Wartości wyprowadzone z treści Theory of Planned Behaviour na z góry zadanych konstruktach; autorzy zaznaczają potrzebę dalszych dowodów. Dziedzina: wywiady, nie mechanizmy.
+FUNCTION_PRIOR: Reguła '10 plus 3': początkowa próba co najmniej 10 wywiadów i kryterium zatrzymania po trzech kolejnych bez nowych tematów.
+SEAM_QUESTION: Jak operacjonalizowano nasycenie danych (próba początkowa, kryterium zatrzymania); jak źródło uzasadnia wartości; jakie zastrzeżenia podają autorzy?
+
+LEAD: M-22
+NAZWA: Yang, Lewis & Frieder: Heuristic Stopping Rules For Technology-Assisted Review
+PRIORYTET: A
+TYP: paper (DocEng 2021)
+LOKALIZACJA: https://arxiv.org/abs/2106.09871
+ALT: https://arxiv.org/pdf/2106.09871 ; Callaghan & Müller-Hansen 2020, Systematic Reviews 9:273, DOI 10.1186/s13643-020-01521-4 (kryterium statystyczne wymaga zbioru istotnych i losowej próby)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] arXiv; abstrakt potwierdzony niezależnie
+UWAGA: Reguły dostrojone do dużych zbiorów dokumentów z rankingiem trafności; zakładają skalibrowane prawdopodobieństwa. Formuła reguły knee (Cormack & Grossman SIGIR 2016) znana tylko z cytatu w tym artykule.
+FUNCTION_PRIOR: Porównanie heurystycznych reguł zatrzymania dla przeglądu wspomaganego technologią (knee, budget, target) i dwie nowe metody oparte na estymacji (Quant, QuantCI).
+SEAM_QUESTION: Jak działa każda reguła (warunki, progi, parametry); jakie założenia przyjmuje; jakie wyniki daje porównanie przy różnych docelowych pokryciach?
+
+LEAD: M-23
+NAZWA: Hennink & Kaiser: Sample sizes for saturation in qualitative research: a systematic review of empirical tests
+PRIORYTET: B
+TYP: przegląd systematyczny
+LOKALIZACJA: Social Science & Medicine 292:114523 (2022)
+ALT: https://doi.org/10.1016/j.socscimed.2021.114523
+DOSTĘP: PARTIAL
+WERYFIKACJA: [ABSTRAKT]
+UWAGA: Pełny tekst nieczytany. Rozróżnia nasycenie kodów i znaczeń; liczby dla kodów mogą zaniżać wysiłek dla głębi znaczeniowej.
+FUNCTION_PRIOR: Przegląd empirycznych testów saturacji: liczba wywiadów do nasycenia kodów i znaczeń.
+SEAM_QUESTION: Jak źródło rozróżnia 'code saturation' i 'meaning saturation' i jakie liczby podaje dla każdej; jak wyniki zależą od jednorodności próby?
+
+LEAD: M-24
+NAZWA: Garritty et al.: Cochrane Rapid Reviews Methods Group, interim guidance
+PRIORYTET: B
+TYP: wytyczne metodyczne
+LOKALIZACJA: https://pmc.ncbi.nlm.nih.gov/articles/PMC7557165/
+ALT: J Clin Epidemiol 130:13-22 (2021) ; Tricco et al. 2015, BMC Medicine 13:224 (przegląd zakresowy metod szybkich przeglądów, czytany)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] przez XML Europe PMC
+UWAGA: Kontekst: interwencje kliniczne. Ograniczenie zakresu przeszukiwania uznane za pragmatyczne, z ryzykiem utraty badań.
+FUNCTION_PRIOR: 26 rekomendacji skracania przeglądu, m.in. ograniczenie baz, ograniczenie literatury szarej i wyszukiwania uzupełniającego; każdy skrót z opisanym ryzykiem.
+SEAM_QUESTION: Które skróty zalecono i jakie ryzyko wskazano dla każdego; jak źródło każe raportować zastosowane skróty?
+
+LEAD: M-25
+NAZWA: Arksey & O'Malley: Scoping studies: towards a methodological framework
+PRIORYTET: B
+TYP: ramy metodyczne
+LOKALIZACJA: https://eprints.whiterose.ac.uk/id/eprint/1618/1/scopingstudies.pdf
+ALT: Int J Soc Res Methodol 8(1):19-32 (2005) ; Peters et al., JBI Evid Synth 2020;18(10):2119-2126 (nieczytane)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Jedyne wskazane kryterium zakończenia jest terminowe, nie nasyceniowe.
+FUNCTION_PRIOR: Ramy przeglądu zakresowego: proces iteracyjny, szeroki zasięg, parametry doprecyzowane po rozpoznaniu zakresu pola.
+SEAM_QUESTION: Jakie etapy mają ramy; jak zakres jest doprecyzowywany w trakcie; jakie kryteria zakończenia podano?
+
+LEAD: M-26
+NAZWA: Elliott et al.: Living systematic reviews
+PRIORYTET: B
+TYP: paper metodyczny
+LOKALIZACJA: PLoS Med 11(2):e1001603 (2014)
+ALT: J Clin Epidemiol 91:23-30 (2017), DOI 10.1016/j.jclinepi.2017.08.010 ; zespół: Living Systematic Review Network
+DOSTĘP: PARTIAL
+WERYFIKACJA: [PEŁNY TEKST] 2014; 2017 tylko abstrakt
+UWAGA: Dwie różne prace. Kryterium wycofania przeglądu z trybu 'żywego' nie zostało znalezione w odczytanych tekstach.
+FUNCTION_PRIOR: Stałe wyszukiwanie zasila przepływ pracy; ścieżki aktualizacji zależą od wagi nowych badań (tylko znacznik daty, przegląd redakcyjny, szybka recenzja).
+SEAM_QUESTION: Jakie ścieżki aktualizacji i jakie kryteria wyboru ścieżki podano; kiedy, według źródła, przegląd przestaje być 'żywy'?
+
+LEAD: M-27
+NAZWA: Wohlin: Guidelines for snowballing in systematic literature studies
+PRIORYTET: B
+TYP: wytyczne metodyczne
+LOKALIZACJA: https://doi.org/10.1145/2601248.2601268 (EASE '14)
+ALT: Greenhalgh & Peacock 2005, BMJ 331(7524):1064-1065 (audyt źródeł przeglądu: 51% z snowballingu; abstrakt czytany)
+DOSTĘP: PARTIAL
+WERYFIKACJA: [ABSTRAKT] ACM zwraca 403
+UWAGA: Warunek 'iteruj do braku nowych pozycji' pochodzi z pamięci skauta, nie z odczytu.
+FUNCTION_PRIOR: Snowballing wstecz i w przód od zbioru startowego, powtarzany, aż nie pojawiają się nowe pozycje.
+SEAM_QUESTION: Jak wybiera się zbiór startowy; jakie kroki ma iteracja i jakie jest kryterium zakończenia; jak źródło porównuje snowballing z przeszukiwaniem baz?
+
+=== GRUPA 6: NIEZAWODNOŚĆ WYDOBYCIA: ZGODNOŚĆ, JEDNOSTKOWANIE, LLM ===
+
+LEAD: M-28
+NAZWA: Krippendorff: miara zgodności przy jednostkowaniu ciągłego tekstu (alfa jednostkowania, uD)
+PRIORYTET: A
+TYP: metoda statystyczna
+LOKALIZACJA: https://www.asc.upenn.edu/sites/default/files/2021-03/Replacement%20of%20section%2012.4%20on%20unitizing%20a%20continuum%20of%20Content%20Analysis,%203rd%20ed..pdf
+ALT: Krippendorff, Mathet, Bouvry & Widlöcher 2016, 'On the reliability of unitizing textual continua: Further developments', Quality & Quantity 50, DOI 10.1007/s11135-015-0266-1 (jest erratum: 10.1007/s11135-015-0289-7); Krippendorff 2004, Human Communication Research 30(3):411-433 (progi alfa z pamięci) ; Mathet, Widlöcher & Métivier 2015, Computational Linguistics 41(3):437-479 (gamma)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] §12.4; artykuł z 2016 tylko metadane
+UWAGA: Źródło nie podaje progu akceptowalności; uD pomija przerwy między jednostkami. Progi z 2004 r. (np. 0,800) cytować tylko po odczycie.
+FUNCTION_PRIOR: Miara zgodności, która obejmuje i wyznaczanie granic jednostek w ciągłym tekście, i kategoryzację jednostek; wartość 1 to zgodność pełna, 0 poziom przypadkowy, poniżej 0 systematyczna niezgodność; warianty uD, |uD, cuD.
+SEAM_QUESTION: Jak zdefiniowano miarę i jej warianty; co oznaczają wartości; co źródło mówi o progu akceptowalności i o przykładzie roboczym?
+
+LEAD: M-29
+NAZWA: Campbell, Quincy, Osserman & Pedersen: Coding in-depth semistructured interviews: problems of unitization and intercoder reliability and agreement
+PRIORYTET: B
+TYP: paper metodyczny
+LOKALIZACJA: Sociological Methods & Research 42(3):294-320 (2013), DOI 10.1177/0049124113500475
+ALT: O'Connor & Joffe 2020, IJQM 19, DOI 10.1177/1609406919899220 ; McHugh 2012, Biochem Med 22(3):276-282, PMC3900052
+DOSTĘP: PARTIAL
+WERYFIKACJA: [ABSTRAKT] pełny tekst płatny
+UWAGA: Transkrypty wywiadów, jeden przypadek. Dwa kroki czytane z opisu streszczającego.
+FUNCTION_PRIOR: Protokół z dwoma krokami: najpierw ustalenie jednostek tekstu, potem dopracowanie książki kodowej z pomiarem zgodności, aż będzie akceptowalna.
+SEAM_QUESTION: Jak źródło opisuje problem jednostkowania i jego wpływ na zgodność; co zespół robi w kolejnych krokach; jakie miary zgodności podano?
+
+LEAD: M-30
+NAZWA: Chew et al.: LLM-Assisted Content Analysis (LACA)
+PRIORYTET: A
+TYP: paper + protokół
+LOKALIZACJA: https://arxiv.org/abs/2306.14924
+ALT: https://arxiv.org/pdf/2306.14924 ; Tai et al. 2024, 'An Examination of the Use of Large Language Models to Aid Analysis of Textual Data', IJQM 23, DOI 10.1177/16094069241231168
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]; tytuł i autorzy potwierdzeni niezależnie
+UWAGA: UWAGA ID: arXiv 2309.01000 to INNA, niezwiązana praca. GPT-3.5, temperatura 0, cztery zbiory; zadania na poziomie znaków zawiodły.
+FUNCTION_PRIOR: Trzy fazy: walidacja książki kodowej, kalibracja z kodowaniem człowiek-model i miarą zgodności (AC1 Gwet), pełne kodowanie przy zgodności nie gorszej; test losowości klasyfikacji.
+SEAM_QUESTION: Jakie kryteria przejścia między fazami; jak działa test losowości klasyfikacji; jakie wyniki zgodności w czterech zbiorach i które kody nie przeszły testu?
+
+LEAD: M-31
+NAZWA: Dunivin: Scalable Qualitative Coding with LLMs
+PRIORYTET: B
+TYP: paper empiryczny
+LOKALIZACJA: https://arxiv.org/abs/2401.15170
+ALT: https://arxiv.org/pdf/2401.15170
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Jeden przypadek; zgodność względem złotego standardu, bez raportu zgodności człowiek-człowiek.
+FUNCTION_PRIOR: Przepisanie książki kodowej pod LLM i czterokrokowy łańcuch rozumowania (rola, definicja, uzasadnienie, decyzja); zgodność kappa względem złotego standardu.
+SEAM_QUESTION: Jak zmodyfikowano książkę kodową; jaki był wpływ łańcucha rozumowania na kappa; jakie ograniczenia podają autorzy?
+
+LEAD: M-32
+NAZWA: Khraisha et al.: Can LLMs replace humans in systematic reviews? Evaluating GPT-4's efficacy in screening and extracting data
+PRIORYTET: B
+TYP: paper empiryczny
+LOKALIZACJA: https://arxiv.org/abs/2310.17526
+ALT: Res Synth Methods, DOI 10.1002/jrsm.1715 ; Gartlehner et al. 2024, DOI 10.1002/jrsm.1710 ; Konet et al. 2024, DOI 10.1002/jrsm.1732 (tylko abstrakty RTI)
+DOSTĘP: PARTIAL
+WERYFIKACJA: [PEŁNY TEKST] preprint v1; wersje czasopisma i Gartlehner/Konet tylko abstrakty
+UWAGA: Liczby z preprintu v1 mogą różnić się od wersji czasopisma. Podobieństwo wartości w Gartlehner i Konet (96,3%) może wynikać z pomylenia w streszczeniu skauta, sprawdzić w PDF.
+FUNCTION_PRIOR: Wyniki GPT-4 dla ekstrakcji i screeningu raportowane jako dokładność i kappa skorygowana o przypadek, z testem powtarzalności.
+SEAM_QUESTION: Jak raportowano dokładność obok kappa; jakie dane ekstrahowano; jak zmierzono powtarzalność między uruchomieniami?
+
+=== GRUPA 7: ATRYBUCJA TWIERDZENIA DO MIEJSCA W ŹRÓDLE ===
+
+LEAD: M-33
+NAZWA: Rashkin et al.: Measuring attribution in natural language generation models (AIS)
+PRIORYTET: A
+TYP: framework ewaluacji
+LOKALIZACJA: https://arxiv.org/abs/2112.12870
+ALT: Computational Linguistics 49(4):777-840, DOI 10.1162/coli_a_00486
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] liczby zgodności adnotatorów nieczytane
+UWAGA: Dotyczy systemów generujących tekst, nie wydobywania mechanizmów.
+FUNCTION_PRIOR: Dwustopniowa ocena ludzka: czy wypowiedź jest interpretowalna, a następnie czy da się ją przypisać do zidentyfikowanego źródła (AIS).
+SEAM_QUESTION: Jak sformułowano pytania dla adnotatorów w obu stopniach; jak mierzono zgodność; czego wymaga źródło od 'identified source'?
+
+LEAD: M-34
+NAZWA: Min et al.: FActScore; Wanner et al.: A Closer Look at Claim Decomposition
+PRIORYTET: B
+TYP: paper + paper
+LOKALIZACJA: https://arxiv.org/abs/2305.14251
+ALT: https://arxiv.org/abs/2403.11903 (Wanner et al., DecompScore: rozkład sam wprowadza błąd)
+DOSTĘP: OPEN
+WERYFIKACJA: [ABSTRAKT]
+UWAGA: Dziedzina: biografie generowane przez modele.
+FUNCTION_PRIOR: Rozkład tekstu na fakty atomowe i odsetek faktów wspartych źródłem; estymator automatyczny weryfikowany względem ocen ludzi.
+SEAM_QUESTION: Jak definiuje się fakt atomowy i jak decyduje o wsparciu źródłem; jaki błąd estymatora względem ludzi; co Wanner et al. mówią o błędach rozkładu?
+
+LEAD: M-35
+NAZWA: Gao et al.: ALCE: Enabling Large Language Models to Generate Text with Citations
+PRIORYTET: B
+TYP: paper + benchmark
+LOKALIZACJA: https://arxiv.org/abs/2305.14627
+ALT: Liu, Zhang & Liang 2023, https://arxiv.org/abs/2304.09848 (weryfikowalność wyszukiwarek generatywnych)
+DOSTĘP: OPEN
+WERYFIKACJA: [ABSTRAKT]
+UWAGA: Dwa powtórzone w sekcji liczby (np. 51,5% zdań w pełni wspartych) pochodzą z abstraktów.
+FUNCTION_PRIOR: Benchmark cytowań: precyzja i pokrycie cytowań liczone przez wnioskowanie NLI.
+SEAM_QUESTION: Jak liczone są precyzja i pokrycie cytowań; jakie ograniczenia podają autorzy?
+
+LEAD: M-36
+NAZWA: Znane tryby awarii sędziów-LLM: Zheng et al.; Wang et al.; Panickssery et al.
+PRIORYTET: B
+TYP: papery
+LOKALIZACJA: https://arxiv.org/abs/2306.05685 (Zheng et al., 'Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena')
+ALT: https://arxiv.org/abs/2305.17926 (Wang et al., zamiana kolejności zmienia rankingi) ; https://arxiv.org/abs/2404.13076 (Panickssery et al., autopreferencja)
+DOSTĘP: OPEN
+WERYFIKACJA: [ABSTRAKT]
+UWAGA: Dotyczy ocen porównawczych; przeniesienie na audyt wydobycia nie jest twierdzeniem źródeł.
+FUNCTION_PRIOR: Opisane obciążenia sędziów-LLM (pozycja, rozwlekłość, autopreferencja) i środki zaradcze (dowody najpierw, wyważenie pozycji, człowiek w pętli).
+SEAM_QUESTION: Jakie obciążenia opisano i jak je zmierzono; jakie środki zaradcze podano i jaka jest ich skuteczność?
+
+=== GRUPA 8: SYNTEZA PONAD ŹRÓDŁAMI I REKORD TWIERDZENIA Z PROWENIENCJĄ ===
+
+LEAD: M-37
+NAZWA: France et al.: eMERGe reporting guidance (meta-etnografia; Noblit & Hare 1988)
+PRIORYTET: A
+TYP: wytyczne raportowania + metoda
+LOKALIZACJA: https://doi.org/10.1186/s12874-018-0600-0 (BMC Med Res Methodol 19:25, 2019)
+ALT: Noblit & Hare 1988, Meta-Ethnography: Synthesizing Qualitative Studies (książka, płatna, nieczytana)
+DOSTĘP: PARTIAL
+WERYFIKACJA: [PEŁNY TEKST] eMERGe; typy tłumaczeń z książki Noblit & Hare z pamięci skauta
+UWAGA: Dziedzina: zdrowie. Typy tłumaczeń (wzajemne, obalające, linia argumentu) NIE zostały odczytane w tekście.
+FUNCTION_PRIOR: Siedem faz meta-etnografii (m.in. ustalenie relacji między badaniami, tłumaczenie badań na siebie, synteza tłumaczeń) i 19 kryteriów raportowania z częścią 'process' i 'outcome'.
+SEAM_QUESTION: Jak źródło opisuje fazy od określenia relacji do syntezy tłumaczeń; jakie typy tłumaczeń wymienia (tylko jeśli są w tekście); jakie kryteria raportowania i jak podzielone między fazy?
+
+LEAD: M-38
+NAZWA: Thomas & Harden: Methods for the thematic synthesis of qualitative research in systematic reviews
+PRIORYTET: B
+TYP: paper metodyczny
+LOKALIZACJA: https://doi.org/10.1186/1471-2288-8-45
+ALT: BMC Med Res Methodol 8:45 (2008) ; Barnett-Page & Thomas 2009, BMC Med Res Methodol 9:59 (mapa metod syntezy)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Dziedzina: przeglądy efektywności. Trzeci etap opisany jako inferencyjny, z ograniczonymi regułami audytu.
+FUNCTION_PRIOR: Trzy etapy: kodowanie wiersz po wierszu, tematy opisowe (drzewo kodów), tematy analityczne wykraczające poza badania pierwotne.
+SEAM_QUESTION: Jak przechodzi się między etapami; jak źródło traktuje przejrzystość i możliwość audytu trzeciego etapu?
+
+LEAD: M-39
+NAZWA: Eisenhardt: Building theories from case study research
+PRIORYTET: B
+TYP: paper metodyczny
+LOKALIZACJA: Academy of Management Review 14(4):532-550 (1989)
+ALT: kopie PDF w serwisach lustrzanych (odczytane przez skauta); adres do ustalenia
+DOSTĘP: PARTIAL
+WERYFIKACJA: [PEŁNY TEKST] z kopii lustrzanej
+UWAGA: Metoda budowania teorii z przypadków, nie z badań. Kopia nieoficjalna.
+FUNCTION_PRIOR: Osiem kroków, w tym analiza wewnątrz- i międzyprzypadkowa; taktyki: kategorie i wymiary, pary przypadków, podział według źródła danych; zamknięcie przez nasycenie.
+SEAM_QUESTION: Jakie taktyki analizy międzyprzypadkowej opisano; jakie kryterium zamknięcia i jak jest uzasadnione?
+
+LEAD: M-40
+NAZWA: Dixon-Woods et al.: Conducting a critical interpretive synthesis of the literature on access to healthcare by vulnerable groups
+PRIORYTET: B
+TYP: paper metodyczny
+LOKALIZACJA: https://doi.org/10.1186/1471-2288-6-35
+ALT: BMC Med Res Methodol 6:35 (2006)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Autorzy zaznaczają, że podejście do ekstrakcji wymaga dalszej oceny; trudna replikacja.
+FUNCTION_PRIOR: Syntetyczne konstrukty i linia argumentacji; próbkowanie celowe, potem teoretyczne; minimalne wykluczanie według jakości.
+SEAM_QUESTION: Jakie kroki opisano; jak traktowana jest jakość źródeł; jakie ograniczenia podają autorzy?
+
+LEAD: M-41
+NAZWA: Clark, Ciccarese & Goble: Micropublications: a semantic model for claims, evidence, arguments and annotations
+PRIORYTET: A
+TYP: model danych
+LOKALIZACJA: https://doi.org/10.1186/2041-1480-5-28
+ALT: J Biomed Semantics 5:28 (2014)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]; autorzy potwierdzeni w repozytorium DASH
+UWAGA: Model w OWL/RDF, dziedzina biomedyczna. Podsumowanie narzędzia raz błędnie przypisało autorów.
+FUNCTION_PRIOR: Rekord twierdzenia: Claim, Statement, Representation, Data, Method/Material, Attribution; relacje supports, challenges, qualifies; graf wsparcia i podważania zakorzeniony w twierdzeniu.
+SEAM_QUESTION: Jakie pola są obowiązkowe i jaka jest minimalna forma; jak zbudowany jest graf wsparcia i podważania; jak zapisana jest atrybucja?
+
+LEAD: M-42
+NAZWA: Kuhn et al.: Decentralized provenance-aware publishing with nanopublications; wytyczne nanopublikacji
+PRIORYTET: B
+TYP: model danych + wytyczne
+LOKALIZACJA: https://doi.org/10.7717/peerj-cs.78 (PeerJ Comput Sci 2:e78, 2016)
+ALT: https://nanopub.net/guidelines/working_draft/ ; Groth, Gibson & Velterop 2010, Information Services & Use 30:51-56, DOI 10.3233/ISU-2010-0613 (tylko metadane)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST] Kuhn i wytyczne
+UWAGA: RDF-ciężkie. Wytyczne oznaczone jako 'working draft'; mało pozycji MUST poza nagłówkiem.
+FUNCTION_PRIOR: Cztery nazwane grafy (Head, Assertion, Provenance, PublicationInfo); asercja zawiera główne twierdzenie; provenance wiąże się z asercją; identyfikatory Trusty URI oparte na skrócie treści.
+SEAM_QUESTION: Co MUSI zawierać każdy graf; jak provenance jest powiązane z asercją; jak działa Trusty URI?
+
+LEAD: M-43
+NAZWA: W3C PROV-DM: model proweniencji
+PRIORYTET: B
+TYP: rekomendacja W3C
+LOKALIZACJA: https://www.w3.org/TR/prov-dm/
+ALT: https://www.w3.org/TR/prov-o/ (wersja ontologiczna)
+DOSTĘP: OPEN
+WERYFIKACJA: [PEŁNY TEKST]
+UWAGA: Ogólny model: zapisuje proweniencję, nie siłę twierdzenia.
+FUNCTION_PRIOR: Relacje wasDerivedFrom, wasAttributedTo, wasGeneratedBy, wasAssociatedWith z argumentami wymaganymi i opcjonalnymi; Revision, Quotation i PrimarySource jako typowane podrodzaje pochodzenia.
+SEAM_QUESTION: Które argumenty każdej relacji są wymagane, a które opcjonalne; jak źródło definiuje podrodzaje pochodzenia?
+
+PROBES_OUTSIDE_CORPUS (propozycja):
+  Pytania:
+  1. Jak metody oddzielają ocenę źródła od oceny informacji z niego i co zastępuje 'historię wiarygodności' tam, gdzie jej nie ma?
+  2. Jakie kryteria zakończenia otwartego poszukiwania stosuje się, gdy zbiór istotnych pozycji nie jest znany z góry?
+  3. Jak mierzy się zgodność wydobycia, gdy sama decyzja o granicach jednostek należy do wydobywającego?
+  4. Jak zapisuje się twierdzenie z proweniencją tak, żeby dało się je później podważyć lub wesprzeć?
+  5. Jak łączy się wyniki wielu źródeł w ustalenie, które nie jest streszczeniem żadnego z nich?
+  Pola do przeszukania (nazwy, nie źródła): analiza wywiadowcza (oceny źródeł); synteza dowodów jakościowych; przegląd wspomagany technologią (zatrzymanie); metodologia analizy treści (niezawodność kodowania); badania nad wzorcami projektowymi; filozofia mechanizmów; krytyka źródeł w historii i archiwistyce (proweniencja, pochodzenie dokumentu); bibliometria i naukometria.
