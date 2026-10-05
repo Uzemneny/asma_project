@@ -1,0 +1,328 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-META1
+TITLE: Metodologia harvestowania — zapis mechanizmu, ocena źródeł, pewność, zatrzymanie
+SOURCE_SET: katalog 43 leadów META-ASMA-METODOLOGIA (metody wydobywania twierdzeń i mechanizmów, oceny źródeł i pewności, zatrzymania, niezawodności wydobycia, syntezy i rekordu twierdzenia); pytanie: jak wydobywać twierdzenia i mechanizmy z niejednorodnych źródeł z oceną źródła, składnikami pewności, śladem do miejsca w źródle i regułą zakończenia
+SOURCES:
+  - Machamer, Darden & Craver, Thinking about mechanisms
+  - Appleton, Patterns and Software: Essential Concepts and Terminology
+  - Liu et al., Agent Design Pattern Catalogue
+  - Schulhoff et al., The Prompt Report
+  - STANAG 2511 / FM 2-22.3, dodatek B (kopia redanalysis.org)
+  - Kelly, Budescu, Dhami & Mandel, The effect of source reliability and information credibility on judgments of information quality in intelligence analysis
+  - Garousi, Felderer & Mäntylä, Guidelines for including grey literature and conducting multivocal literature reviews in software engineering
+  - Rainer & Williams, Practitioner-generated blog posts as evidence for SE research: attitudinal survey and preliminary checklist
+  - Lewin et al., Applying GRADE-CERQual to qualitative evidence synthesis findings, paper 2
+RUN: 2
+FOCUS: grupy 3–4 katalogu (M-08, M-09, M-12, M-13, M-17): ocena źródła oddzielnie od informacji, źródła szare, składniki pewności
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-05
+ACCESS_LIMITATIONS:
+  - wszystkie odczyty wykonano narzędziem streszczającym; numery stron, tabel i rysunków w kotwicach pochodzą z tych odczytów
+  - M-08: kopia redanalysis.org w odczycie nie ma strony tytułowej, daty, wydania ani numerów stron; druga kopia (eturwg.c4i.gmu.edu), FM 2-22.3 i oryginał STANAG 2511 nie zostały otwarte; według wejścia kopie różnią się brzmieniem poziomów
+  - M-09: preprint OSF zwrócił same metadane; odczyt ze strony wydawcy (Cambridge) obejmuje streszczenie i podsumowanie wyników bez statystyk i tabel
+  - M-12: odczyt podał liczbę kryteriów tabeli 7 raz jako 10, raz jako 8; ponowny odczyt z liczeniem wierszy dał 8
+  - M-17: paper 1 serii (definicje składników i poziomów pewności ogólnej) nie został otwarty
+  - w Runie 2 otwarto M-08, M-09, M-12, M-13, M-17; łącznie otwarto 9 leadów, 34 leady katalogu nie mają otwartego artefaktu
+TARGET_PROFILE:
+  id: META-ASMA-METODOLOGIA
+  version: 1.0
+  target: ustalone metody wydobywania twierdzeń i mechanizmów z niejednorodnych źródeł (także nierecenzowanych i bez historii zmian), oceniania wiarygodności źródła i pewności wydobycia oraz kończenia otwartych poszukiwań, opisane tak, żeby dało się je zastosować (pola, skale, kroki, progi).
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+M-08 STANAG 2511 / FM 2-22.3, dodatek B | https://redanalysis.org/wp-content/uploads/2016/09/Appendix-B-reliability-of-information.pdf | dwie tabele: poziomy A–F wiarygodności źródła (B-1) i poziomy 1–6 treści informacji (B-2); łączenie ocen w jedno oznaczenie nie występuje w odczytanym tekście
+M-09 Kelly et al. | https://www.cambridge.org/core/journals/judgment-and-decision-making/article/effect-of-source-reliability-and-information-credibility-on-judgments-of-information-quality-in-intelligence-analysis/E67548E8010A47345C3439D45D9EC6B3 | dwa eksperymenty (74 analityków, 175 osób niebędących ekspertami), dwie manipulowane osie, cztery rodzaje ocen, podsumowanie wyników w streszczeniu
+M-12 Garousi et al. | https://arxiv.org/pdf/1707.02553 | rys. 1 (trzy poziomy typu miejsca publikacji), tabela 4 (siedem pytań o włączenie), wytyczna 8 (trzy reguły zatrzymania), tabela 7 (osiem kryteriów jakości źródła), tabela 9 (przykład zastosowania)
+M-13 Rainer & Williams | https://arxiv.org/pdf/2103.01845 | ankieta (44 odpowiedzi), tabela 3 (dziewięć kryteriów), sekcja 7 i tabele 10–14 (lista kontrolna z siedmioma kategoriami)
+M-17 Lewin et al., paper 2 | https://implementationscience.biomedcentral.com/articles/10.1186/s13012-017-0689-2 | cztery składniki, cztery poziomy zastrzeżeń, ocena ogólna od poziomu high, rys. 2, Evidence Profile i tabela SoQF
+UNKNOWN_REGIONS:
+  - M-08: oryginał STANAG 2511 i druga kopia (FM 2-22.3); strona tytułowa, data i numery stron kopii
+  - M-09: pełny tekst artykułu poza streszczeniem i podsumowaniem wyników; preprint OSF
+  - M-12: sekcja 5.5 (synteza danych) i tabele poza 4, 7 i 9
+  - M-13: tabele 11–14 (pełne listy pytań) i tabele 6–9 (wyniki analizy tematycznej)
+  - M-17: paper 1 (definicje składników i poziomów pewności ogólnej), papers 3–6, tabele 1–7 i dodatkowe pliki 1–5
+  - 34 leady katalogu bez otwartego artefaktu: M-02, M-04, M-07, M-10, M-11, M-14, M-15, M-16, M-18 do M-43
+OUTSIDE_SCOPE:
+  - przeniesienie skal, list kontrolnych i schematu pewności na dziedziny inne niż podane przez źródła (nie jest twierdzeniem żadnego źródła)
+
+DELTA
+NEW
+UNIT_ID: U-006
+NAME: Source Reliability and Information Credibility Rating Scales
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Zapisuje dwie odrębne oceny: wiarygodność źródła (litery A–F) na podstawie wcześniejszych doniesień tego źródła oraz wiarygodność treści informacji (cyfry 1–6) na podstawie potwierdzenia przez niezależne źródła, logiczności wewnętrznej i zgodności z innymi informacjami.
+MINIMAL_FORM:
+  - skala źródła, podstawa oceny: wcześniejsze doniesienia źródła
+  - A: bez wątpliwości co do autentyczności, wiarygodności i kompetencji; historia pełnej rzetelności
+  - B: drobna wątpliwość; historia prawidłowych informacji w większości przypadków
+  - C: wątpliwość, ale źródło dostarczało prawidłowych informacji w przeszłości
+  - D: znaczna wątpliwość, ale źródło dostarczało prawidłowych informacji w przeszłości
+  - E: brak autentyczności, wiarygodności i kompetencji; historia nieprawidłowych informacji
+  - F: brak podstawy do oceny wiarygodności źródła
+  - skala informacji, podstawa oceny: potwierdzenie przez niezależne źródła, logiczność wewnętrzna, zgodność z innymi informacjami
+  - 1: potwierdzona przez inne niezależne źródła; logiczna; zgodna z innymi informacjami
+  - 2: niepotwierdzona; logiczna; zgodna z innymi informacjami w temacie
+  - 3: niepotwierdzona; dość logiczna; zgodna z niektórymi innymi informacjami
+  - 4: niepotwierdzona; możliwa, ale nielogiczna; brak innych informacji w temacie
+  - 5: niepotwierdzona; nielogiczna; sprzeczna z innymi informacjami
+  - 6: brak podstawy do oceny prawdziwości informacji
+SOURCE_ANCHOR:
+  - source: STANAG 2511 / FM 2-22.3, dodatek B (kopia redanalysis.org)
+    locator: https://redanalysis.org/wp-content/uploads/2016/09/Appendix-B-reliability-of-information.pdf
+    anchor: dodatek B, B-1 (wiarygodność źródła), B-2 (treść informacji)
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - wcześniejsze doniesienia źródła (skala źródła)
+  - inne niezależne źródła, z którymi porównuje się informację (poziom 1 skali informacji)
+MUST_BE_TRUE: ocena A–E zakłada, że źródło ma historię wcześniejszych doniesień; brak podstawy do oceny źródła zapisuje się jako F
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: EVALUATION_RULE, SCHEMA
+ADOPTION_NOTES:
+  - dotyczy punktu (b) z CO MA WYJŚĆ w profilu: ocena źródła zapisana osobno od oceny treści informacji; wartości F i 6 mają znaczenie brak podstawy do oceny
+UNKNOWN:
+  - format: odczytany tekst nie opisuje łączenia obu ocen w jedno oznaczenie (opis leada podaje oznaczenie `B2`) ani nie stwierdza niezależności skal
+  - evidence: odczytany tekst nie wskazuje, kto przypisuje oceny ani w jakiej chwili
+  - dependency: druga kopia (FM 2-22.3) i oryginał STANAG 2511 nie zostały otwarte; według wejścia brzmienie poziomów w kopiach różni się
+LIMITS:
+  - poziomy cytowane z jednej kopii; brzmienie poziomu 1 w tej kopii zawiera słowa o niezależnych źródłach, a według wejścia druga kopia mówi o innych źródłach
+  - dziedzina: wywiad wojskowy
+  - zdania spoza tabel, zwrócone przez narzędzie odczytu (F oznacza brak historii doniesień, nie niewiarygodność; źródło bez wcześniejszych doniesień ocenia się jako F), nie zostały zweryfikowane w tekście kopii
+RELATES_TO:
+  - U-007
+
+NEW
+UNIT_ID: U-007
+NAME: Differential Weighting of Source Reliability and Information Credibility in Quality Judgments
+LENS: LENS_KNOWLEDGE
+TYPE: evidence_result
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Opisuje eksperymentalny pomiar, jak oceniający łączą wiarygodność źródła i wiarygodność informacji, podane oznaczeniami alfanumerycznymi Admiralty Code, w ocenach dokładności, informatywności, trustworthiness i prawdopodobieństwa użycia informacji.
+MINIMAL_FORM:
+  - eksperyment 1: 74 analityków wywiadu (52 z Kanady, 22 z Wielkiej Brytanii); eksperyment 2: 175 osób niebędących ekspertami (Kanada, USA)
+  - manipulacja: wiarygodność źródła (niska, średnia, wysoka; litery A–E) i wiarygodność informacji (niska, średnia, wysoka; cyfry 1–5), zmieniane niezależnie
+  - miary: oceny dokładności, informatywności, trustworthiness i prawdopodobieństwa użycia, w powtarzanych pomiarach
+  - wynik: w ocenach dokładności większą wagę ma wiarygodność informacji; w ocenach trustworthiness większą wagę ma wiarygodność źródła; dla informatywności i prawdopodobieństwa użycia brak wykazanej różnicy wag
+  - wynik: ocena dokładności przewiduje prawdopodobieństwo użycia informacji
+  - wynik: spójność wewnątrzosobnicza ocen jest największa przy umiarkowanej spójności atrybutów
+  - wynik: oceniający nie traktują obu osi jako w pełni niezależnych mimo instrukcji, by je tak traktować
+SOURCE_ANCHOR:
+  - source: Kelly, Budescu, Dhami & Mandel, The effect of source reliability and information credibility on judgments of information quality in intelligence analysis
+    locator: https://www.cambridge.org/core/journals/judgment-and-decision-making/article/effect-of-source-reliability-and-information-credibility-on-judgments-of-information-quality-in-intelligence-analysis/E67548E8010A47345C3439D45D9EC6B3
+    anchor: streszczenie i podsumowanie wyników eksperymentów 1 i 2
+    revision: Judgment and Decision Making 20 (2025), e36, DOI 10.1017/jdm.2025.10007
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: TESTED_BEHAVIOR
+MUST_BE_TRUE: wyniki dotyczą ocen ludzi w zadaniach w stylu analizy wywiadowczej, z użyciem oznaczeń Admiralty Code
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: DESIGN_PRINCIPLE
+ADOPTION_NOTES:
+  - dotyczy punktu (b) z CO MA WYJŚĆ w profilu: wynik opisuje zachowanie oceniających ludzi przy dwuosiowej skali; zastosowanie do oceniających LLM lub do wydobywania mechanizmów nie jest twierdzeniem źródła
+UNKNOWN:
+  - evidence: wielkości efektów, statystyki i liczba prób na uczestnika nie zostały odczytane
+  - format: odczytany tekst nie podaje zaleceń dotyczących stosowania skali
+  - evidence: w odczycie kierunek wag zależy od rodzaju oceny; opis leada przypisuje większą wagę wiarygodności źródła w ogólności
+LIMITS:
+  - odczyt ze strony wydawcy przez narzędzie streszczające; liczby uczestników i kierunki wyników nie zostały sprawdzone w tabelach artykułu
+  - uczestnicy: analitycy wywiadu z Kanady i Wielkiej Brytanii oraz osoby niebędące ekspertami z Kanady i USA
+  - skala w badaniu: A–E i 1–5, bez poziomów F i 6
+RELATES_TO:
+  - U-006
+
+NEW
+UNIT_ID: U-008
+NAME: Grey Literature Source Quality Checklist with Outlet Tiers
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Ocenia jakość źródła literatury szarej, a nie pojedynczego twierdzenia, według ośmiu kryteriów z pytaniami szczegółowymi; kryterium typu miejsca publikacji ma trzy poziomy z wartościami 1, 0,5 i 0.
+MINIMAL_FORM:
+  - kryteria (8): autorytet producenta; metodologia; obiektywność; data; pozycja względem powiązanych źródeł; nowość; wpływ; typ miejsca publikacji
+  - autorytet producenta: reputacja organizacji, afiliacja autora, historia publikacji, wykazana ekspertyza
+  - metodologia: jawny cel, jawna metodologia, autorytatywne odniesienia, podane ograniczenia, pokrycie pytania, określona populacja lub przypadek
+  - obiektywność: zrównoważone ujęcie, odróżnienie obiektywności od opinii, brak ukrytego interesu, wnioski oparte na danych
+  - data: jawnie podana data
+  - pozycja względem powiązanych źródeł: czy powiązane źródła szare lub formalne są wskazane i omówione
+  - nowość: czy źródło wzbogaca badanie i wzmacnia lub podważa obecne stanowisko
+  - wpływ: cytowania, linki zwrotne, udostępnienia, komentarze i wyświetlenia zsumowane w jedną miarę
+  - typ miejsca publikacji: poziom 1 (wysoka kontrola wydawcy; książki, czasopisma, raporty rządowe, white papers) = 1; poziom 2 (umiarkowana; raporty roczne, wiadomości, prezentacje, wideo, serwisy pytań i odpowiedzi, wiki) = 0,5; poziom 3 (niska; blogi, e-maile, tweety) = 0
+  - przykład zastosowania (tabela 9): pytania szczegółowe oceniane 0 lub 1, typ miejsca publikacji 0, 0,5 lub 1, suma z 20 czynników i wartość znormalizowana przez dzielenie przez 20
+SOURCE_ANCHOR:
+  - source: Garousi, Felderer & Mäntylä, Guidelines for including grey literature and conducting multivocal literature reviews in software engineering
+    locator: https://arxiv.org/pdf/1707.02553
+    anchor: tabela 7 (s. 19–20), tabela 9 (s. 20–21), rys. 1 (s. 4)
+    revision: preprint przyjęty do Information and Software Technology; numer wersji arXiv nie występuje w odczytanym tekście
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+MUST_BE_TRUE: granice poziomów typu miejsca publikacji są płynne; zależnie od treści źródło tego samego typu może należeć do innego poziomu (rys. 1, s. 4)
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: EVALUATION_RULE, SCHEMA
+ADOPTION_NOTES:
+  - dotyczy punktu (b) z CO MA WYJŚĆ w profilu: kryteria oceny źródła nierecenzowanego, odrębne od oceny treści twierdzenia; kryterium `Date` wymaga daty podanej w źródle
+UNKNOWN:
+  - format: tabela 7 nie podaje reguły punktacji pytań szczegółowych; tekst przywołuje skalę trzystopniową (tak = 1, częściowo = 0,5, nie = 0) z cudzej pracy, a tabela 9 stosuje 0 i 1
+  - evidence: brzmienie i liczba pytań szczegółowych w każdym kryterium nie zostały odczytane wprost; liczba 20 czynników pochodzi z tabeli 9
+  - evidence: odczytany tekst nie zawiera stwierdzenia odróżniającego jakość źródła od jakości pojedynczego twierdzenia
+LIMITS:
+  - dziedzina: inżynieria oprogramowania; brak walidacji na repozytoriach promptów
+  - wytyczne opracowano po fakcie na podstawie trzech przeglądów wielogłosowych i jednego przeglądu literatury szarej; nie zastosowano ich systematycznie w jednym z tych przeglądów (s. 11)
+  - tekst zaznacza, że liczba komentarzy może być zaburzona przez spam, więc nie mierzy wprost popularności
+RELATES_TO:
+  - U-009
+
+NEW
+UNIT_ID: U-009
+NAME: Preliminary Credibility Checklist for Practitioner Blog Posts Without Scoring
+LENS: LENS_KNOWLEDGE
+TYPE: schema
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Określa siedem kategorii wstępnej listy kontrolnej do oceny wiarygodności postów blogowych praktyków jako dowodu w badaniach inżynierii oprogramowania; pytania mają formę zapytań, w większości otwartych, bez punktacji i progów.
+MINIMAL_FORM:
+  - kategorie (7): Foundational; Process; Author; Content; Reader; Influencer; Media
+  - Foundational: świadomość osoby stosującej listę, światopogląd, projekt badania
+  - Process: rygor i kroki dociekania
+  - Author: reputacja, afiliacja, stronniczość, ekspertyza, doświadczenie
+  - Content: jakość pisania; treść anegdotyczna, empiryczna, praktyczna, konceptualna
+  - Reader: ocena informacji zwrotnej od czytelników
+  - Influencer: wpływy na autora
+  - Media: platforma publikacji
+  - forma pytań: zapytanie, np. o jasność pisania posta; w większości pytania otwarte, nie tak/nie
+  - punktacja i progi: nie występują; autorzy wyłączają je celowo (sekcja 7.1)
+SOURCE_ANCHOR:
+  - source: Rainer & Williams, Practitioner-generated blog posts as evidence for SE research: attitudinal survey and preliminary checklist
+    locator: https://arxiv.org/pdf/2103.01845
+    anchor: sekcja 7.1, sekcja 7.2, tabela 10 (s. 25), tabele 11–14 (s. 28–31)
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+MUST_BE_TRUE: lista dotyczy postów blogowych; autorzy nazywają ją wstępną i wymagającą dalszego rozwijania, walidacji i oceny
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: SCHEMA
+ADOPTION_NOTES:
+  - dotyczy punktu (b) z CO MA WYJŚĆ w profilu: kategorie dotyczące autora i medium oceniają źródło, kategoria Content dotyczy treści; progu liczbowego ta lista nie dostarcza
+UNKNOWN:
+  - evidence: pytania przypisane do kategorii (tabele 11–14) i ich liczba nie zostały odczytane
+  - format: odczytany tekst nie opisuje kroków stosowania listy poza formą pytań
+LIMITS:
+  - dziedzina: inżynieria oprogramowania, tylko posty blogowe
+  - ankieta wstępna: 44 odpowiedzi ze 138 zaproszeń, próba wygodna z komitetów programowych konferencji; autorzy wskazują małą próbę oraz rozkłady nienormalne, które mogą obniżać rzetelność analiz statystycznych
+  - uzasadnienie braku punktacji: autorzy uwzględniają różne światopoglądy badaczy i problem ważności (sekcja 7.1)
+  - dziewięć kryteriów ocenianych w ankiecie (tabela 3) jest odrębnym zbiorem od kategorii listy (kandydat C-020)
+RELATES_TO:
+  - U-008
+
+NEW
+UNIT_ID: U-010
+NAME: Component-Based Confidence Rating with Written Downgrade Rationale
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Ocenia pewność pojedynczego ustalenia z syntezy jakościowej według czterech składników; ustalenie zaczyna od poziomu high i jest obniżane o jeden lub więcej poziomów przy zastrzeżeniach co do któregokolwiek składnika, a powody oceny zapisuje się w Evidence Profile.
+MINIMAL_FORM:
+  - jednostka oceny: pojedyncze ustalenie przeglądu (`review finding`), nie synteza jako całość
+  - składniki: `methodological limitations`, `coherence`, `adequacy of data`, `relevance`
+  - poziomy zastrzeżeń dla każdego składnika: brak lub bardzo drobne (mało prawdopodobne obniżenie pewności); drobne (może obniżyć); umiarkowane (prawdopodobnie obniży); poważne (bardzo prawdopodobnie obniży)
+  - pewność ogólna: `high`, `moderate`, `low`, `very low`; start każdego ustalenia: `high`; obniżenie o poziom lub poziomy przy zastrzeżeniach co do któregokolwiek składnika
+  - ocena iteracyjna, w dyskusji co najmniej dwóch członków zespołu przeglądu; bez podwójnego obniżenia za to samo zastrzeżenie w różnych składnikach
+  - brak ustalonej kolejności oceny składników; składniki mają równą wagę
+  - Evidence Profile (5 elementów): streszczenie ustalenia; wyjaśnienie oceny każdego składnika (standardowe frazy); ocena ogólna; wyjaśnienie oceny ogólnej; odniesienie do prac składowych i ich kontekstów
+  - zastrzeżenia do każdego składnika opisane na tyle szczegółowo, by odbiorca ustalenia zrozumiał powody oceny
+SOURCE_ANCHOR:
+  - source: Lewin et al., Applying GRADE-CERQual to qualitative evidence synthesis findings, paper 2
+    locator: https://implementationscience.biomedcentral.com/articles/10.1186/s13012-017-0689-2
+    anchor: sekcje Making an overall CERQual assessment of confidence (rys. 2) i Creating a CERQual Evidence Profile and a Summary of Qualitative Findings (SoQF) table
+    revision: Implementation Science 13 (supl. 1), 2018
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - definicje składników i poziomów pewności ogólnej z paper 1 serii (tabela 3), nieotwarty
+MUST_BE_TRUE: ocena dotyczy ustaleń z syntezy jakościowej opartej na danych z badań pierwotnych i jest wykonywana przez zespół przeglądu
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: EVALUATION_RULE, SCHEMA
+ADOPTION_NOTES:
+  - dotyczy punktu (c) z CO MA WYJŚĆ w profilu: rozkład pewności na składniki z zapisanym uzasadnieniem obniżenia; jednostką jest zsyntetyzowane ustalenie, nie pojedynczy zapis
+UNKNOWN:
+  - dependency: definicje składników i poziomów pewności ogólnej leżą w paper 1, który nie został otwarty
+  - format: lista standardowych fraz wyjaśnień i progi liczbowe poziomów nie zostały odczytane
+  - evidence: tabele 1–7 z przykładami nie zostały odczytane
+LIMITS:
+  - dziedzina: syntezy jakościowe w ochronie zdrowia (według wejścia); tekst odczytany mówi o syntezie jakościowej
+  - autorzy: zastosowanie schematu do syntezy wykonanej przez inny zespół jest zadaniem trudnym i czasochłonnym według ich ograniczonego doświadczenia
+  - równa waga składników wynika z braku dowodu, że powinny mieć różne wagi
+RELATES_TO:
+  - U-006
+
+CURRENT INDEX
+U-001 | Mechanism Description Composition | SOURCE_SUPPORTED | last: run 1
+U-002 | Mechanism Sketch, Schema and Complete Description | SOURCE_SUPPORTED | last: run 1
+U-003 | Recurrence Test for Pattern Acceptance | SOURCE_SUPPORTED | last: run 1
+U-004 | Pattern Entry Template with Consequences and Known Uses | SOURCE_SUPPORTED | last: run 1
+U-005 | Two-Stage Screening with Measured Agreement and Classifier Validation | SOURCE_SUPPORTED | last: run 1
+U-006 | Source Reliability and Information Credibility Rating Scales | SOURCE_SUPPORTED | last: run 2
+U-007 | Differential Weighting of Source Reliability and Information Credibility in Quality Judgments | SOURCE_SUPPORTED | last: run 2
+U-008 | Grey Literature Source Quality Checklist with Outlet Tiers | SOURCE_SUPPORTED | last: run 2
+U-009 | Preliminary Credibility Checklist for Practitioner Blog Posts Without Scoring | SOURCE_SUPPORTED | last: run 2
+U-010 | Component-Based Confidence Rating with Written Downgrade Rationale | SOURCE_SUPPORTED | last: run 2
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm: elementy opisu mechanizmu i ciągłość wytwarzania (sekcje 2, 4.1–4.3)
+C-002 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm: klasyfikacja opisu na pełny, schemat i szkic (sekcje 4.3, 5.3)
+C-003 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: cztery rodzaje aktywności dolnego poziomu i względność `bottom out` (sekcja 5.1, s. 13–14)
+C-004 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: lista elementów formy wzorca z definicjami (sekcja Elements of a Pattern)
+C-005 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm: test powtarzalności i status `proto-pattern` (sekcja Proto-Patterns and Patternity Tests)
+C-006 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: katalog, system i język wzorców (sekcje Pattern Catalogs and Systems, Pattern Languages)
+C-007 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: opis przeglądu systematycznego i snowballingu (sekcja 3), szczegóły w odnośniku [5] nieotwartym
+C-008 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm: pola wpisu katalogu wzorców (sekcje 3, 4)
+C-009 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: model decyzyjny wyboru wzorców (sekcja 5.1, rys. 19)
+C-010 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm: dwuetapowa selekcja z pomiarem zgodności (sekcje 2.1, 2.1.1)
+C-011 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: definicja techniki jako `blueprint` i jednokategoriowe umieszczanie w taksonomii (sekcje 1.2.2, 2.2)
+C-012 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: miara użycia techniki przez liczbę cytowań w zbiorze (sekcja 2.3)
+C-013 | UNITIZED | U-006 | run 2 NEW | odrębny mechanizm: dwie skale ocen o różnych podstawach, źródła A–F i informacji 1–6 (dodatek B, B-1 i B-2)
+C-014 | UNITIZED | U-007 | run 2 NEW | odrębny wynik: eksperymentalny pomiar wag wiarygodności źródła i informacji w ocenach jakości
+C-015 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: spójność wewnątrzosobnicza ocen przy różnych poziomach spójności atrybutów (streszczenie)
+C-016 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: trzy poziomy typu miejsca publikacji według kontroli wydawcy i ekspertyzy (rys. 1)
+C-017 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: siedem pytań o włączenie literatury szarej (tabela 4, s. 13–14)
+C-018 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: trzy reguły zatrzymania wyszukiwania (wytyczna 8, sekcja 5.1.2)
+C-019 | UNITIZED | U-008 | run 2 NEW | odrębny mechanizm: osiem kryteriów jakości źródła szarego z wartościami dla typu miejsca publikacji (tabela 7)
+C-020 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: dziewięć kryteriów wiarygodności ocenianych w ankiecie (tabela 3, rys. 3)
+C-021 | UNITIZED | U-009 | run 2 NEW | odrębny mechanizm: siedem kategorii wstępnej listy kontrolnej bez punktacji (sekcja 7, tabela 10)
+C-022 | UNITIZED | U-010 | run 2 NEW | odrębny mechanizm: cztery składniki pewności i obniżanie od poziomu high z zapisanym uzasadnieniem
+C-023 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: tabela Summary of Qualitative Findings i jej elementy
+
+REJECTED INFERENCES
+- wniosek z opisu leada M-08, że skale są łączone w oznaczenie typu `B2`: odczytany tekst kopii nie opisuje łączenia ani niezależności skal
+- wniosek z opisu leada M-09, że oceny zależą bardziej od wiarygodności źródła niż informacji: odczytane podsumowanie rozróżnia rodzaje ocen (dokładność, trustworthiness) i podaje brak różnicy dla dwóch pozostałych
+- wniosek z opisów leadów M-12, że tabela 7 punktuje poziomy źródeł 1/0,5/0 dla całej listy albo że kryteria są nieważone: wartości 1, 0,5 i 0 dotyczą typu miejsca publikacji, a punktację pytań szczegółowych podaje tylko przykład w tabeli 9
+- wniosek z opisu leada M-13, że kategorie listy to autorytet, metodologia, obiektywność i data: lista ma siedem kategorii o nazwach z U-009, a kryteria ankiety tworzą odrębny zbiór dziewięciu pozycji
+- wniosek, że F i 6 w M-08 oznaczają niewiarygodność: tabela definiuje je jako brak podstawy do oceny
+
+AUDIT DELTA
+- opisy leadów różnią się od tekstów w M-08 (oznaczenie `B2`), M-09 (kierunek wag), M-12 (punktacja) i M-13 (kategorie listy)
+- M-12: odczyt podał dla tabeli 7 raz 10, raz 8 kryteriów; w U-008 użyto liczby 8 z ponownego odczytu z liczeniem wierszy, a liczba pytań szczegółowych pozostaje nieodczytana wprost
+- M-09: wyniki w U-007 pochodzą z odczytu streszczającego strony wydawcy; preprint OSF zwrócił same metadane, więc liczby i kierunki wyników nie zostały sprawdzone w tabelach artykułu
+- M-08: zdania spoza tabel zwrócone przez narzędzie odczytu nie zostały zapisane w U-006 jako SOURCE_FACT, tylko w LIMITS
+- w regionach M-12 i M-13 kandydaci spełniali reguły wyboru jednakowo (C-016 do C-019; C-020 i C-021); remis rozstrzygnięto profilem według §43 pkt 2, a pozostałym kandydatom zapisano `BUDGET`
+- profil celu używa pól PROBLEM, CO MA WYJŚĆ i CZEGO NIE SZUKAĆ zamiast PROBLEMS, DOMAINS, CONSTRAINTS i ANTI-GOALS z §43; profil wpłynął tylko na blok `TARGET_PROFILE`, `ADOPTION_NOTES` i dwa remisy
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostaje 13 kandydatów DEFER z otwartych źródeł (C-003, C-004, C-006, C-007, C-009, C-011, C-012, C-015, C-016, C-017, C-018, C-020, C-023) oraz 34 leady katalogu z locatorami do otwarcia według planu Runów z wejścia.
+
+SYNTHESIS
+OBSERVATION: w Runie 2 tylko U-007 ma EVIDENCE_LAYER TESTED_BEHAVIOR i EFFECT_STATUS TESTED_IN_SOURCE; U-006, U-008, U-009 i U-010 mają DOCUMENTED_DESIGN i NOT_APPLICABLE.
+OBSERVATION: U-009 nie ma punktacji ani progów z założenia autorów, a U-008 podaje wartości punktowe jawnie tylko dla typu miejsca publikacji.
+INFERENCE: U-006 wiąże ocenę źródła z historią wcześniejszych doniesień, a U-008 i U-009 wymieniają kryteria niezależne od takiej historii (autorytet, metodologia, obiektywność, data, medium); wynika to z porównania pól MINIMAL_FORM.
+TRANSFER: U-006, U-008 i U-009 dają możliwe pola oceny źródła oddzielne od oceny informacji, a U-010 dodaje składniki pewności z zapisanym uzasadnieniem obniżenia; przeniesienie poza zdrowie, wywiad i inżynierię oprogramowania nie jest twierdzeniem źródeł.
+OPEN_QUESTION: czy druga kopia STANAG 2511 / FM 2-22.3 opisuje łączenie oceny źródła i informacji w jedno oznaczenie.
+OPEN_QUESTION: jak paper 1 serii GRADE-CERQual definiuje poziomy pewności ogólnej high, moderate, low i very low.
+ASSESSMENT: Run 3 według planu z wejścia (M-21, M-22, M-28, M-30, M-33) obejmuje temat reguł zatrzymania, w którym leży kandydat C-018 z DEFER.
