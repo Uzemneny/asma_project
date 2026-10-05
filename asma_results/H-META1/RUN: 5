@@ -1,0 +1,386 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-META1
+TITLE: Metodologia harvestowania — zapis mechanizmu, ocena źródeł, pewność, zatrzymanie
+SOURCE_SET: katalog 43 leadów META-ASMA-METODOLOGIA (metody wydobywania twierdzeń i mechanizmów, oceny źródeł i pewności, zatrzymania, niezawodności wydobycia, syntezy i rekordu twierdzenia); pytanie: jak wydobywać twierdzenia i mechanizmy z niejednorodnych źródeł z oceną źródła, składnikami pewności, śladem do miejsca w źródle i regułą zakończenia
+SOURCES:
+  - Machamer, Darden & Craver, Thinking about mechanisms
+  - Appleton, Patterns and Software: Essential Concepts and Terminology
+  - Liu et al., Agent Design Pattern Catalogue
+  - Schulhoff et al., The Prompt Report
+  - STANAG 2511 / FM 2-22.3, dodatek B (kopia redanalysis.org)
+  - Kelly, Budescu, Dhami & Mandel, The effect of source reliability and information credibility on judgments of information quality in intelligence analysis
+  - Garousi, Felderer & Mäntylä, Guidelines for including grey literature and conducting multivocal literature reviews in software engineering
+  - Rainer & Williams, Practitioner-generated blog posts as evidence for SE research: attitudinal survey and preliminary checklist
+  - Lewin et al., Applying GRADE-CERQual to qualitative evidence synthesis findings, paper 2
+  - Francis et al., What is an adequate sample size? Operationalising data saturation for theory-based interview studies
+  - Yang, Lewis & Frieder, Heuristic Stopping Rules For Technology-Assisted Review
+  - Krippendorff, Content Analysis: An Introduction to Its Methodology, 3rd ed., zamiennik sekcji 12.4
+  - Chew et al., LLM-Assisted Content Analysis (LACA)
+  - Rashkin et al., Measuring attribution in natural language generation models
+  - France et al., eMERGe meta-ethnography reporting guidance
+  - Clark, Ciccarese & Goble, Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications
+  - Thomas & Harden, Methods for the thematic synthesis of qualitative research in systematic reviews
+  - Kuhn et al., Decentralized provenance-aware publishing with nanopublications
+  - Wytyczne nanopublikacji (nanopub.net)
+  - Eisenhardt, Building theories from case study research
+  - Bechtel & Abrahamsen, Explanation: a mechanist alternative
+  - Wong, Greenhalgh, Westhorp, Buckingham & Pawson, RAMESES publication standards: realist syntheses
+  - White et al., A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT
+  - ODNI, Intelligence Community Directive 203, Analytic Standards
+  - CIA, A Tradecraft Primer: Structured Analytic Techniques
+RUN: 5
+FOCUS: elementy opisu mechanizmu, standardy raportowania syntez realistycznych, katalog wzorców promptów, standardy analityczne ODNI i kontrola jakości informacji (M-02, M-04, M-07, M-10, M-11)
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-05
+ACCESS_LIMITATIONS:
+  - wszystkie odczyty wykonano narzędziem streszczającym; numery stron, sekcji, tabel i punktów w kotwicach pochodzą z tych odczytów
+  - M-02: odczyt z pliku PDF na stronie autora; czasopismo i numery stron publikacji pochodzą z wejścia, nie z odczytu; definicja z s. 424 i przypis 6 pochodzą z jednego odczytu
+  - M-04: pierwszy odczyt strony ORA zwrócił tylko metadane; właściwy odczyt wykonano z pliku PDF wskazanego na tej stronie; metadane wskazują wersję J Adv Nurs 69(5):1005–1022; wersja BMC Medicine 11:21 nie została otwarta; treść pozycji 1–19 poza nagłówkami nie została odczytana; Pawson & Tilley 1997 nie został otwarty
+  - M-07: pierwszy odczyt strony arXiv (abs) zwrócił tylko streszczenie; właściwy odczyt wykonano z pliku PDF; tekst odczytu urywa się w sekcji V
+  - M-10: odczyt tabeli wyrażeń prawdopodobieństwa dał sześć terminów w wierszu i siedem pasm procentowych bez możliwości przyporządkowania; ICD 206 nie został otwarty; brzmienia cytatów różnią się między dwoma odczytami, dlatego w Unitach zapisano parafrazy
+  - M-11: dwa odczyty różnią się opisem kroków (pierwszy: baza danych według typu źródła i daty, drugi: siedem punktów); użyto drugiego, który podaje punkty dosłownie; s. 1–6 nie zostały odczytane; Heuer, rozdz. 8 nie został otwarty
+  - w Runie 5 otwarto M-02, M-04, M-07, M-10, M-11; łącznie otwarto 24 leady, 19 leadów katalogu nie ma otwartego artefaktu
+TARGET_PROFILE:
+  id: META-ASMA-METODOLOGIA
+  version: 1.0
+  target: ustalone metody wydobywania twierdzeń i mechanizmów z niejednorodnych źródeł (także nierecenzowanych i bez historii zmian), oceniania wiarygodności źródła i pewności wydobycia oraz kończenia otwartych poszukiwań, opisane tak, żeby dało się je zastosować (pola, skale, kroki, progi).
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+M-02 Bechtel & Abrahamsen | https://mechanism.ucsd.edu/bill/research/explanation.mechanisticalternative.pdf | sekcja Introduction (s. 423–424), definicja mechanizmu (s. 424), warunki zewnętrzne i osadzenie (s. 424–425), sekcja 3 o dekompozycji i lokalizacji (s. 432–434), przykład oddychania komórkowego (s. 427–428), przypis 6 (s. 424)
+M-04 Wong et al. | https://ora.ox.ac.uk/objects/uuid:d6343445-f785-43b0-a647-d66a0029a83d/files/mfa7aaabebe92ef3d5beabb2fa8ad2b8c | tabela 1 (19 pozycji raportowania), definicja mechanizmu i logika realistyczna, opis opracowania standardów (Delphi)
+M-07 White et al. | https://arxiv.org/pdf/2302.11382 | sekcja II-B (szablon wpisu), sekcja II-D (identyfikacja wzorców i ograniczenia), tabela I w sekcji III-A (kategorie i wzorce)
+M-10 ODNI ICD 203 | https://archive.dni.gov/files/documents/ICD/ICD-203.pdf | sekcja D.6.e(1)–(9) (dziewięć standardów), D.6.e(2)(a) (tabela wyrażeń prawdopodobieństwa), D.6.e(2)(b) (poziom pewności), data dokumentu
+M-11 CIA Tradecraft Primer | https://www.cia.gov/resources/csi/static/Tradecraft-Primer-apr09.pdf | sekcja Quality of Information Check (s. 10–11: When to Use, Value Added, The Method), kolejność technik diagnostycznych (s. 7–15), uwaga o gwarancji dokładności (s. 5)
+UNKNOWN_REGIONS:
+  - M-02: czasopismo publikacji (odczyt nie potwierdził danych bibliograficznych)
+  - M-04: wersja BMC Medicine 11:21; treść pozycji 1–19 poza nagłówkami; Pawson & Tilley 1997
+  - M-07: sekcja V i dalsze (tekst odczytu urwany); treść wpisów poszczególnych wzorców; wersja i data preprintu
+  - M-10: przyporządkowanie terminów do pasm prawdopodobieństwa; ICD 206; zakres stosowania dyrektywy
+  - M-11: s. 1–6 i techniki poza rozdziałem diagnostycznym; Heuer, rozdz. 8
+  - 19 leadów katalogu bez otwartego artefaktu: M-14 do M-16, M-18 do M-20, M-23 do M-27, M-29, M-31, M-32, M-34 do M-36, M-40, M-43
+OUTSIDE_SCOPE:
+  - przeniesienie opisów mechanizmu, standardów raportowania, szablonów wzorców promptów, standardów analitycznych i kontroli jakości informacji na dziedziny inne niż podane przez źródła (nie jest twierdzeniem żadnego źródła)
+
+DELTA
+NEW
+UNIT_ID: U-021
+NAME: Mechanism Account Elements from Parts and Operations to Environment
+LENS: LENS_KNOWLEDGE
+TYPE: schema
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Wylicza elementy opisu mechanizmu: części składowe, operacje składowe, organizację przestrzenną i czasową oraz warunki zewnętrzne i osadzenie w większych mechanizmach; mechanizm jest tu strukturą wykonującą funkcję dzięki częściom, operacjom i ich organizacji.
+MINIMAL_FORM:
+  - definicja (s. 424, parafraza): mechanizm = struktura wykonująca funkcję dzięki swoim częściom składowym, operacjom składowym i ich organizacji
+  - części składowe: uczestniczą w wytwarzaniu zjawiska
+  - operacje składowe: aktywności i przekształcenia wykonywane w mechanizmie; według odczytu części mogą być aktywne lub bierne
+  - organizacja: porządek przestrzenny i czasowy; możliwe wiele poziomów organizacji; w układach biologicznych także organizacja nieliniowa (sprzężenia zwrotne, samoorganizacja) wymagająca modelowania obliczeniowego
+  - warunki zewnętrzne: okoliczności, w których mechanizm działa; ich zmienność między kontekstami ujawnia różnice mechanizmów
+  - osadzenie: mechanizm bywa składnikiem większego mechanizmu, a jego części bywają mechanizmami niższego poziomu (struktura rekurencyjna)
+SOURCE_ANCHOR:
+  - source: Bechtel & Abrahamsen, Explanation: a mechanist alternative
+    locator: https://mechanism.ucsd.edu/bill/research/explanation.mechanisticalternative.pdf
+    anchor: sekcja Introduction (s. 423–424), definicja na s. 424, warunki zewnętrzne i osadzenie (s. 424–425), organizacja (s. 424, 434–435)
+    revision: Studies in History and Philosophy of Biological and Biomedical Sciences 36:421–441, 2005 (dane z wejścia; odczyt ich nie potwierdził)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - zjawisko, w którego wytwarzaniu uczestniczą części mechanizmu
+MUST_BE_TRUE: opis wskazuje zjawisko lub funkcję, którą wykonuje struktura, a elementy są dobrane do tego zjawiska
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: SCHEMA
+ADOPTION_NOTES:
+  - dotyczy punktu (a) z CO MA WYJŚĆ w profilu: lista elementów zapisu mechanizmu (części, operacje, organizacja, warunki zewnętrzne, osadzenie); zastosowanie do wydobywania mechanizmów z tekstów nie jest twierdzeniem źródła
+UNKNOWN:
+  - evidence: dekompozycja funkcjonalna i strukturalna oraz lokalizacje (sekcja 3) nie są zapisane w tym Unicie (kandydat C-049)
+  - format: odczyt nie podaje pól ani szablonu zapisu, tylko listę elementów w tekście ciągłym
+LIMITS:
+  - dziedzina: biologia (przykład oddychania komórkowego, s. 427–428)
+  - według odczytu przypisu 6 (s. 424) charakterystyka nie wystarcza dla mechanizmów biologicznych, które wymagają autonomicznych układów daleko od równowagi
+  - według odczytu ludzie nie śledzą złożonych interakcji wielu składników bez symulacji (s. 430)
+RELATES_TO:
+  - U-001
+
+NEW
+UNIT_ID: U-022
+NAME: Realist Synthesis Reporting Items with Appraisal and Extraction Positions
+LENS: LENS_KNOWLEDGE
+TYPE: schema
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Wylicza 19 pozycji raportowania syntezy realistycznej, w tym pozycję o selekcji i ocenie dokumentów oraz pozycję o wydobyciu danych, oraz podaje definicję mechanizmu używaną w tej syntezie.
+MINIMAL_FORM:
+  - zakres: standardy publikacyjne wyłącznie dla syntez realistycznych
+  - mechanizm (parafraza definicji cytowanej za Astbury & Leeuw 2010): leżące u podstaw byty, procesy lub struktury działające w określonych kontekstach i generujące wyniki
+  - logika realistyczna: interwencja zmienia kontekst, kontekst uruchamia mechanizmy, mechanizmy dają wyniki zamierzone i niezamierzone
+  - pozycje (tabela 1, nazwy według odczytu): 1 Title; 2 Abstract; 3 Rationale; 4 Objectives and focus; 5 Changes in review process; 6 Rationale for using realist synthesis; 7 Scoping the literature; 8 Searching processes; 9 Selection and appraisal of documents; 10 Data extraction; 11 Analysis and synthesis processes; 12 Document flow diagram; 13 Document characteristics; 14 Main findings; 15 Summary of findings; 16 Strengths, limitations and future directions; 17 Comparison with existing literature; 18 Conclusion and recommendations; 19 Funding
+  - pozycje o dokumentach źródłowych: 9 (selekcja i ocena dokumentów) oraz 10 (wydobycie danych)
+  - język wymagań: według odczytu pozycje używają sformułowań w rodzaju "should ideally contain" i "should be described"; autorzy przeglądów oceniają, ile informacji podać
+SOURCE_ANCHOR:
+  - source: Wong, Greenhalgh, Westhorp, Buckingham & Pawson, RAMESES publication standards: realist syntheses
+    locator: https://ora.ox.ac.uk/objects/uuid:d6343445-f785-43b0-a647-d66a0029a83d/files/mfa7aaabebe92ef3d5beabb2fa8ad2b8c
+    anchor: tabela 1 (lista 19 pozycji), fragment o definicji mechanizmu i logice realistycznej
+    revision: Journal of Advanced Nursing 69(5):1005–1022, 2013 (według metadanych strony ORA; współpublikacja BMC Medicine 11:21 nieotwarta)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - synteza realistyczna jako typ przeglądu
+MUST_BE_TRUE: przegląd jest syntezą realistyczną; według odczytu standardy nie dotyczą innych typów przeglądów
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: SCHEMA, EVALUATION_RULE
+ADOPTION_NOTES:
+  - dotyczy punktów (a) i (b) z CO MA WYJŚĆ w profilu: lista pozycji raportowania z pozycjami o ocenie dokumentów i wydobyciu danych; treść tych pozycji nie została odczytana, a zastosowanie do wydobywania mechanizmów nie jest twierdzeniem źródła
+UNKNOWN:
+  - evidence: treść pozycji 9 i 10 (kryteria trafności i rygoru, uzasadnienie wydobycia) nie została odczytana poza nagłówkami
+  - format: podział pozycji na wymagane i zalecane nie występuje w odczycie; odczyt podaje język "should" bez poziomów
+  - evidence: definicja konfiguracji kontekst–mechanizm–wynik jako zapisu wyniku nie występuje w odczycie
+  - format: nazwy pozycji pochodzą z odczytu streszczającego i mogą różnić się od brzmienia tabeli
+  - dependency: Pawson & Tilley 1997 nie został otwarty
+LIMITS:
+  - dziedzina według wejścia: zdrowie i polityka; odczyt wskazuje tylko zakres syntez realistycznych
+  - standardy dotyczą raportowania, nie struktury pól mechanizmu
+  - opis opracowania standardów (przegląd 35 syntez, panel Delphi) nie jest zapisany w tym Unicie (kandydat C-051)
+RELATES_TO:
+  - U-016
+
+NEW
+UNIT_ID: U-023
+NAME: Prompt Pattern Documentation Template with Informal Pattern Identification
+LENS: LENS_KNOWLEDGE
+TYPE: schema
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Zapisuje wpis katalogu wzorców promptów w sześciu polach oraz podaje sposób identyfikacji wzorców: eksploracja promptów społeczności i własne użycie, bez podanej reguły włączenia.
+MINIMAL_FORM:
+  - pola wpisu (sekcja II-B): Name and classification; Intent and context; Motivation; Structure and key ideas; Example implementation; Consequences
+  - identyfikacja wzorców (sekcja II-D): eksploracja korpusu promptów publikowanych przez społeczność w internecie oraz niezależne tworzenie promptów podczas własnego użycia ChatGPT
+  - reguła włączenia: odczyt jej nie podaje
+  - katalog: 16 wzorców według sumy listy w odczycie; podział na kategorie nie jest zapisany w tym Unicie (kandydat C-053)
+SOURCE_ANCHOR:
+  - source: White et al., A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT
+    locator: https://arxiv.org/pdf/2302.11382
+    anchor: sekcja II-B (szablon), sekcja II-D (identyfikacja i ograniczenia), tabela I (liczba wzorców)
+    revision: arXiv:2302.11382, preprint; wersja nie została odczytana
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - korpus promptów społeczności i własne użycie autorów jako źródło wzorców
+MUST_BE_TRUE: wpis wzorca ma sześć pól szablonu; odczyt nie wskazuje pól opcjonalnych
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: SCHEMA
+ADOPTION_NOTES:
+  - dotyczy punktu (a) z CO MA WYJŚĆ w profilu: pola wpisu wzorca w domenie LLM; brak reguły włączenia i oceny skuteczności, więc wynik nie jest dowodem skuteczności promptów
+UNKNOWN:
+  - format: odczyt nie wskazuje, które pola szablonu są obowiązkowe
+  - evidence: treść wpisów poszczególnych wzorców nie została zapisana w Unicie; tekst odczytu urywa się w sekcji V
+LIMITS:
+  - według odczytu wzorce testowano wyłącznie w ChatGPT+ (sekcja II-D)
+  - według odczytu brak oceny skuteczności wzorców, testów empirycznych i badań użytkowników
+  - preprint bez ustalonego miejsca publikacji (dane z wejścia)
+RELATES_TO:
+  - U-004
+
+NEW
+UNIT_ID: U-024
+NAME: Analytic Standards for Source Description and Separation of Information from Judgment
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Określa dziewięć standardów warsztatu analitycznego, w tym opis jakości i wiarygodności źródeł (standard 1), wyrażanie i wyjaśnianie niepewności (standard 2) oraz odróżnienie informacji od założeń i osądów (standard 3).
+MINIMAL_FORM:
+  - standardy (D.6.e(1)–(9), nazwy sparafrazowane): 1 opis jakości i wiarygodności źródeł, danych i metodologii; 2 wyrażanie i wyjaśnianie niepewności w głównych osądach; 3 odróżnienie informacji od założeń i osądów; 4 analiza alternatyw; 5 trafność dla odbiorcy i implikacje; 6 jasna i logiczna argumentacja; 7 wyjaśnienie zmiany lub zgodności osądów; 8 dokładność osądów; 9 informacja wizualna tam, gdzie jest wskazana
+  - standard 1: wskazanie źródeł i metodologii, na których oparte są osądy; deskryptory źródeł według ICD 206 (D.6.e(1))
+  - standard 3: produkty odróżniają wypowiedzi niosące informację od wypowiedzi niosących założenia lub osądy (D.6.e(3))
+  - standard 2: prawdopodobieństwo wyrażane terminami z zestawów w D.6.e(2)(a); poziom pewności (np. high confidence) w D.6.e(2)(b); poziom pewności i stopień prawdopodobieństwa nie występują w jednym zdaniu
+SOURCE_ANCHOR:
+  - source: ODNI, Intelligence Community Directive 203, Analytic Standards
+    locator: https://archive.dni.gov/files/documents/ICD/ICD-203.pdf
+    anchor: sekcja D.6.e(1)–(3), D.6.e(2)(a)–(b)
+    revision: 2 stycznia 2015 (według odczytu)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - ICD 206 jako źródło zasad deskryptorów źródeł
+MUST_BE_TRUE: opis źródeł używa deskryptorów zgodnych z ICD 206 (według D.6.e(1))
+ENFORCEMENT: UNKNOWN
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: EVALUATION_RULE
+ADOPTION_NOTES:
+  - dotyczy punktów (b) i (c) z CO MA WYJŚĆ w profilu: wymóg opisu źródła, odróżnienia informacji od osądu oraz rozdzielenia poziomu pewności od prawdopodobieństwa; tekst nie podaje skali oceny źródeł, a zastosowanie poza wywiadem nie jest twierdzeniem źródła
+UNKNOWN:
+  - enforcement: odczyt nie wskazuje mechanizmu egzekwowania ani oceny zgodności
+  - format: przyporządkowanie terminów do pasm prawdopodobieństwa nie zostało ustalone (kandydat C-055)
+  - dependency: ICD 206 nie został otwarty; format deskryptorów źródeł nieznany
+  - format: zakres stosowania dyrektywy nie został odczytany
+LIMITS:
+  - dziedzina: produkty analityczne wywiadu
+  - standard 1 wymaga opisu jakości i wiarygodności, a odczyt nie podaje skali ani kryteriów oceny
+  - brzmienia cytatów różnią się między dwoma odczytami; zapisano parafrazy
+RELATES_TO:
+  - U-006
+
+NEW
+UNIT_ID: U-025
+NAME: Quality of Information Check Seven-Point Source Review
+LENS: LENS_KNOWLEDGE
+TYPE: method
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Opisuje technikę diagnostyczną sprawdzania jakości informacji w analizie jako siedem punktów przeglądu źródeł, od oceny dokładności po wskazanie poziomu zaufania do źródeł.
+MINIMAL_FORM:
+  - kiedy (s. 10): proces ciągły; odczyt wskazuje też okresowe przeglądy przed finalizacją głównych ocen
+  - punkty metody (s. 10–11, w kolejności odczytu): 1 systematyczny przegląd wszystkich źródeł pod kątem dokładności; 2 wskazanie źródeł krytycznych lub przekonujących; 3 sprawdzenie, czy krytyczne doniesienia mają wystarczające i silne potwierdzenie; 4 ponowne przejrzenie informacji wcześniej odrzuconych w świetle nowych faktów; 5 oznaczenie wycofanych doniesień dla innych analityków oraz przegląd analiz opartych na nich pod kątem tego, czy doniesienie było niezbędne dla osądów; 6 sprawdzenie, czy informacja niejednoznaczna została zinterpretowana i opatrzona zastrzeżeniami; 7 wskazanie poziomu zaufania do źródeł, które będą występować w przyszłych ocenach
+  - wartość dodana (s. 10): wykrywanie możliwych strategii oszustwa i zaprzeczenia przeciwnika; wskazywanie luk i nowych wymagań dla zbierających; informowanie decydentów o poziomie zaufania analityków do osądów
+  - miejsce w rozdziale: druga z czterech technik diagnostycznych, po Key Assumptions Check (s. 7), przed Indicators or Signposts of Change (s. 12) i Analysis of Competing Hypotheses (s. 14)
+SOURCE_ANCHOR:
+  - source: CIA, A Tradecraft Primer: Structured Analytic Techniques
+    locator: https://www.cia.gov/resources/csi/static/Tradecraft-Primer-apr09.pdf
+    anchor: sekcja Quality of Information Check (s. 10–11), rozdział technik diagnostycznych (s. 7–15)
+    revision: marzec 2009 (według odczytu)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - zbiór źródeł i doniesień użytych w analizie
+MUST_BE_TRUE: analityk ma informacje o tle źródła, jego dostępie i motywacji (według odczytu s. 10, odczyt jednokrotny)
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: METHOD, WORKFLOW
+ADOPTION_NOTES:
+  - dotyczy punktu (b) z CO MA WYJŚĆ w profilu: przegląd źródeł pod kątem dokładności, potwierdzenia i poziomu zaufania; tekst nie podaje skali ani progów, a zastosowanie do wydobywania mechanizmów nie jest twierdzeniem źródła
+UNKNOWN:
+  - format: skala poziomu zaufania do źródeł nie występuje w odczycie; punkt 7 nie podaje wartości
+  - format: relacje tej techniki do pozostałych technik poza kolejnością w rozdziale nie występują w odczycie
+  - evidence: s. 1–6 i techniki poza rozdziałem diagnostycznym nie zostały odczytane
+LIMITS:
+  - dziedzina: analiza wywiadowcza; tekst zawiera studium przypadku dotyczące Iraku (s. 11), którego treści nie zapisano
+  - według odczytu tekst stwierdza, że stosowanie technik nie gwarantuje dokładności osądów (s. 5; odczyt jednokrotny)
+  - pozostałe techniki diagnostyczne (kandydaci C-057, C-058, C-059) nie są zapisane w tym Unicie
+RELATES_TO:
+  - U-024
+
+CURRENT INDEX
+U-001 | Mechanism Description Composition | SOURCE_SUPPORTED | last: run 1
+U-002 | Mechanism Sketch, Schema and Complete Description | SOURCE_SUPPORTED | last: run 1
+U-003 | Recurrence Test for Pattern Acceptance | SOURCE_SUPPORTED | last: run 1
+U-004 | Pattern Entry Template with Consequences and Known Uses | SOURCE_SUPPORTED | last: run 1
+U-005 | Two-Stage Screening with Measured Agreement and Classifier Validation | SOURCE_SUPPORTED | last: run 1
+U-006 | Source Reliability and Information Credibility Rating Scales | SOURCE_SUPPORTED | last: run 2
+U-007 | Differential Weighting of Source Reliability and Information Credibility in Quality Judgments | SOURCE_SUPPORTED | last: run 2
+U-008 | Grey Literature Source Quality Checklist with Outlet Tiers | SOURCE_SUPPORTED | last: run 2
+U-009 | Preliminary Credibility Checklist for Practitioner Blog Posts Without Scoring | SOURCE_SUPPORTED | last: run 2
+U-010 | Component-Based Confidence Rating with Written Downgrade Rationale | SOURCE_SUPPORTED | last: run 2
+U-011 | Interview Data Saturation Stopping Rule (10 Plus 3) | SOURCE_SUPPORTED | last: run 3
+U-012 | Knee Method Stopping Rule for Technology-Assisted Review | SOURCE_SUPPORTED | last: run 3
+U-013 | Unitizing Agreement Coefficients for Continuous Text | SOURCE_SUPPORTED | last: run 3
+U-014 | Three-Phase LLM-Assisted Content Analysis Protocol with Human-Model Calibration | SOURCE_SUPPORTED | last: run 3
+U-015 | Attribution to Identified Sources Two-Stage Annotation | SOURCE_SUPPORTED | last: run 3
+U-016 | Meta-Ethnography Phases from Relating Studies to Synthesizing Translations | SOURCE_SUPPORTED | last: run 4
+U-017 | Micropublication Claim Record with Attribution and Support Graph | SOURCE_SUPPORTED | last: run 4
+U-018 | Three-Stage Thematic Synthesis of Qualitative Findings | SOURCE_SUPPORTED | last: run 4
+U-019 | Nanopublication Four-Graph Structure with Required Links | SOURCE_SUPPORTED | last: run 4
+U-020 | Eight-Step Process for Building Theory from Cross-Case Evidence | SOURCE_SUPPORTED | last: run 4
+U-021 | Mechanism Account Elements from Parts and Operations to Environment | SOURCE_SUPPORTED | last: run 5
+U-022 | Realist Synthesis Reporting Items with Appraisal and Extraction Positions | SOURCE_SUPPORTED | last: run 5
+U-023 | Prompt Pattern Documentation Template with Informal Pattern Identification | SOURCE_SUPPORTED | last: run 5
+U-024 | Analytic Standards for Source Description and Separation of Information from Judgment | SOURCE_SUPPORTED | last: run 5
+U-025 | Quality of Information Check Seven-Point Source Review | SOURCE_SUPPORTED | last: run 5
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm: elementy opisu mechanizmu i ciągłość wytwarzania (sekcje 2, 4.1–4.3)
+C-002 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm: klasyfikacja opisu na pełny, schemat i szkic (sekcje 4.3, 5.3)
+C-003 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: cztery rodzaje aktywności dolnego poziomu i względność `bottom out` (sekcja 5.1, s. 13–14)
+C-004 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: lista elementów formy wzorca z definicjami (sekcja Elements of a Pattern)
+C-005 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm: test powtarzalności i status `proto-pattern` (sekcja Proto-Patterns and Patternity Tests)
+C-006 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: katalog, system i język wzorców (sekcje Pattern Catalogs and Systems, Pattern Languages)
+C-007 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: opis przeglądu systematycznego i snowballingu (sekcja 3), szczegóły w odnośniku [5] nieotwartym
+C-008 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm: pola wpisu katalogu wzorców (sekcje 3, 4)
+C-009 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: model decyzyjny wyboru wzorców (sekcja 5.1, rys. 19)
+C-010 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm: dwuetapowa selekcja z pomiarem zgodności (sekcje 2.1, 2.1.1)
+C-011 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: definicja techniki jako `blueprint` i jednokategoriowe umieszczanie w taksonomii (sekcje 1.2.2, 2.2)
+C-012 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: miara użycia techniki przez liczbę cytowań w zbiorze (sekcja 2.3)
+C-013 | UNITIZED | U-006 | run 2 NEW | odrębny mechanizm: dwie skale ocen o różnych podstawach, źródła A–F i informacji 1–6 (dodatek B, B-1 i B-2)
+C-014 | UNITIZED | U-007 | run 2 NEW | odrębny wynik: eksperymentalny pomiar wag wiarygodności źródła i informacji w ocenach jakości
+C-015 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: spójność wewnątrzosobnicza ocen przy różnych poziomach spójności atrybutów (streszczenie)
+C-016 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: trzy poziomy typu miejsca publikacji według kontroli wydawcy i ekspertyzy (rys. 1)
+C-017 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: siedem pytań o włączenie literatury szarej (tabela 4, s. 13–14)
+C-018 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: trzy reguły zatrzymania wyszukiwania (wytyczna 8, sekcja 5.1.2)
+C-019 | UNITIZED | U-008 | run 2 NEW | odrębny mechanizm: osiem kryteriów jakości źródła szarego z wartościami dla typu miejsca publikacji (tabela 7)
+C-020 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: dziewięć kryteriów wiarygodności ocenianych w ankiecie (tabela 3, rys. 3)
+C-021 | UNITIZED | U-009 | run 2 NEW | odrębny mechanizm: siedem kategorii wstępnej listy kontrolnej bez punktacji (sekcja 7, tabela 10)
+C-022 | UNITIZED | U-010 | run 2 NEW | odrębny mechanizm: cztery składniki pewności i obniżanie od poziomu high z zapisanym uzasadnieniem
+C-023 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: tabela Summary of Qualitative Findings i jej elementy
+C-024 | UNITIZED | U-011 | run 3 NEW | odrębny mechanizm: próba początkowa 10 wywiadów i zatrzymanie po trzech wywiadach bez nowych tematów (s. 7–9)
+C-025 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: niezależne kodowanie przez dwóch sędziów i alfa Krippendorffa dla każdego konstruktu (s. 8–9)
+C-026 | UNITIZED | U-012 | run 3 NEW | odrębny mechanizm: reguła kolana dla przeglądu wspomaganego technologią (sekcja 3.5)
+C-027 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: reguła budżetu z progami 0,75C, ρ ≥ 6 i 10C/Rel(s) (sekcja 3.6)
+C-028 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: reguły Quant i QuantCI oparte na estymacji odzysku (sekcje 4.1–4.3)
+C-029 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: porównanie reguł dla odzysku docelowego 0,1–0,9 na RCV1-v2 (sekcja 6, tabele 2–3)
+C-030 | UNITIZED | U-013 | run 3 NEW | odrębny mechanizm: współczynniki zgodności przy jednostkowaniu UD, uD, |uD i cuD (sekcje 12.4.1–12.4.3)
+C-031 | UNITIZED | U-014 | run 3 NEW | odrębny mechanizm: trzyfazowy protokół kodowania z LLM z kalibracją człowiek–model (sekcja 2.1)
+C-032 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: test losowości klasyfikacji, dwumianowy i chi-kwadrat przy α = 0,05 (sekcje 2.1.1.1, 2.2.3)
+C-033 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: wyniki AC1 w czterech zbiorach i kody, które nie przeszły testu losowości (sekcja 3, tabele 2, 4, 7)
+C-034 | UNITIZED | U-015 | run 3 NEW | odrębny mechanizm: dwuetapowa ocena AIS, interpretowalność i poparcie przez źródło (§3.3.1, §4.1)
+C-035 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: pomiar zgodności adnotatorów i wyniki na czterech zbiorach (§5.5.1, tabele 3–7)
+C-036 | UNITIZED | U-016 | run 4 NEW | odrębny mechanizm: fazy meta-etnografii od relacji między badaniami do syntezy tłumaczeń (tabela 1, fazy 1–6)
+C-037 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: 19 kryteriów raportowania meta-etnografii z podziałem na fazy (tabela 1)
+C-038 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: etapy opracowania wytycznych: przegląd metodologiczny, audyt, badania Delphi i spotkanie grupy doradczej (rys. 1)
+C-039 | UNITIZED | U-017 | run 4 NEW | odrębny mechanizm: rekord twierdzenia z atrybucją i graf poparcia i kwestionowania (rys. 3, 4)
+C-040 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: porównanie mikropublikacji z nanopublikacjami, SWAN i BEL (tabela 1)
+C-041 | UNITIZED | U-018 | run 4 NEW | odrębny mechanizm: trzy etapy syntezy tematycznej od kodów do tematów analitycznych (sekcje Detailed methods, Stages one and two)
+C-042 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: przykład roboczy z ośmiu badań, 36 kodów, 12 tematów opisowych i 6 analitycznych (sekcja Results)
+C-043 | UNITIZED | U-019 | run 4 NEW | odrębny mechanizm: cztery grafy nanopublikacji z wymaganiami `MUST` (sekcja Background, wytyczne)
+C-044 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: konstrukcja i weryfikacja Trusty URI opartego na skrócie treści (sekcje Background, Approach)
+C-045 | UNITIZED | U-020 | run 4 NEW | odrębny mechanizm: osiem kroków budowania teorii z przypadków (tabela 1)
+C-046 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: taktyki analizy wewnątrz- i międzyprzypadkowej (s. 544–548)
+C-047 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: zamknięcie przez nasycenie teoretyczne i zakres 4–10 przypadków (s. 550)
+C-048 | UNITIZED | U-021 | run 5 NEW | odrębny mechanizm: elementy opisu mechanizmu od części i operacji do warunków zewnętrznych i osadzenia (sekcja Introduction, s. 423–425)
+C-049 | DEFER | - | run 5 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: dekompozycja funkcjonalna i strukturalna oraz lokalizacje (sekcja 3, s. 432–434)
+C-050 | UNITIZED | U-022 | run 5 NEW | odrębny mechanizm: lista 19 pozycji raportowania syntezy realistycznej z pozycjami o ocenie dokumentów i wydobyciu danych (tabela 1)
+C-051 | DEFER | - | run 5 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: opracowanie standardów: przegląd 35 syntez realistycznych i trzy rundy Delphi z 37 ekspertami (streszczenie, opis metod)
+C-052 | UNITIZED | U-023 | run 5 NEW | odrębny mechanizm: sześć pól wpisu wzorca promptu i identyfikacja wzorców bez reguły włączenia (sekcje II-B, II-D)
+C-053 | DEFER | - | run 5 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: sześć kategorii i 16 wzorców promptów (tabela I, sekcja III-A)
+C-054 | UNITIZED | U-024 | run 5 NEW | odrębny mechanizm: standardy 1–3 o opisie źródeł, niepewności i odróżnieniu informacji od osądów (D.6.e(1)–(3))
+C-055 | DEFER | - | run 5 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: zestawy terminów prawdopodobieństwa i siedem pasm procentowych (D.6.e(2)(a))
+C-056 | UNITIZED | U-025 | run 5 NEW | odrębny mechanizm: siedem punktów kontroli jakości informacji (s. 10–11)
+C-057 | DEFER | - | run 5 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: Key Assumptions Check (s. 7)
+C-058 | DEFER | - | run 5 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: Indicators or Signposts of Change (s. 12)
+C-059 | DEFER | - | run 5 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: Analysis of Competing Hypotheses (s. 14)
+
+REJECTED INFERENCES
+- wniosek z opisu leada M-04, że źródło definiuje konfigurację CMO jako zapis wyniku: odczyt podaje definicję mechanizmu (cytowaną za Astbury & Leeuw 2010) i opis logiki realistycznej, a definicji konfiguracji kontekst–mechanizm–wynik nie wymienia
+- wniosek z opisu leada M-04, że pozycja 10 zawiera uzasadnienie wydobycia: odczyt podaje tylko nagłówek Data extraction, a treści pozycji nie odczytano
+- wniosek, że pozycje standardów RAMESES dzielą się na wymagane i zalecane: odczyt podaje język "should" i brak poziomów
+- wniosek z odczytu M-07, że katalog ma pięć kategorii: lista w tym samym odczycie ma sześć kategorii o sumie 16 wzorców
+- wniosek z uwagi wejścia do M-10, że pasma słownika prawdopodobieństwa pochodzą wyłącznie z pamięci: odczyt podaje siedem pasm (od 01–05% do 95–99%), a przyporządkowania terminów nie ustalono
+- wniosek z pierwszego odczytu M-11, że pierwszym krokiem jest baza danych według typu źródła i daty: drugi odczyt, podający punkty dosłownie, nie zawiera tego kroku
+- wniosek z pierwszego odczytu M-11, że Quality of Information Check weryfikuje przesłanki z Key Assumptions Check i podstawę dla Indicators i ACH: drugi odczyt podaje tylko kolejność technik
+
+AUDIT DELTA
+- opisy leadów różnią się od odczytów w M-04 (definicja CMO, uzasadnienie wydobycia), M-07 (liczba kategorii), M-10 (źródło pasm prawdopodobieństwa) i M-11 (opis metody jako wypunktowanie, nie proza)
+- M-04 i M-07: pierwsze odczyty zwróciły tylko metadane lub streszczenie; Unity opisano po ponownym odczycie z plików PDF
+- M-07: odczyt wymienił "five categories", a wyliczył sześć kategorii o sumie 16 wzorców; w C-053 użyto liczby z listy
+- M-10: tabela wyrażeń prawdopodobieństwa w odczycie ma sześć terminów w wierszu i siedem pasm; przyporządkowania nie zapisano, a pasma są w kandydacie C-055
+- M-10: brzmienia cytatów standardów 1 i 3 różnią się między odczytami; w U-024 zapisano parafrazy; data dokumentu pochodzi z jednego odczytu
+- M-11: punkty metody pochodzą z drugiego odczytu; uwaga o gwarancji dokładności (s. 5), wymóg informacji o tle źródła (s. 10) i studium przypadku Iraku (s. 11) pochodzą z jednego odczytu
+- M-02: definicja z s. 424 ma więcej niż 15 słów i zapisano parafrazę; przypis 6 pochodzi z jednego odczytu
+- wszystkie odczyty wykonano narzędziem streszczającym; numery stron, tabel i sekcji nie zostały sprawdzone w tekście dosłownym
+- we wszystkich pięciu regionach z kilkoma kandydatami w limicie wybrano niższy CANDIDATE_ID; profil nie rozstrzygał remisów w Runie 5
+- profil celu używa pól PROBLEM, CO MA WYJŚĆ i CZEGO NIE SZUKAĆ zamiast PROBLEMS, DOMAINS, CONSTRAINTS i ANTI-GOALS z §43; profil wpłynął tylko na blok `TARGET_PROFILE` i `ADOPTION_NOTES`
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostaje 34 kandydatów DEFER z otwartych źródeł (C-003, C-004, C-006, C-007, C-009, C-011, C-012, C-015, C-016, C-017, C-018, C-020, C-023, C-025, C-027, C-028, C-029, C-032, C-033, C-035, C-037, C-038, C-040, C-042, C-044, C-046, C-047, C-049, C-051, C-053, C-055, C-057, C-058, C-059) oraz 19 leadów katalogu z locatorami do otwarcia według listy kolejnych Runów z wejścia.
+
+SYNTHESIS
+OBSERVATION: wszystkie pięć Unitów Runu 5 ma EVIDENCE_LAYER DOCUMENTED_DESIGN i EFFECT_STATUS NOT_APPLICABLE; cztery mają ENFORCEMENT PROSE_ONLY, a U-024 ma ENFORCEMENT UNKNOWN.
+OBSERVATION: U-021 wymienia pięć elementów opisu mechanizmu, U-023 podaje sześć pól wpisu wzorca bez wskazania pól obowiązkowych, a U-022 podaje 19 pozycji raportowania, z których treści pozycji o ocenie dokumentów i wydobyciu danych nie odczytano.
+OBSERVATION: U-024 i U-025 wymagają opisu źródeł lub wskazania poziomu zaufania do źródeł, a żaden z odczytów nie podaje skali oceny źródeł.
+INFERENCE: U-021 i U-001 podają części (byty), operacje (aktywności) i organizację; U-021 dodaje warunki zewnętrzne i osadzenie w większym mechanizmie, a U-001 warunki początkowe i końcowe oraz etapy pośrednie; wynika to z porównania pól MINIMAL_FORM.
+INFERENCE: U-023 i U-004 są szablonami wpisu katalogu wzorców; U-023 ma sześć pól, a U-004 dziewięć, w tym Forces, Known uses i Related patterns, których U-023 nie ma; wynika to z porównania pól MINIMAL_FORM.
+TRANSFER: U-021 i U-023 dają możliwe pola zapisu mechanizmu i wzorca, a U-024 i U-025 możliwe punkty kontroli źródła (opis źródła, odróżnienie informacji od osądu, potwierdzenie, poziom zaufania); przeniesienie poza filozofię nauki, domenę LLM i analizę wywiadowczą nie jest twierdzeniem źródeł.
+OPEN_QUESTION: jak standardy RAMESES opisują treść pozycji 9 i 10 (U-022).
+OPEN_QUESTION: jak ICD 203 przyporządkowuje terminy do pasm prawdopodobieństwa (C-055).
+ASSESSMENT: z listy kolejnych Runów otwarto pięć leadów; 19 leadów oraz 34 kandydatów DEFER pozostaje do przetworzenia.
