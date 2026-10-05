@@ -1,0 +1,371 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-META1
+TITLE: Metodologia harvestowania — zapis mechanizmu, ocena źródeł, pewność, zatrzymanie
+SOURCE_SET: katalog 43 leadów META-ASMA-METODOLOGIA (metody wydobywania twierdzeń i mechanizmów, oceny źródeł i pewności, zatrzymania, niezawodności wydobycia, syntezy i rekordu twierdzenia); pytanie: jak wydobywać twierdzenia i mechanizmy z niejednorodnych źródeł z oceną źródła, składnikami pewności, śladem do miejsca w źródle i regułą zakończenia
+SOURCES:
+  - Machamer, Darden & Craver, Thinking about mechanisms
+  - Appleton, Patterns and Software: Essential Concepts and Terminology
+  - Liu et al., Agent Design Pattern Catalogue
+  - Schulhoff et al., The Prompt Report
+  - STANAG 2511 / FM 2-22.3, dodatek B (kopia redanalysis.org)
+  - Kelly, Budescu, Dhami & Mandel, The effect of source reliability and information credibility on judgments of information quality in intelligence analysis
+  - Garousi, Felderer & Mäntylä, Guidelines for including grey literature and conducting multivocal literature reviews in software engineering
+  - Rainer & Williams, Practitioner-generated blog posts as evidence for SE research: attitudinal survey and preliminary checklist
+  - Lewin et al., Applying GRADE-CERQual to qualitative evidence synthesis findings, paper 2
+  - Francis et al., What is an adequate sample size? Operationalising data saturation for theory-based interview studies
+  - Yang, Lewis & Frieder, Heuristic Stopping Rules For Technology-Assisted Review
+  - Krippendorff, Content Analysis: An Introduction to Its Methodology, 3rd ed., zamiennik sekcji 12.4
+  - Chew et al., LLM-Assisted Content Analysis (LACA)
+  - Rashkin et al., Measuring attribution in natural language generation models
+  - France et al., eMERGe meta-ethnography reporting guidance
+  - Clark, Ciccarese & Goble, Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications
+  - Thomas & Harden, Methods for the thematic synthesis of qualitative research in systematic reviews
+  - Kuhn et al., Decentralized provenance-aware publishing with nanopublications
+  - Wytyczne nanopublikacji (nanopub.net)
+  - Eisenhardt, Building theories from case study research
+RUN: 4
+FOCUS: synteza ustaleń z wielu źródeł i rekord twierdzenia (M-37, M-41, M-38, M-42, M-39)
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-05
+ACCESS_LIMITATIONS:
+  - wszystkie odczyty wykonano narzędziem streszczającym; numery stron, sekcji, tabel i rysunków w kotwicach pochodzą z tych odczytów
+  - M-37 i M-41: adresy DOI przekierowały na link.springer.com i odczyt wykonano z tego adresu; w M-37 odczyt wymienił sześć z siedmiu faz i kryteria 1–16 z 19; Noblit & Hare 1988 nie został otwarty
+  - M-41: definicje klas w materiale dodatkowym (A.1–A.2) i pliki dodatkowe 1–3 nie zostały otwarte
+  - M-38: Barnett-Page & Thomas 2009 nie został otwarty
+  - M-42: odczyt wytycznych nie podał statusu dokumentu, podpisów ani ograniczeń; Groth, Gibson & Velterop 2010 nie został otwarty
+  - M-39: odczyt wykonano z nieoficjalnej kopii (euroac.ffri.hr) znalezionej wyszukiwaniem, bez oficjalnej wersji z Academy of Management Review; nagłówek odczytu (sześć faz, 15 działań) różni się od listy ośmiu kroków w tym samym odczycie
+  - w Runie 4 otwarto M-37, M-38, M-39, M-41, M-42; łącznie otwarto 19 leadów, 24 leady katalogu nie mają otwartego artefaktu
+TARGET_PROFILE:
+  id: META-ASMA-METODOLOGIA
+  version: 1.0
+  target: ustalone metody wydobywania twierdzeń i mechanizmów z niejednorodnych źródeł (także nierecenzowanych i bez historii zmian), oceniania wiarygodności źródła i pewności wydobycia oraz kończenia otwartych poszukiwań, opisane tak, żeby dało się je zastosować (pola, skale, kroki, progi).
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+M-37 France et al. | https://link.springer.com/article/10.1186/s12874-018-0600-0 | tabela 1 (fazy 1–6 meta-etnografii i kryteria raportowania), rys. 1 (etapy opracowania wytycznych), typy tłumaczeń w opisie faz 5 i 6
+M-41 Clark, Ciccarese & Goble | https://link.springer.com/article/10.1186/2041-1480-5-28 | klasy modelu (Claim, Statement, Representation, Data, Method, Attribution), relacje supports, challenges, qualifies, rys. 3 (forma minimalna), rys. 4 (argument), tabela 1 (porównanie z nanopublikacjami, SWAN i BEL)
+M-38 Thomas & Harden | https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/1471-2288-8-45 | sekcje Detailed methods for thematic synthesis, Stages one and two, Context and rigour; przykład z ośmiu badań
+M-42 Kuhn et al. | https://peerj.com/articles/cs-78/ | cztery grafy nanopublikacji (Background), przykład w sekcji Trusty Publishing, sekcje Nanopublication Servers i Nanopublication Indexes z ograniczeniami domyślnymi
+M-42 Wytyczne nanopublikacji | https://nanopub.net/guidelines/working_draft/ | wymagania MUST i SHOULD dla grafów Head, Assertion, Provenance i PublicationInfo oraz dla nanopublikacji jako całości
+M-39 Eisenhardt | http://euroac.ffri.hr/wp-content/uploads/2010/06/Eisenhardt_1989_Building-Theories-from-Case.pdf | tabela 1 (kroki procesu), taktyki analizy wewnątrz- i międzyprzypadkowej (s. 544–548), zamknięcie przez nasycenie teoretyczne (s. 550), ograniczenia (s. 548–549)
+UNKNOWN_REGIONS:
+  - M-37: faza 7 i kryteria 17–19; Noblit & Hare 1988
+  - M-41: materiał dodatkowy A.1–A.2 i pliki dodatkowe 1–3; przypadki użycia 1–9 poza opisem w odczycie
+  - M-38: Barnett-Page & Thomas 2009
+  - M-42: status i data wytycznych; sekcje o podpisach i ograniczeniach; Groth, Gibson & Velterop 2010
+  - M-39: oficjalna wersja z Academy of Management Review
+  - 24 leady katalogu bez otwartego artefaktu: M-02, M-04, M-07, M-10, M-11, M-14 do M-16, M-18 do M-20, M-23 do M-27, M-29, M-31, M-32, M-34 do M-36, M-40, M-43
+OUTSIDE_SCOPE:
+  - przeniesienie metod syntezy, modeli rekordu twierdzenia i procesu budowania teorii na dziedziny inne niż podane przez źródła (nie jest twierdzeniem żadnego źródła)
+
+DELTA
+NEW
+UNIT_ID: U-016
+NAME: Meta-Ethnography Phases from Relating Studies to Synthesizing Translations
+LENS: LENS_KNOWLEDGE
+TYPE: method
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Opisuje sześć odczytanych faz meta-etnografii, od wyboru metody do syntezy tłumaczeń, w tym ustalanie relacji między badaniami, tłumaczenie badań na siebie (wzajemne i obalające) oraz syntezę linii argumentu.
+MINIMAL_FORM:
+  - faza 1: wybór meta-etnografii i start (uzasadnienie, cele, pytanie przeglądu, uzasadnienie wyboru metody)
+  - faza 2: ustalenie, co jest trafne (strategia i proces wyszukiwania, wybór badań pierwotnych)
+  - faza 3: czytanie włączonych badań (bliskie czytanie, wydobycie danych pojęciowych: pojęć, tematów, metafor; opis cech badań)
+  - faza 4: ustalenie, jak badania są ze sobą powiązane (porównanie aspektów badań)
+  - faza 5: tłumaczenie badań na siebie: tłumaczenie wzajemne (badania potwierdzają się lub rozwijają) i tłumaczenie obalające (badania przeczą sobie lub wyjaśniają różnice)
+  - faza 6: synteza tłumaczeń: zsyntetyzowane tłumaczenia (interpretacja tłumaczeń przez przeglądających) i synteza linii argumentu (nowa narracja lub całościowe wyjaśnienie); nowe modele lub ramy
+  - proces iteracyjny; autorzy nie zalecają podejścia liniowego
+SOURCE_ANCHOR:
+  - source: France et al., eMERGe meta-ethnography reporting guidance
+    locator: https://link.springer.com/article/10.1186/s12874-018-0600-0
+    anchor: tabela 1 (część 1 wytycznych), opis faz 1–6
+    revision: BMC Medical Research Methodology 19, opublikowano 31 stycznia 2019, DOI 10.1186/s12874-018-0600-0
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - badania pierwotne jakościowe włączone w fazie 2
+MUST_BE_TRUE: wytyczne dotyczą raportowania meta-etnografii i nie opisują jednej liniowej ścieżki prowadzenia
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: METHOD, WORKFLOW
+ADOPTION_NOTES:
+  - dotyczy punktu (g) z CO MA WYJŚĆ w profilu: kroki łączenia ustaleń wielu źródeł (relacje, tłumaczenie, synteza); zastosowanie do wydobywania mechanizmów nie jest twierdzeniem źródła
+UNKNOWN:
+  - evidence: faza 7 nie została odczytana
+  - format: definicje typów tłumaczeń występują w odczycie w postaci jednozdaniowej, bez kroków wykonania
+  - dependency: Noblit & Hare 1988 nie został otwarty
+LIMITS:
+  - dziedzina: badania zdrowotne i opieka społeczna; według tekstu stosowalne w różnych dyscyplinach
+  - wytyczne dotyczą raportowania, nie prowadzenia meta-etnografii
+  - kryteria raportowania (C-037) i etapy opracowania wytycznych (C-038) nie są zapisane w tym Unicie
+RELATES_TO:
+  - U-018
+
+NEW
+UNIT_ID: U-017
+NAME: Micropublication Claim Record with Attribution and Support Graph
+LENS: LENS_KNOWLEDGE
+TYPE: schema
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Zapisuje twierdzenie naukowe jako rekord z atrybucją i rozszerza je do argumentu: twierdzenie, dane i metody oraz relacje supports, challenges i qualifies tworzą graf zakorzeniony w twierdzeniu.
+MINIMAL_FORM:
+  - `Claim` = główne `Statement`, o którym mówi mikropublikacja; `Statement` = zdanie oznajmujące
+  - `Representation` = artefakt, który coś reprezentuje; podklasy: Sentence, Data, Method, Micropublication, Attribution, ArticleText
+  - `Data` = informacja empiryczna wspierająca twierdzenie (tabele, obrazy, zbiory); `Method` = opis uzyskania danych w formie przepisu do ponownego użycia; `Material` = rodzaj Method
+  - `Qualifier` = zdanie, które może modyfikować Statement
+  - `supports`: relacja przechodnia między Representation; `challenges`: wywnioskowana, gdy Representation bezpośrednio kwestionuje inną albo pośrednio ją podważa; `qualifies`: modyfikacja przez Qualifier; `elementOf`: łączy składniki argumentu z SupportGraph
+  - forma minimalna: Statement z atrybucją (Claim i Attribution); forma maksymalna: Statement z pełnym argumentem (dowody, interpretacje, dyskusja i kwestionowania)
+  - atrybucja na dwóch poziomach: mikropublikacji jako całości oraz twierdzenia z jego elementami; zapisuje agenta (osobę lub organizację) i jego rolę
+  - serializacja: RDF i OWL 2; słownik pod adresem `http://purl.org/mp`
+SOURCE_ANCHOR:
+  - source: Clark, Ciccarese & Goble, Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications
+    locator: https://link.springer.com/article/10.1186/2041-1480-5-28
+    anchor: rys. 3 (forma minimalna), rys. 4 (argument z twierdzeniem, danymi i metodą), tabela 1
+    revision: Journal of Biomedical Semantics 5:28, 2014, DOI 10.1186/2041-1480-5-28
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - OWL 2 i RDF jako formalizm zapisu
+  - słownik mikropublikacji
+MUST_BE_TRUE: forma minimalna zawiera Claim i Attribution (według odczytu)
+ENFORCEMENT: UNKNOWN
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: SCHEMA, DATA_STRUCTURE
+ADOPTION_NOTES:
+  - dotyczy punktu (h) z CO MA WYJŚĆ w profilu: pola rekordu twierdzenia z atrybucją oraz relacje wspierania i podważania; model pochodzi z dziedziny biomedycznej, a zastosowanie poza nią nie jest twierdzeniem źródła
+UNKNOWN:
+  - enforcement: odczyt nie wskazuje, czy ontologia wymusza obecność pól Claim i Attribution
+  - evidence: definicje klas z materiału dodatkowego (A.1–A.2) nie zostały otwarte
+  - format: szczegółowe pola atrybucji (agent, rola, czas) nie zostały odczytane poza opisem ogólnym
+LIMITS:
+  - dziedzina: komunikacja biomedyczna; przykłady dotyczą badań nad chorobą Alzheimera i hamowaniem mTOR przez rapamycynę
+  - wejście jest w języku naturalnym, a formalizacja jest opcjonalnym krokiem kuratorskim
+  - pełne domknięcie sieci poparć wymaga rozwiązania wszystkich poparć
+  - model jest zgodny z BEL, nanopublikacjami i SWAN według tekstu; porównanie (tabela 1) należy do kandydata C-040
+RELATES_TO:
+  - U-019
+
+NEW
+UNIT_ID: U-018
+NAME: Three-Stage Thematic Synthesis of Qualitative Findings
+LENS: LENS_KNOWLEDGE
+TYPE: method
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Syntetyzuje wyniki badań jakościowych w trzech etapach: kodowanie wiersz po wierszu, grupowanie kodów w opisowe tematy w hierarchicznym drzewie oraz generowanie tematów analitycznych wykraczających poza badania pierwotne.
+MINIMAL_FORM:
+  - etap 1: swobodne kodowanie tekstu wiersz po wierszu, indukcyjnie; powstaje bank kodów
+  - etap 2: porównanie kodów pod kątem podobieństw i różnic oraz grupowanie w hierarchiczne drzewo o wielu warstwach; tematy opisowe pozostają blisko wyników badań pierwotnych
+  - etap 3: interrogacja tematów opisowych pytaniami przeglądu i generowanie tematów analitycznych (nowe pojęcia, wyjaśnienia, hipotezy) wykraczających poza badania pierwotne
+  - ślad: jawne zapisywanie rozwoju tematów jako element centralny metody
+  - etap 3 zależy od osądu przeglądających; reguły wnioskowania nie są podane; proces obejmuje dyskusję i cykliczne doprecyzowanie, aż tematy są dostatecznie abstrakcyjne
+SOURCE_ANCHOR:
+  - source: Thomas & Harden, Methods for the thematic synthesis of qualitative research in systematic reviews
+    locator: https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/1471-2288-8-45
+    anchor: sekcje Detailed methods for thematic synthesis, Stages one and two, Context and rigour
+    revision: BMC Medical Research Methodology 8:45, 2008, DOI 10.1186/1471-2288-8-45
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - pytanie przeglądu, wobec którego interrogowane są tematy opisowe w etapie 3
+MUST_BE_TRUE: przeglądający zapisują rozwój tematów, aby etap 3 był śledzony
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: METHOD, WORKFLOW
+ADOPTION_NOTES:
+  - dotyczy punktu (g) z CO MA WYJŚĆ w profilu: kroki od kodów przez tematy opisowe do tematów analitycznych; zastosowanie do wydobywania mechanizmów nie jest twierdzeniem źródła
+UNKNOWN:
+  - format: reguły audytu etapu 3 nie występują w odczytanym tekście
+  - evidence: przykład roboczy z ośmiu badań nie został zapisany w Unicie (kandydat C-042)
+LIMITS:
+  - autorzy opisują etap 3 jako najtrudniejszy do opisania i potencjalnie najbardziej kontrowersyjny, bo zależy od osądu przeglądających
+  - dziedzina: przeglądy systematyczne w ochronie zdrowia; przykład dotyczył poglądów dzieci na zdrowe odżywianie
+  - autorzy wskazują ryzyko dekontekstualizacji, ograniczenia w dostępie do informacji kontekstowej w raportach badań oraz brak ustalonej podstawy empirycznej wykluczania badań ze względu na jakość
+RELATES_TO:
+  - U-016
+
+NEW
+UNIT_ID: U-019
+NAME: Nanopublication Four-Graph Structure with Required Links
+LENS: LENS_KNOWLEDGE
+TYPE: schema
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Określa nanopublikację jako zbiór kwadruplów RDF w czterech nazwanych grafach (Head, Assertion, Provenance, PublicationInfo): Head wiąże pozostałe grafy, Assertion zawiera atomową porcję danych, a Provenance odnosi się do Assertion.
+MINIMAL_FORM:
+  - nanopublikacja = zbiór kwadruplów RDF (podmiot, orzeczenie, obiekt, kontekst) z poprawnym URI kontekstu dla każdego tripla
+  - URI nanopublikacji `[N]` oraz grafów `[H]`, `[A]`, `[P]`, `[I]` muszą być różne; każdy triple leży w jednym z grafów H, A, P, I
+  - Head: dokładnie po jednym kwadruplu `[N] rdf:type np:Nanopublication`, `[N] np:hasAssertion [A]`, `[N] np:hasProvenance [P]` i `[N] np:hasPublicationInfo [I]`, z kontekstem `[H]`
+  - Assertion: główna treść jako atomowa porcja danych sformalizowanych; URI różne od grafów head, provenance i publication info
+  - Provenance: opisuje, jak, przez kogo, kiedy i z jakiego źródła powstało twierdzenie; musi zawierać co najmniej jedno odniesienie do `[A]`, np. `:assertion prov:wasDerivedFrom <źródło>`
+  - PublicationInfo: metainformacja o całej nanopublikacji; musi zawierać co najmniej jedno odniesienie do `[N]`; powinna zawierać atrybucję i znacznik czasu
+SOURCE_ANCHOR:
+  - source: Kuhn et al., Decentralized provenance-aware publishing with nanopublications
+    locator: https://peerj.com/articles/cs-78/
+    anchor: sekcja Background (cztery grafy), sekcja Trusty Publishing (przykład provenance)
+    revision: PeerJ Computer Science 2:e78, 2016, DOI 10.7717/peerj-cs.78
+  - source: Wytyczne nanopublikacji (nanopub.net)
+    locator: https://nanopub.net/guidelines/working_draft/
+    anchor: wymagania dla grafów Head, Assertion, Provenance, PublicationInfo i dla nanopublikacji jako całości
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - RDF z kontekstami (kwadruple) jako formalizm zapisu
+MUST_BE_TRUE: spełnione są wymagania `MUST` z wytycznych; wszystkie triple leżą w jednym z czterech grafów, a ich URI są różne
+ENFORCEMENT: UNKNOWN
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: SCHEMA, DATA_STRUCTURE
+ADOPTION_NOTES:
+  - dotyczy punktu (h) z CO MA WYJŚĆ w profilu: rozdział twierdzenia (Assertion) od proweniencji i metainformacji o publikacji; struktura zakłada formalizm RDF
+UNKNOWN:
+  - enforcement: odczyt nie wskazuje, czy serwery sieci odrzucają nanopublikacje niespełniające wymagań `MUST`
+  - format: status dokumentu wytycznych (wersja, data) nie występuje w odczycie; wejście oznacza go jako working draft
+  - evidence: wymagania dotyczące podpisów i ograniczeń wytycznych nie występują w odczycie
+LIMITS:
+  - dziedzina: dane naukowe (nauki przyrodnicze, humanistyka); asercja ma postać sformalizowanych danych RDF
+  - domyślne ograniczenia serwerów w tekście Kuhn i in.: do 1200 tripli i 1 MB na nanopublikację
+  - konstrukcja i weryfikacja Trusty URI (kandydat C-044) nie jest zapisana w tym Unicie
+RELATES_TO:
+  - U-017
+
+NEW
+UNIT_ID: U-020
+NAME: Eight-Step Process for Building Theory from Cross-Case Evidence
+LENS: LENS_KNOWLEDGE
+TYPE: method
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Opisuje proces budowania teorii z przypadków w ośmiu krokach, od pytania badawczego i doboru teoretycznego przypadków, przez analizę wewnątrz- i międzyprzypadkową oraz kształtowanie hipotez z porównaniem z literaturą, po zamknięcie przy nasyceniu teoretycznym.
+MINIMAL_FORM:
+  - 1 Getting Started: pytanie badawcze; możliwe konstrukty a priori; bez z góry przyjętej teorii i hipotez
+  - 2 Selecting Cases: określenie populacji; dobór teoretyczny, nie losowy
+  - 3 Crafting Instruments and Protocols: wiele metod zbierania danych; dane jakościowe i ilościowe; wielu badaczy
+  - 4 Entering the Field: zbieranie i analiza danych nakładają się; notatki terenowe; elastyczne dopasowania
+  - 5 Analyzing Data: analiza wewnątrzprzypadkowa; wyszukiwanie wzorców międzyprzypadkowych technikami rozbieżnymi (kategorie i wymiary; pary przypadków; podział według źródła danych)
+  - 6 Shaping Hypotheses: iteracyjne zestawianie dowodów w tabelach; logika replikacji; szukanie przyczyn za relacjami
+  - 7 Enfolding Literature: porównanie z literaturą sprzeczną i podobną
+  - 8 Reaching Closure: nasycenie teoretyczne, gdy jest możliwe
+SOURCE_ANCHOR:
+  - source: Eisenhardt, Building theories from case study research
+    locator: http://euroac.ffri.hr/wp-content/uploads/2010/06/Eisenhardt_1989_Building-Theories-from-Case.pdf
+    anchor: tabela 1 (według odczytu s. 537), s. 532–550
+    revision: Academy of Management Review 14(4), październik 1989 (kopia nieoficjalna)
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - zestaw przypadków dobranych teoretycznie
+MUST_BE_TRUE: proces buduje teorię z przypadków i nie jest metodą budowania teorii z badań
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: METHOD, WORKFLOW
+ADOPTION_NOTES:
+  - dotyczy punktów (d) i (g) z CO MA WYJŚĆ w profilu: krok zamknięcia przy nasyceniu oraz analiza międzyprzypadkowa jako łączenie wyników wielu źródeł; zastosowanie do wydobywania mechanizmów nie jest twierdzeniem źródła
+UNKNOWN:
+  - evidence: opis taktyk analizy (C-046) i kryterium zamknięcia z zakresem liczby przypadków (C-047) nie są zapisane w tym Unicie
+  - dependency: oficjalna wersja z Academy of Management Review nie została otwarta
+LIMITS:
+  - autor wskazuje ryzyko nadmiernie złożonej teorii bez parsymonii, wąskiego zakresu i niskiej ogólności oraz ograniczonej liczby przypadków (s. 548–549)
+  - odczyt pochodzi z kopii nieoficjalnej, a numery stron pochodzą z odczytu streszczającego
+RELATES_TO:
+  - U-011
+
+CURRENT INDEX
+U-001 | Mechanism Description Composition | SOURCE_SUPPORTED | last: run 1
+U-002 | Mechanism Sketch, Schema and Complete Description | SOURCE_SUPPORTED | last: run 1
+U-003 | Recurrence Test for Pattern Acceptance | SOURCE_SUPPORTED | last: run 1
+U-004 | Pattern Entry Template with Consequences and Known Uses | SOURCE_SUPPORTED | last: run 1
+U-005 | Two-Stage Screening with Measured Agreement and Classifier Validation | SOURCE_SUPPORTED | last: run 1
+U-006 | Source Reliability and Information Credibility Rating Scales | SOURCE_SUPPORTED | last: run 2
+U-007 | Differential Weighting of Source Reliability and Information Credibility in Quality Judgments | SOURCE_SUPPORTED | last: run 2
+U-008 | Grey Literature Source Quality Checklist with Outlet Tiers | SOURCE_SUPPORTED | last: run 2
+U-009 | Preliminary Credibility Checklist for Practitioner Blog Posts Without Scoring | SOURCE_SUPPORTED | last: run 2
+U-010 | Component-Based Confidence Rating with Written Downgrade Rationale | SOURCE_SUPPORTED | last: run 2
+U-011 | Interview Data Saturation Stopping Rule (10 Plus 3) | SOURCE_SUPPORTED | last: run 3
+U-012 | Knee Method Stopping Rule for Technology-Assisted Review | SOURCE_SUPPORTED | last: run 3
+U-013 | Unitizing Agreement Coefficients for Continuous Text | SOURCE_SUPPORTED | last: run 3
+U-014 | Three-Phase LLM-Assisted Content Analysis Protocol with Human-Model Calibration | SOURCE_SUPPORTED | last: run 3
+U-015 | Attribution to Identified Sources Two-Stage Annotation | SOURCE_SUPPORTED | last: run 3
+U-016 | Meta-Ethnography Phases from Relating Studies to Synthesizing Translations | SOURCE_SUPPORTED | last: run 4
+U-017 | Micropublication Claim Record with Attribution and Support Graph | SOURCE_SUPPORTED | last: run 4
+U-018 | Three-Stage Thematic Synthesis of Qualitative Findings | SOURCE_SUPPORTED | last: run 4
+U-019 | Nanopublication Four-Graph Structure with Required Links | SOURCE_SUPPORTED | last: run 4
+U-020 | Eight-Step Process for Building Theory from Cross-Case Evidence | SOURCE_SUPPORTED | last: run 4
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm: elementy opisu mechanizmu i ciągłość wytwarzania (sekcje 2, 4.1–4.3)
+C-002 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm: klasyfikacja opisu na pełny, schemat i szkic (sekcje 4.3, 5.3)
+C-003 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: cztery rodzaje aktywności dolnego poziomu i względność `bottom out` (sekcja 5.1, s. 13–14)
+C-004 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: lista elementów formy wzorca z definicjami (sekcja Elements of a Pattern)
+C-005 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm: test powtarzalności i status `proto-pattern` (sekcja Proto-Patterns and Patternity Tests)
+C-006 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: katalog, system i język wzorców (sekcje Pattern Catalogs and Systems, Pattern Languages)
+C-007 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: opis przeglądu systematycznego i snowballingu (sekcja 3), szczegóły w odnośniku [5] nieotwartym
+C-008 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm: pola wpisu katalogu wzorców (sekcje 3, 4)
+C-009 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: model decyzyjny wyboru wzorców (sekcja 5.1, rys. 19)
+C-010 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm: dwuetapowa selekcja z pomiarem zgodności (sekcje 2.1, 2.1.1)
+C-011 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: definicja techniki jako `blueprint` i jednokategoriowe umieszczanie w taksonomii (sekcje 1.2.2, 2.2)
+C-012 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: miara użycia techniki przez liczbę cytowań w zbiorze (sekcja 2.3)
+C-013 | UNITIZED | U-006 | run 2 NEW | odrębny mechanizm: dwie skale ocen o różnych podstawach, źródła A–F i informacji 1–6 (dodatek B, B-1 i B-2)
+C-014 | UNITIZED | U-007 | run 2 NEW | odrębny wynik: eksperymentalny pomiar wag wiarygodności źródła i informacji w ocenach jakości
+C-015 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: spójność wewnątrzosobnicza ocen przy różnych poziomach spójności atrybutów (streszczenie)
+C-016 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: trzy poziomy typu miejsca publikacji według kontroli wydawcy i ekspertyzy (rys. 1)
+C-017 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: siedem pytań o włączenie literatury szarej (tabela 4, s. 13–14)
+C-018 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: trzy reguły zatrzymania wyszukiwania (wytyczna 8, sekcja 5.1.2)
+C-019 | UNITIZED | U-008 | run 2 NEW | odrębny mechanizm: osiem kryteriów jakości źródła szarego z wartościami dla typu miejsca publikacji (tabela 7)
+C-020 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: dziewięć kryteriów wiarygodności ocenianych w ankiecie (tabela 3, rys. 3)
+C-021 | UNITIZED | U-009 | run 2 NEW | odrębny mechanizm: siedem kategorii wstępnej listy kontrolnej bez punktacji (sekcja 7, tabela 10)
+C-022 | UNITIZED | U-010 | run 2 NEW | odrębny mechanizm: cztery składniki pewności i obniżanie od poziomu high z zapisanym uzasadnieniem
+C-023 | DEFER | - | run 2 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: tabela Summary of Qualitative Findings i jej elementy
+C-024 | UNITIZED | U-011 | run 3 NEW | odrębny mechanizm: próba początkowa 10 wywiadów i zatrzymanie po trzech wywiadach bez nowych tematów (s. 7–9)
+C-025 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: niezależne kodowanie przez dwóch sędziów i alfa Krippendorffa dla każdego konstruktu (s. 8–9)
+C-026 | UNITIZED | U-012 | run 3 NEW | odrębny mechanizm: reguła kolana dla przeglądu wspomaganego technologią (sekcja 3.5)
+C-027 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: reguła budżetu z progami 0,75C, ρ ≥ 6 i 10C/Rel(s) (sekcja 3.6)
+C-028 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: reguły Quant i QuantCI oparte na estymacji odzysku (sekcje 4.1–4.3)
+C-029 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: porównanie reguł dla odzysku docelowego 0,1–0,9 na RCV1-v2 (sekcja 6, tabele 2–3)
+C-030 | UNITIZED | U-013 | run 3 NEW | odrębny mechanizm: współczynniki zgodności przy jednostkowaniu UD, uD, |uD i cuD (sekcje 12.4.1–12.4.3)
+C-031 | UNITIZED | U-014 | run 3 NEW | odrębny mechanizm: trzyfazowy protokół kodowania z LLM z kalibracją człowiek–model (sekcja 2.1)
+C-032 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: test losowości klasyfikacji, dwumianowy i chi-kwadrat przy α = 0,05 (sekcje 2.1.1.1, 2.2.3)
+C-033 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: wyniki AC1 w czterech zbiorach i kody, które nie przeszły testu losowości (sekcja 3, tabele 2, 4, 7)
+C-034 | UNITIZED | U-015 | run 3 NEW | odrębny mechanizm: dwuetapowa ocena AIS, interpretowalność i poparcie przez źródło (§3.3.1, §4.1)
+C-035 | DEFER | - | run 3 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: pomiar zgodności adnotatorów i wyniki na czterech zbiorach (§5.5.1, tabele 3–7)
+C-036 | UNITIZED | U-016 | run 4 NEW | odrębny mechanizm: fazy meta-etnografii od relacji między badaniami do syntezy tłumaczeń (tabela 1, fazy 1–6)
+C-037 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: 19 kryteriów raportowania meta-etnografii z podziałem na fazy (tabela 1)
+C-038 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: etapy opracowania wytycznych: przegląd metodologiczny, audyt, badania Delphi i spotkanie grupy doradczej (rys. 1)
+C-039 | UNITIZED | U-017 | run 4 NEW | odrębny mechanizm: rekord twierdzenia z atrybucją i graf poparcia i kwestionowania (rys. 3, 4)
+C-040 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: porównanie mikropublikacji z nanopublikacjami, SWAN i BEL (tabela 1)
+C-041 | UNITIZED | U-018 | run 4 NEW | odrębny mechanizm: trzy etapy syntezy tematycznej od kodów do tematów analitycznych (sekcje Detailed methods, Stages one and two)
+C-042 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: przykład roboczy z ośmiu badań, 36 kodów, 12 tematów opisowych i 6 analitycznych (sekcja Results)
+C-043 | UNITIZED | U-019 | run 4 NEW | odrębny mechanizm: cztery grafy nanopublikacji z wymaganiami `MUST` (sekcja Background, wytyczne)
+C-044 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: konstrukcja i weryfikacja Trusty URI opartego na skrócie treści (sekcje Background, Approach)
+C-045 | UNITIZED | U-020 | run 4 NEW | odrębny mechanizm: osiem kroków budowania teorii z przypadków (tabela 1)
+C-046 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: taktyki analizy wewnątrz- i międzyprzypadkowej (s. 544–548)
+C-047 | DEFER | - | run 4 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: zamknięcie przez nasycenie teoretyczne i zakres 4–10 przypadków (s. 550)
+
+REJECTED INFERENCES
+- wniosek z uwagi wejścia do M-37, że typy tłumaczeń nie występują w tekście eMERGe: odczyt wymienia tłumaczenie wzajemne, obalające i syntezę linii argumentu
+- wniosek, że odczyt M-37 potwierdza siedem faz i 19 kryteriów raportowania: odczyt wylicza sześć faz i kryteria 1–16, a fazę 7 i kryteria 17–19 pozostawia nieodczytane
+- wniosek z opisu leada M-41, że rekord ma sześć jednakowo obowiązkowych pól: odczyt podaje formę minimalną jako Statement z atrybucją (Claim i Attribution), a pozostałe klasy tworzą formę rozszerzoną
+- wniosek z uwagi wejścia do M-42, że wytyczne mają mało pozycji `MUST` poza nagłówkiem: odczyt wymienia wymagania `MUST` dla grafów Head i Provenance, PublicationInfo oraz dla nanopublikacji jako całości
+- wniosek, że kryterium zamknięcia w M-39 to wyłącznie nasycenie teoretyczne: odczyt dodaje względy pragmatyczne (czas, koszty) i zakres 4–10 przypadków (C-047)
+
+AUDIT DELTA
+- opisy leadów różnią się od tekstów w M-37 (typy tłumaczeń obecne, liczba faz i kryteriów w odczycie), M-41 (forma minimalna) i M-42 (pozycje `MUST`)
+- M-37: wejście podaje numer artykułu 19:25, a odczyt podaje 19, Article 1; DOI jest zgodny
+- M-39: odczyt podał też taktykę grupowania przypadków po trzy lub cztery, której nie ma w opisie leada; w U-020 użyto trzech taktyk z opisu leada, a odczyt wymaga potwierdzenia w tekście oficjalnej wersji
+- M-42: status working draft pochodzi z wejścia; odczyt wytycznych nie podał statusu ani daty
+- wszystkie pięć odczytów wykonano narzędziem streszczającym; zapis symboliczny przykładów RDF i numery stron nie zostały sprawdzone w tekście dosłownym
+- we wszystkich pięciu regionach z kilkoma kandydatami w limicie wybrano niższy CANDIDATE_ID; profil nie rozstrzygał remisów w Runie 4
+- profil celu używa pól PROBLEM, CO MA WYJŚĆ i CZEGO NIE SZUKAĆ zamiast PROBLEMS, DOMAINS, CONSTRAINTS i ANTI-GOALS z §43; profil wpłynął tylko na blok `TARGET_PROFILE` i `ADOPTION_NOTES`
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostaje 27 kandydatów DEFER z otwartych źródeł (C-003, C-004, C-006, C-007, C-009, C-011, C-012, C-015, C-016, C-017, C-018, C-020, C-023, C-025, C-027, C-028, C-029, C-032, C-033, C-035, C-037, C-038, C-040, C-042, C-044, C-046, C-047) oraz 24 leady katalogu z locatorami do otwarcia według listy kolejnych Runów z wejścia.
+
+SYNTHESIS
+OBSERVATION: wszystkie pięć Unitów Runu 4 ma EVIDENCE_LAYER DOCUMENTED_DESIGN i EFFECT_STATUS NOT_APPLICABLE.
+OBSERVATION: U-017 i U-019 podają pola rekordu twierdzenia z atrybucją lub proweniencją, U-016, U-018 i U-020 podają kroki łączenia wyników wielu źródeł lub przypadków, a U-018 nie podaje reguł wnioskowania dla etapu 3.
+INFERENCE: U-017 i U-019 oddzielają twierdzenie od jego atrybucji lub proweniencji (Claim i Attribution; Assertion i Provenance); wynika to z porównania pól MINIMAL_FORM.
+INFERENCE: U-016 (tłumaczenie wzajemne i obalające) i U-017 (supports i challenges) opisują relacje zgodności i sprzeczności, pierwszy między badaniami, drugi między elementami argumentu; wynika to z porównania pól MINIMAL_FORM.
+TRANSFER: U-017 i U-019 dają możliwe pola rekordu twierdzenia (twierdzenie, atrybucja, relacje wspierania i podważania, proweniencja), a U-016, U-018 i U-020 możliwe kroki syntezy ponad pojedynczym źródłem; przeniesienie poza biomedycynę, nauki o zdrowiu, dane naukowe i badania przypadków nie jest twierdzeniem źródeł.
+OPEN_QUESTION: jak eMERGe opisuje fazę 7 i kryteria 17–19 (C-037).
+OPEN_QUESTION: jak Kuhn i in. konstruują i weryfikują Trusty URI (C-044).
+ASSESSMENT: Runy 1–4 z planu wejścia są wykonane; 24 leady z listy kolejnych Runów oraz 27 kandydatów DEFER pozostają do przetworzenia.
