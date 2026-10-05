@@ -1,0 +1,264 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-META1
+TITLE: Metodologia harvestowania — zapis mechanizmu, ocena źródeł, pewność, zatrzymanie
+SOURCE_SET: katalog 43 leadów META-ASMA-METODOLOGIA (metody wydobywania twierdzeń i mechanizmów, oceny źródeł i pewności, zatrzymania, niezawodności wydobycia, syntezy i rekordu twierdzenia); pytanie: jak wydobywać twierdzenia i mechanizmy z niejednorodnych źródeł z oceną źródła, składnikami pewności, śladem do miejsca w źródle i regułą zakończenia
+SOURCES:
+  - Machamer, Darden & Craver, Thinking about mechanisms
+  - Appleton, Patterns and Software: Essential Concepts and Terminology
+  - Liu et al., Agent Design Pattern Catalogue
+  - Schulhoff et al., The Prompt Report
+RUN: 1
+FOCUS: grupy 1–2 katalogu (M-01, M-03, M-05, M-06): zapis mechanizmu i wzorca, katalogi wzorców, selekcja prac
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-05
+ACCESS_LIMITATIONS:
+  - wszystkie odczyty wykonano narzędziem streszczającym; numery stron M-01 pochodzą z nagłówków kopii UCSD
+  - M-06: odczyt PDF przerwany w sekcji 6.2.3.3; wersja HTML zwróciła spis treści i sekcję 1; dodatki A.3–A.6 nieodczytane
+  - M-05: metoda przeglądu systematycznego jest opisana w odnośniku [5] (Lu et al., ICSA'23), który nie został otwarty
+  - otwarto M-01, M-03, M-05, M-06; pozostałe 39 leadów katalogu nie zostało otwartych w tym Runie
+TARGET_PROFILE:
+  id: META-ASMA-METODOLOGIA
+  version: 1.0
+  target: ustalone metody wydobywania twierdzeń i mechanizmów z niejednorodnych źródeł (także nierecenzowanych i bez historii zmian), oceniania wiarygodności źródła i pewności wydobycia oraz kończenia otwartych poszukiwań, opisane tak, żeby dało się je zastosować (pola, skale, kroki, progi).
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+M-01 Thinking about mechanisms | https://mechanism.ucsd.edu/bill/teaching/w10/machamer.darden.craver.pdf | definicja mechanizmu (sekcja 2), warunki początkowe i końcowe oraz etapy pośrednie (sekcje 4.1–4.3), względność poziomu `bottom out` (sekcja 5.1), schematy i szkice (sekcja 5.3)
+M-03 Appleton | https://www.bradapp.com/docs/patterns-intro.html | definicja wzorca, elementy formy wzorca, test powtarzalności (`rule of three`), kolekcje wzorców, kryteria konferencji PLoP
+M-05 Liu et al. | https://arxiv.org/pdf/2405.10467 | tabela 1 z 18 wzorcami, opis metody (sekcja 3), wpisy 4.1–4.18, model decyzyjny (sekcja 5.1)
+M-06 Schulhoff et al. | https://arxiv.org/pdf/2406.06608 | terminologia (sekcja 1.2), proces przeglądu (sekcja 2.1), taksonomia 58 technik (sekcja 2.2), miara użycia techniki (sekcja 2.3)
+UNKNOWN_REGIONS:
+  - M-06: sekcja 6.2.3.3 od połowy do końca oraz dodatki A.3–A.6
+  - M-05: odnośniki [5] (Lu et al., ICSA'23) i [20] (Meszaros & Doble, 1997)
+  - 39 leadów katalogu bez otwartego artefaktu: M-02, M-04, M-07 do M-43
+OUTSIDE_SCOPE:
+  - przeniesienie metod na dziedziny inne niż podane przez źródła (nie jest twierdzeniem żadnego źródła)
+
+DELTA
+NEW
+UNIT_ID: U-001
+NAME: Mechanism Description Composition
+LENS: LENS_KNOWLEDGE
+TYPE: schema
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Określa, co musi nazwać opis mechanizmu, żeby wyjaśniał powstawanie zjawiska: byty z własnościami, aktywności, organizację bytów i aktywności oraz warunki początkowe i końcowe połączone etapami pośrednimi bez luk w ciągłości wytwarzania (`productive continuity`).
+MINIMAL_FORM:
+  - mechanizm = byty (z własnościami) + aktywności, zorganizowane tak, że wytwarzają regularne zmiany od `set-up conditions` do `termination conditions`
+  - opis = `set-up conditions` → etapy pośrednie (byty + aktywności) → `termination conditions`; przejście między etapami wyjaśnia nazwana aktywność
+  - organizacja bytów: położenie, struktura, orientacja; organizacja aktywności: porządek, tempo, czas trwania
+  - `set-up conditions` obejmują byty, ich własności, relacje przestrzenne i warunki umożliwiające (np. energia, pH, rozkład ładunku); nie są wejściami mechanizmu
+  - `termination conditions` = uprzywilejowany stan końcowy (np. spoczynek, równowaga, stan aktywowany lub stłumiony, wytworzenie produktu); nie są wyjściami mechanizmu
+  - struktura etapów: liniowa, rozwidlenia, połączenia lub cykle
+SOURCE_ANCHOR:
+  - source: Machamer, Darden & Craver, Thinking about mechanisms
+    locator: https://mechanism.ucsd.edu/bill/teaching/w10/machamer.darden.craver.pdf
+    anchor: sekcja 2 (s. 3), sekcje 4.1–4.3 (s. 11–12)
+    revision: Philosophy of Science 67(1), marzec 2000, s. 1–25
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - termin `activity` jako termin techniczny, zwykle oznaczany czasownikiem (sekcja 2, s. 4)
+MUST_BE_TRUE: mechanizm działa regularnie, tzn. zawsze lub zwykle tak samo w tych samych warunkach (sekcja 2, s. 3); opis pełny nie ma luk w krokach i używa bytów oraz aktywności akceptowanych w danej dziedzinie w danym czasie (sekcja 4.3, s. 12)
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: SCHEMA
+ADOPTION_NOTES:
+  - dotyczy punktu (a) z CO MA WYJŚĆ w profilu: pola zapisu mechanizmu (byty, aktywności, organizacja, warunki początkowe i końcowe, etapy pośrednie)
+  - źródło ogranicza zakres do biologii molekularnej i neurobiologii; zastosowanie do systemów AI lub promptów nie jest twierdzeniem źródła
+UNKNOWN:
+  - format: źródło nie podaje szablonu zapisu (nazw pól ani formatu); lista elementów wynika z opisu prozą
+LIMITS:
+  - autorzy ograniczają analizę do mechanizmów w biologii molekularnej i neurobiologii i zostawiają inne dziedziny jako pytanie otwarte (sekcja 1, s. 2)
+  - źródło odrzuca terminy `input`, `output` i `state change` na rzecz `set-up conditions`, `termination conditions` i etapów pośrednich (sekcja 4.1, s. 11)
+RELATES_TO:
+  - U-002
+
+NEW
+UNIT_ID: U-002
+NAME: Mechanism Sketch, Schema and Complete Description
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Rozróżnia trzy rodzaje opisu mechanizmu według kompletności i abstrakcji: opis pełny (bez luk w ciągłości od warunków początkowych do końcowych), schemat mechanizmu (skrócony, abstrakcyjny opis typu mechanizmu, wypełnialny opisami znanych składników) i szkic mechanizmu (abstrakcja z lukami w etapach, zwanymi `black boxes`, albo bez składników dolnego poziomu).
+MINIMAL_FORM:
+  - opis pełny: ciągłość wytwarzania bez luk od warunków początkowych do końcowych
+  - luka wyjaśniająca = brak nazwanej aktywności przy przejściu między etapami (schemat A→B→C bez wyjaśnionej strzałki)
+  - `mechanism schema`: skrócony opis abstrakcyjny typu mechanizmu; stopień abstrakcji (ilość pominiętego szczegółu) jest odrębny od zakresu (dziedzina, w której schemat można zinstancjować)
+  - `mechanism sketch`: abstrakcja, w której nie podano jeszcze składników `bottom out` albo w której etapy mają luki (`black boxes`); wskazuje dalszą pracę
+  - szkic może zostać porzucony po nowych ustaleniach albo stać się schematem
+  - schemat po zinstancjowaniu służy do wyjaśniania, przewidywania i projektowania protokołów badawczych
+SOURCE_ANCHOR:
+  - source: Machamer, Darden & Craver, Thinking about mechanisms
+    locator: https://mechanism.ucsd.edu/bill/teaching/w10/machamer.darden.craver.pdf
+    anchor: sekcja 2 (s. 3), sekcja 4.3 (s. 12), sekcja 5.1 (s. 13–14), sekcja 5.3 (s. 15–18)
+    revision: Philosophy of Science 67(1), marzec 2000, s. 1–25
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - elementy opisu i ciągłość wytwarzania z U-001
+MUST_BE_TRUE: poziom `bottom out` jest względny wobec uczonego, zespołu lub dziedziny i może się zmieniać; składniki dolnego poziomu to te, które dana dziedzina przyjmuje jako względnie podstawowe lub niewymagające dalszego rozkładu (sekcja 5.1, s. 13–14)
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: EVALUATION_RULE
+ADOPTION_NOTES:
+  - dotyczy punktu (a) z CO MA WYJŚĆ w profilu: trzy klasy kompletności zapisu mechanizmu; schemat jest zdefiniowany przez abstrakcję, szkic przez luki lub brak składników dolnego poziomu
+UNKNOWN:
+  - format: źródło nie podaje notacji ani pola do zapisu luki; luka występuje jako brakująca aktywność w schemacie A→B→C (s. 3) i jako `black box` w szkicu (s. 18)
+LIMITS:
+  - zakres: biologia molekularna i neurobiologia (sekcja 1, s. 2)
+  - przykłady szkiców i schematów pochodzą z historii odkrycia mechanizmu syntezy białek (sekcja 6, s. 18–21)
+RELATES_TO:
+  - U-001
+
+NEW
+UNIT_ID: U-003
+NAME: Recurrence Test for Pattern Acceptance
+LENS: LENS_KNOWLEDGE
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Określa, kiedy opis rozwiązania może być uznany za wzorzec: musi zawierać rozpoznawalne elementy wzorca (w tym siły) i zostać zweryfikowany jako zjawisko powtarzalne, najlepiej w co najmniej trzech istniejących systemach (`rule of three`); do tego czasu pozostaje `proto-pattern`, a jego krótki opis to `patlet`.
+MINIMAL_FORM:
+  - kandydat zawiera rozpoznawalne elementy wzorca; rozwiązanie bez sił (`forces`) nie jest wzorcem
+  - powtarzalność zweryfikowana, najlepiej w ≥3 istniejących systemach (`rule of three`) → wzorzec
+  - powtarzalność niezweryfikowana → `proto-pattern`; krótki opis = `patlet`
+  - powtarzalność jest cechą ilościową; dopasowanie (`fit`) wykazuje się wyjaśnieniem, jak wzorzec równoważy siły, a użyteczność wyjaśnieniem, dlaczego jest skuteczny i korzystny
+  - element `Known Uses` opisuje znane wystąpienia wzorca w istniejących systemach i służy walidacji, że rozwiązanie jest sprawdzone, a problem powtarzalny
+  - część środowiska uważa za niewłaściwe nazywanie czegoś wzorcem przed pewnym przeglądem przez innych
+SOURCE_ANCHOR:
+  - source: Appleton, Patterns and Software: Essential Concepts and Terminology
+    locator: https://www.bradapp.com/docs/patterns-intro.html
+    anchor: Proto-Patterns and Patternity Tests, Elements of a Pattern (Known Uses), Writing Patterns
+    revision: strona z adnotacją last modified 02/14/2000
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+MUST_BE_TRUE: istnieją co najmniej trzy istniejące systemy, w których rozwiązanie występuje, albo opis pozostaje `proto-pattern`; próg ma formę zalecenia (słowo `preferably` w tekście źródła)
+ENFORCEMENT: PROSE_ONLY
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: EVALUATION_RULE
+ADOPTION_NOTES:
+  - dotyczy punktu (a) z CO MA WYJŚĆ w profilu: próg powtarzalności zapisu wzorca
+UNKNOWN:
+  - independence: źródło nie określa, czy trzy systemy mają być od siebie niezależne, ani kto weryfikuje powtarzalność
+LIMITS:
+  - próg nie ma wskazanego autora; źródło opisuje go jako często nazywany regułą trzech, czyli konwencję środowiska wzorców projektowych
+  - esej z 2000 r.; dziedzina: projektowanie i architektura oprogramowania
+RELATES_TO:
+  - U-004
+
+NEW
+UNIT_ID: U-004
+NAME: Pattern Entry Template with Consequences and Known Uses
+LENS: LENS_KNOWLEDGE
+TYPE: schema
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Określa pola wpisu w katalogu wzorców architektonicznych dla agentów opartych na modelach fundamentalnych: nazwa, podsumowanie, kontekst, problem, siły, rozwiązanie, konsekwencje (korzyści i wady powiązane z atrybutami jakości), znane użycia i powiązane wzorce.
+MINIMAL_FORM:
+  - wpis = `Pattern name` → `Summary` → `Context` → `Problem` → `Forces` → `Solution` → `Consequences` (`Benefits`; `Drawbacks`) → `Known uses` → `Related patterns`
+  - `Forces`, `Benefits` i `Drawbacks`: listy nazwanych atrybutów jakości, każdy z jednozdaniowym opisem
+  - `Known uses`: lista nazwanych systemów lub prac z jednozdaniowym opisem użycia
+  - dla każdego wzorca uproszczony diagram obejmujący tylko komponenty istotne dla zastosowania wzorca
+  - szablon rozszerzony według Meszaros & Doble (1997), odnośnik [20]
+SOURCE_ANCHOR:
+  - source: Liu et al., Agent Design Pattern Catalogue
+    locator: https://arxiv.org/pdf/2405.10467
+    anchor: sekcja 3, sekcja 4 (wstęp), sekcje 4.1–4.18, sekcja 5.3
+    revision: wersja z nagłówkiem 7 listopada 2024
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - szablon rozszerzony z odnośnika [20] (Meszaros & Doble, 1997), nieotwarty
+EFFECT_STATUS: NOT_APPLICABLE
+TRANSFER_FORM: SCHEMA
+ADOPTION_NOTES:
+  - dotyczy punktu (a) z CO MA WYJŚĆ w profilu: pola zapisu wzorca; układ siły → rozwiązanie → konsekwencje → znane użycia → powiązane wzorce
+UNKNOWN:
+  - format: tekst nie wskazuje pól obowiązkowych ani minimalnej formy wpisu
+  - dependency: treść szablonu rozszerzonego z odnośnika [20] nie została otwarta
+LIMITS:
+  - dziedzina: agenty oparte na modelach fundamentalnych; 18 wzorców dotyczy ustalania celu i generowania planu (sekcje 1 i 3)
+  - pozycje `Known uses` pochodzą z dodatkowego przeglądu obejmującego literaturę szarą i oficjalne strony produktów, a nie z przeglądu systematycznego (sekcja 3)
+  - zliczenie własne na tekście sekcji 4.1–4.18 (DIRECT_INFERENCE): 17 wpisów ma od trzech do pięciu pozycji w liście `Known uses`; wpis 4.5 ma jedno zdanie bez listy, wskazujące CoT i Zero-shot-CoT jako przykłady
+  - nazwy atrybutów jakości w `Forces`, `Benefits` i `Drawbacks` nie mają w tekście definicji ani miar; autorzy wskazują kwantyfikację jako pracę przyszłą (sekcja 5.3)
+RELATES_TO:
+  - U-003
+
+NEW
+UNIT_ID: U-005
+NAME: Two-Stage Screening with Measured Agreement and Classifier Validation
+LENS: LENS_KNOWLEDGE
+TYPE: method
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Opisuje selekcję prac do przeglądu opartego na PRISMA w dwóch etapach: ręczna adnotacja próby według czterech kryteriów z pomiarem zgodności dwóch adnotatorów, następnie klasyfikator oparty na LLM walidowany względem adnotacji wzorcowych z raportem precyzji i recall.
+MINIMAL_FORM:
+  - źródła danych: arXiv, Semantic Scholar, ACL; zapytania: lista 44 słów kluczowych (dodatek A.4, nieodczytany)
+  - próba początkowa z arXiv: proste słowa kluczowe i reguły logiczne; adnotacja ręczna 1 661 artykułów według czterech kryteriów:
+  - kryterium 1: włącz, jeśli praca proponuje nową technikę promptowania
+  - kryterium 2: włącz, jeśli praca obejmuje wyłącznie twarde prompty prefiksowe (`hard prefix prompts`)
+  - kryterium 3: wyklucz, jeśli praca dotyczy treningu przez propagację gradientów
+  - kryterium 4: włącz, jeśli praca używa zamaskowanej ramki lub okna dla modalności nietekstowych
+  - 300 artykułów ocenionych niezależnie przez dwóch adnotatorów: zgodność 92%, α Krippendorffa = κ Cohena = 81%
+  - klasyfikator: prompt dla `gpt-4-1106-preview` (dodatek A.5, nieodczytany) zastosowany do pozostałych artykułów; walidacja na 100 adnotacjach wzorcowych: precyzja 89%, recall 75%, F1 81%
+  - zbiór końcowy = adnotacje ręczne + wyniki klasyfikatora: 1 565 prac z 4 247 unikalnych rekordów (podpis rys. 2.1)
+SOURCE_ANCHOR:
+  - source: Schulhoff et al., The Prompt Report
+    locator: https://arxiv.org/pdf/2406.06608
+    anchor: sekcja 1 (Scope of Study, Sections Overview), sekcje 2.1 i 2.1.1, rys. 2.1
+    revision: arXiv v6, 26 lutego 2025
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+DEPENDENCIES:
+  - prompt klasyfikatora (dodatek A.5), nieodczytany
+  - 100 adnotacji wzorcowych użytych do walidacji
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: METHOD, WORKFLOW
+ADOPTION_NOTES:
+  - dotyczy punktów (d) i (e) z CO MA WYJŚĆ w profilu: etap ludzki z pomiarem zgodności przed etapem automatycznym oraz walidacja klasyfikatora względem adnotacji wzorcowych
+  - jednostką oceny jest decyzja włączenia lub wykluczenia całej pracy; granice jednostek w tekście nie występują
+UNKNOWN:
+  - evidence: pochodzenie 100 adnotacji wzorcowych względem próby 1 661 artykułów nie jest opisane w odczytanym tekście
+  - evidence: liczby cząstkowe z rys. 2.1 (3 677, 2 087, 639 oraz 4 797) nie dają spójnej sumy w odczycie; w Unicie użyto tylko 4 247 i 1 565 z podpisu rysunku
+  - format: sposób wydobycia technik z 1 565 prac i zbudowania taksonomii 58 technik nie został odczytany
+LIMITS:
+  - dziedzina: prace o promptowaniu, zawężone do `hard prefix prompts` i technik niezależnych od zadania (`task-agnostic`) (sekcja 1)
+  - recall 75% oznacza, że w próbie walidacyjnej część prac spełniających kryteria nie została włączona przez klasyfikator (DIRECT_INFERENCE z definicji recall)
+  - zgodność 92% i α = κ = 81% dotyczy 300 artykułów dwóch adnotatorów; raportu zgodności dla pozostałych artykułów w odczytanym tekście nie ma
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm: elementy opisu mechanizmu i ciągłość wytwarzania (sekcje 2, 4.1–4.3)
+C-002 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm: klasyfikacja opisu na pełny, schemat i szkic (sekcje 4.3, 5.3)
+C-003 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: cztery rodzaje aktywności dolnego poziomu i względność `bottom out` (sekcja 5.1, s. 13–14)
+C-004 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: lista elementów formy wzorca z definicjami (sekcja Elements of a Pattern)
+C-005 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm: test powtarzalności i status `proto-pattern` (sekcja Proto-Patterns and Patternity Tests)
+C-006 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: katalog, system i język wzorców (sekcje Pattern Catalogs and Systems, Pattern Languages)
+C-007 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: opis przeglądu systematycznego i snowballingu (sekcja 3), szczegóły w odnośniku [5] nieotwartym
+C-008 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm: pola wpisu katalogu wzorców (sekcje 3, 4)
+C-009 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: model decyzyjny wyboru wzorców (sekcja 5.1, rys. 19)
+C-010 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm: dwuetapowa selekcja z pomiarem zgodności (sekcje 2.1, 2.1.1)
+C-011 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: definicja techniki jako `blueprint` i jednokategoriowe umieszczanie w taksonomii (sekcje 1.2.2, 2.2)
+C-012 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; materiał: miara użycia techniki przez liczbę cytowań w zbiorze (sekcja 2.3)
+
+REJECTED INFERENCES
+- opis leada M-01 przypisuje `black boxes` schematowi; w źródle `black boxes` dotyczą szkicu (s. 18), a schemat jest zdefiniowany przez abstrakcję (s. 15–16)
+- wniosek, że próg trzech systemów jest bezwzględny: tekst M-03 podaje go z słowem `preferably` i bez wskazanego autora
+- wniosek, że szczegóły wyszukiwania, selekcji i oceny jakości przeglądu są w M-05: tekst zawiera jeden akapit w sekcji 3 i odsyła do odnośnika [5]
+- wniosek, że M-05 stosuje próg trzech z M-03: tekst M-05 nie podaje progu włączenia pozycji do `Known uses`; liczba 3–5 pozycji wynika ze zliczenia
+- wniosek, że liczby cząstkowe z rys. 2.1 M-06 są wiarygodne jako suma: odczyt rysunku jest niespójny arytmetycznie
+
+AUDIT DELTA
+- opisy leadów różnią się od tekstów w M-01 (przypisanie `black boxes`), M-03 (próg `preferably`), M-05 (miejsce opisu metody) i M-06 (liczby cząstkowe rys. 2.1)
+- liczby cząstkowe rys. 2.1 w M-06: 3 677 + 2 087 + 639 = 6 403, a odczyt podaje 4 797 przed deduplikacją
+- zliczenie pozycji `Known uses` w U-004 wykonano ręcznie na odczytanym tekście; nie weryfikowano drugim odczytem
+- profil celu używa pól PROBLEM, CO MA WYJŚĆ i CZEGO NIE SZUKAĆ zamiast PROBLEMS, DOMAINS, CONSTRAINTS i ANTI-GOALS z §43; w tym Runie profil wpłynął tylko na blok `TARGET_PROFILE` i `ADOPTION_NOTES`
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostaje siedmiu kandydatów DEFER z otwartych źródeł (C-003, C-004, C-006, C-007, C-009, C-011, C-012) oraz 39 leadów katalogu z locatorami do otwarcia według planu Runów z wejścia.
+
+SYNTHESIS
+OBSERVATION: wszystkie pięć Unitów ma EVIDENCE_LAYER DOCUMENTED_DESIGN; EFFECT_STATUS TESTED_IN_SOURCE ma tylko U-005, pozostałe cztery NOT_APPLICABLE.
+INFERENCE: zliczenie pozycji `Known uses` w U-004 (3–5 w 17 z 18 wpisów) mieści się w progu „co najmniej trzy" z U-003, ale tekst M-05 nie powołuje się na ten próg.
+TRANSFER: U-001 i U-002 dają możliwe pola zapisu mechanizmu: byty, aktywności, organizacja, warunki początkowe i końcowe, etapy pośrednie, klasa kompletności (pełny, schemat, szkic) z `black boxes` jako jawnymi lukami; przeniesienie poza biologię nie jest twierdzeniem źródła.
+OPEN_QUESTION: czy lista elementów formy wzorca z M-03 (C-004) zawiera pola szablonu z U-004 jako podzbiór.
+OPEN_QUESTION: czy sekcja 2.2 M-06 opisuje krok wydobycia technik z prac do taksonomii (C-011), którego sekcja 2.1 nie opisuje.
+ASSESSMENT: plan Runów z wejścia (Run 2: M-08, M-09, M-12, M-13, M-17) pozostaje bez zmian; kandydaci DEFER z Runu 1 mogą dołączyć do Runu 5 lub późniejszego.
