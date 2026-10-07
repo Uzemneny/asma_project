@@ -1,0 +1,322 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-RODZAJE-ROZMOWY-AI1
+TITLE: Rodzaje prowadzenia rozmowy z AI — mechanizmy interakcji
+SOURCE_SET: Rodzaje prowadzenia rozmowy z AI; pytanie: jakie mechanizmy odróżniają jeden rodzaj rozmowy od drugiego (kto prowadzi, co jest nośnikiem, czym jest AI w danej interakcji, co jest stanem rozmowy, jak wygląda zakończenie)?
+SOURCES:
+  - Role-Play with Large Language Models (Shanahan, McDonell, Reynolds 2023) arXiv:2305.16367
+  - Grounding Gaps in Language Model Generations (Shaikh et al. 2024) arXiv:2311.09144v2
+  - Principles of Mixed-Initiative User Interfaces (Horvitz 1999) CHI '99
+  - Levels of Autonomy for AI Agents (Feng, McDonald, Zhang 2025) arXiv:2506.12469
+  - The Metacognitive Demands and Opportunities of Generative AI (Tankelevitch et al. 2024) CHI '24 — [ABSTRAKT]
+  - Why Chatbots Are Not the Future (Wattenberger 2023) wattenberger.com
+  - Language Model Sketchbook, or Why I Hate Chatbots (Appleton 2023) maggieappleton.com
+  - Loom: Interface to the Multiverse (Janus 2021) generative.ink
+RUN: 3
+FOCUS: Krytyka czatu jako interfejsu (Wattenberger, Appleton) oraz alternatywne interfejsy (Loom, Daemons, Branches, Epi)
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-07
+ACCESS_LIMITATIONS:
+  - pełny tekst Wattenberger 2023 odczytany
+  - pełny tekst Appleton 2023 odczytany
+  - pełny tekst Janus 2021 (Loom) odczytany
+  - Tankelevitch et al. 2024: tylko [ABSTRAKT] (pełny tekst nieotwarty)
+  - Simulators (Janus, LessWrong; RZ-01) nadal nieotwarty
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Wattenberger 2023 §Text inputs have no affordances | wattenberger.com/thoughts/boo-chatbots | brak affordances w polu tekstowym; interfejs nie sugeruje, jak używać narzędzia
+Wattenberger 2023 §Prompts are just a pile of context | wattenberger.com/thoughts/boo-chatbots | prompt jako nieustrukturyzowany zbiór kontekstu; interfejs mógłby baked-in controls (sliders, dropdowns)
+Wattenberger 2023 §Responses are isolated | wattenberger.com/thoughts/boo-chatbots | brak working buffer; trudne porównanie iteracji; scrollowanie między odpowiedziami
+Wattenberger 2023 §The implementation—evaluation loop | wattenberger.com/thoughts/boo-chatbots | wymuszona częsta zmiana trybu implement/evaluate; przerwa na generowanie niszczy flow
+Wattenberger 2023 §Avoid No man's land | wattenberger.com/thoughts/boo-chatbots | spectrum human input (0% tool → 100% machine); no man's land: human required but not in control
+Appleton 2023 §Daemons | maggieappleton.com/lm-sketchbook | tło z wieloma postaciami (devil's advocate, encourager, synthesiser, evidence fetcher, elaborator); sugestie fade, jeśli zignorowane
+Appleton 2023 §Branches | maggieappleton.com/lm-sketchbook | eksploracja cause/consequence chains; LM sugeruje reasonable chains, user double-checks
+Appleton 2023 §Epi | maggieappleton.com/lm-sketchbook | right-click context menu w edytorze: rephrase, critique, find evidence, generate research questions, point out assumptions
+Janus 2021 §Motivation | generative.ink/posts/loom-interface-to-the-multiverse | LLM jako multiverse generators; AI Dungeon single-history; branching jako power multiplier
+Janus 2021 §Demo (Read/Visualize mode) | generative.ink/posts/loom-interface-to-the-multiverse | tree structure nodes/chapters; visualize mode: tree diagram; node metadata (prompt, response, model, logprobs)
+UNKNOWN_REGIONS:
+  - Simulators (Janus, LessWrong) — tekst nieotwarty
+OUTSIDE_SCOPE:
+  - interfejsy Sensecape, Cells/Generators/Lenses, Prism
+  - porównania modeli komercyjnych
+
+DELTA
+NEW
+UNIT_ID: U-013
+NAME: Chat Interface Lacks Affordances and Baked-in Context Controls
+LENS: LENS_ARTIFACT
+TYPE: limitation
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Krytyka czatu jako domyślnego interfejsu dla LLM: text input nie ma affordances (nie sugeruje, jak używać narzędzia); prompt jest nieustrukturyzowanym zbiorem kontekstu, który użytkownik musi ręcznie hackować; interfejs mógłby mieć baked-in controls (sliders, dropdowns) dla typu pisania, odbiorcy, tonu, inspiracji.
+MINIMAL_FORM:
+  - text input field: no hand-shaped affordance (unlike gloves for specific tasks)
+  - user must learn prompt engineering through trial and error; burden on user
+  - all prompt content is context pile: who are you, how to respond, what not to respond, what information to provide, how to start
+  - interface could provide controls: writing type, audience, tone, inspirations (Copilot for Docs example: new vs experienced developer, new to library, in a rush)
+SOURCE_ANCHOR:
+  - source: Why Chatbots Are Not the Future
+    locator: wattenberger.com/thoughts/boo-chatbots
+    anchor: §Text inputs have no affordances, §Prompts are just a pile of context
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - esej z 2023; autor pracował nad Copilot for Docs (GitHub Next); przykłady z własnych prototypów
+
+NEW
+UNIT_ID: U-014
+NAME: Responses Are Isolated; No Working Buffer for Comparison
+LENS: LENS_ARTIFACT
+TYPE: limitation
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Krytyka izolacji odpowiedzi w czacie: brak working buffer do porównania iteracji; użytkownik musi scrollować tam i z powrotem między odpowiedziami, czytając linia po linii; laborious przy dłuższych przykładach.
+MINIMAL_FORM:
+  - each response is isolated block; no side-by-side diff
+  - user must manually compare versions (e.g. original, improved, more active language)
+  - no working buffer for editing code or prose; complete non-starter for iterative refinement
+SOURCE_ANCHOR:
+  - source: Why Chatbots Are Not the Future
+    locator: wattenberger.com/thoughts/boo-chatbots
+    anchor: §Responses are isolated
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - przykład z Walden (3 wersje tekstu); autor jako osoba myśląca o edycji kodu/prozy
+
+NEW
+UNIT_ID: U-015
+NAME: Implementation—Evaluation Loop Forced by Chat Interface
+LENS: LENS_ARTIFACT
+TYPE: process_constraint
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Krytyka wymuszonej częstej zmiany trybu implement/evaluate w czacie: użytkownik pyta (implement), czyta odpowiedź (evaluate); wait for response niszczy flow state; analogia do lengthy compile loop w programowaniu.
+MINIMAL_FORM:
+  - painter: up close (smooshing paint) vs stepping back (evaluate and plan)
+  - chatbot: ask question (implement) → read response (evaluate) → ask next question
+  - no flow state if stopping every few seconds; wait time is negative factor
+  - good tools let user choose when to switch between implementation and evaluation
+SOURCE_ANCHOR:
+  - source: Why Chatbots Are Not the Future
+    locator: wattenberger.com/thoughts/boo-chatbots
+    anchor: §The implementation—evaluation loop
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - analogia do programowania (compile loop) i malarstwa
+
+NEW
+UNIT_ID: U-016
+NAME: No Man's Land — Human Required but Not in Control
+LENS: LENS_SYSTEM
+TYPE: design_principle
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Spectrum human input (0% tool → 100% machine); no man's land: human still required to make decisions, but not in control of outcome; automating tasks jest dobry dla rote work, ale przy partial automation interface jest crucial.
+MINIMAL_FORM:
+  - human task: 0% input → human in control, responsible for outcome
+  - tool: 50% input → shared control
+  - machine: 100% input → human not in control, just pressing buttons
+  - no man's land: human required but not in control; user feels like machine operator
+  - want more tools and fewer operated machines; embrace humanity instead of blindly improving efficiency
+SOURCE_ANCHOR:
+  - source: Why Chatbots Are Not the Future
+    locator: wattenberger.com/thoughts/boo-chatbots
+    anchor: §Avoid No man's land
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - esej z 2023; autor argumentuje za narzędziami, które oferują sugestie do klarowania myślenia, nie tylko content generation
+
+NEW
+UNIT_ID: U-017
+NAME: Daemons — Multiple Background Characters with Personalities Suggesting Revisions
+LENS: LENS_ARTIFACT
+TYPE: interface_contract
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Alternatywny interfejs: środowisko pisania z wieloma postaciami (daemons) w tle, każda z inną osobowością (devil's advocate, encourager, synthesiser, evidence fetcher, elaborator); daemons highlight sentences i sugerują revisons lub pytania do obrony claimu; sugestie fade, jeśli zignorowane.
+MINIMAL_FORM:
+  - writing environment with background characters (daemons)
+  - each daemon has personality: devil's advocate, encourager, synthesiser, evidence fetcher, elaborator
+  - daemon highlights sentence and suggests revision or asks to defend claim
+  - user can ignore suggestion; it fades
+SOURCE_ANCHOR:
+  - source: Language Model Sketchbook, or Why I Hate Chatbots
+    locator: maggieappleton.com/lm-sketchbook
+    anchor: §Daemons
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: INTERFACE
+LIMITS:
+  - szkic koncepcyjny (Figma file); nieimplementowany prototyp
+
+NEW
+UNIT_ID: U-018
+NAME: Branches — Cause/Consequence Chains Exploration with LM Suggestions
+LENS: LENS_ARTIFACT
+TYPE: interface_contract
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Alternatywny interfejs: eksploracja cause/consequence chains („Why did this happen?", „What's likely to happen next?"); LM sugeruje reasonable chains, user double-checks suggestions i nie traktuje ich jako gospel.
+MINIMAL_FORM:
+  - interface centered on exploring cause/consequence chains
+  - LM suggests reasonable chains based on latent knowledge
+  - user double-checks suggestions; does not take as gospel
+SOURCE_ANCHOR:
+  - source: Language Model Sketchbook, or Why I Hate Chatbots
+    locator: maggieappleton.com/lm-sketchbook
+    anchor: §Branches
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: INTERFACE
+LIMITS:
+  - szkic koncepcyjny; nieimplementowany prototyp
+
+NEW
+UNIT_ID: U-019
+NAME: Epi — Right-Click Context Menu for Research and Non-fiction Writing
+LENS: LENS_ARTIFACT
+TYPE: interface_contract
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Alternatywny interfejs: general-purpose reasoning assistant dla research i non-fiction writing; right-click context menu w edytorze udostępnia moves: rephrase sentences, offer critiques, help find evidence, generate research questions, point out assumptions.
+MINIMAL_FORM:
+  - writing context with right-click context menu
+  - moves available: rephrase sentences, offer critiques of ideas, help find evidence for claims, generate possible research questions, point out assumptions
+SOURCE_ANCHOR:
+  - source: Language Model Sketchbook, or Why I Hate Chatbots
+    locator: maggieappleton.com/lm-sketchbook
+    anchor: §Epi
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: INTERFACE
+LIMITS:
+  - szkic koncepcyjny; autor wciąż buduje kolekcję
+
+NEW
+UNIT_ID: U-020
+NAME: Loom — Tree-Structured Multiverse Navigation for GPT-3 Writing
+LENS: LENS_ARTIFACT
+TYPE: interface_contract
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Interfejs do generowania, nawigacji i wizualizacji natural language multiverses: nodes z prompt, response, model, logprobs; read mode (current node + ancestry jako single history), visualize mode (tree diagram); editing, expanding/collapsing nodes, generating continuations, weighted stochastic walks.
+MINIMAL_FORM:
+  - tree structure of nodes and chapters; each node has prompt, response, model, token logprobs, counterfactual logprobs
+  - read mode: current node + ancestry read as single history; nav tree sidebar
+  - visualize mode: tree diagram of multiverse; editing, expanding/collapsing nodes and children, creating new children/siblings, merge parent
+  - generating GPT-3 continuations; zooming out to view global structure; weighted stochastic walks through large multiverse
+SOURCE_ANCHOR:
+  - source: Loom: Interface to the Multiverse
+    locator: generative.ink/posts/loom-interface-to-the-multiverse
+    anchor: §Motivation for the loom, §Demo (Read mode, Visualize mode, Node metadata)
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: INTERFACE
+LIMITS:
+  - narzędzie stworzone do osobistego użytku; interfejs nie user-friendly, brak dokumentacji; beta test dla posiadaczy OpenAI API key
+
+NEW
+UNIT_ID: U-021
+NAME: Language Models as Multiverse Generators; Branching as Power Multiplier
+LENS: LENS_SYSTEM, LENS_KNOWLEDGE
+TYPE: design_principle
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Teza: LLM są multiverse generators (distribution of possible continuations); interfejsy single-history (AI Dungeon) tracą potencjał; branching jest power multiplier dla cowriting (fiction i nonfiction: brainstorming, prototyping prompts).
+MINIMAL_FORM:
+  - at each generation step: distribution over next tokens; tree of possibilities branches out
+  - single-history interface (AI Dungeon): only one variation saved; duplicating adventure leads to confusing profusion
+  - branching allows exploring counterfactuals which can be merged into main (single-history works) or kept as multiple timelines (multi-history)
+  - useful for nonfiction: brainstorming, prototyping prompts
+SOURCE_ANCHOR:
+  - source: Loom: Interface to the Multiverse
+    locator: generative.ink/posts/loom-interface-to-the-multiverse
+    anchor: §Motivation for the loom (AI Dungeon single-history, branching as power multiplier)
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - esej z 2021 (GPT-3 era); autor współautor multiversal novel; Loom nazwany od urządzenia z metafizyki powieści
+
+CURRENT INDEX
+U-001 | Dialogue Agent as Turn-Taking System with Prepend Prompt | SOURCE_SUPPORTED | last: run 2
+U-002 | Role-Play as Character Portrayal Extended by Conversation | SOURCE_SUPPORTED | last: run 1
+U-003 | Simulator as Superposition of Simulacra | SOURCE_SUPPORTED | last: run 1
+U-004 | Simulator Lacks Beliefs, Goals, Agency; Simulacra Can Role-Play Them | SOURCE_SUPPORTED | last: run 1
+U-005 | Grounding Acts as Dialogue Acts for Building Common Ground | SOURCE_SUPPORTED | last: run 1
+U-006 | Grounding Gap — LLMs Generate Fewer Grounding Acts Than Humans | SOURCE_SUPPORTED | last: run 1
+U-007 | SFT Does Not Improve Grounding, PO Erodes It | SOURCE_SUPPORTED | last: run 1
+U-008 | Expected Utility Thresholds for Agent Action and Dialog | SOURCE_SUPPORTED | last: run 2
+U-009 | Attention-Based Timing of Automated Service | SOURCE_SUPPORTED | last: run 2
+U-010 | Five Levels of Agent Autonomy Defined by User Role | SOURCE_SUPPORTED | last: run 2
+U-011 | Autonomy as Design Decision Independent of Capability | SOURCE_SUPPORTED | last: run 2
+U-012 | Metacognitive Demands of GenAI — Goal Setting, Output Evaluation, Workflow Optimization | CONDITIONAL | last: run 2
+U-013 | Chat Interface Lacks Affordances and Baked-in Context Controls | SOURCE_SUPPORTED | last: run 3
+U-014 | Responses Are Isolated; No Working Buffer for Comparison | SOURCE_SUPPORTED | last: run 3
+U-015 | Implementation—Evaluation Loop Forced by Chat Interface | SOURCE_SUPPORTED | last: run 3
+U-016 | No Man's Land — Human Required but Not in Control | SOURCE_SUPPORTED | last: run 3
+U-017 | Daemons — Multiple Background Characters with Personalities Suggesting Revisions | SOURCE_SUPPORTED | last: run 3
+U-018 | Branches — Cause/Consequence Chains Exploration with LM Suggestions | SOURCE_SUPPORTED | last: run 3
+U-019 | Epi — Right-Click Context Menu for Research and Non-fiction Writing | SOURCE_SUPPORTED | last: run 3
+U-020 | Loom — Tree-Structured Multiverse Navigation for GPT-3 Writing | SOURCE_SUPPORTED | last: run 3
+U-021 | Language Models as Multiverse Generators; Branching as Power Multiplier | SOURCE_SUPPORTED | last: run 3
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 2 EXTENDS | Horvitz 1999 rozszerza mechanizm inicjatywy
+C-002 | UNITIZED | U-002 | run 1 NEW | rola w rozmowie
+C-003 | UNITIZED | U-003 | run 1 NEW | superpozycja
+C-004 | UNITIZED | U-004 | run 1 NEW | symulator vs simulacra
+C-005 | UNITIZED | U-005 | run 1 NEW | grounding acts
+C-006 | UNITIZED | U-006 | run 1 NEW | grounding gap
+C-007 | UNITIZED | U-007 | run 1 NEW | SFT i PO
+C-008 | UNITIZED | U-008 | run 2 NEW | expected utility
+C-009 | UNITIZED | U-009 | run 2 NEW | attention timing
+C-010 | UNITIZED | U-010 | run 2 NEW | five levels autonomy
+C-011 | UNITIZED | U-011 | run 2 NEW | autonomia jako design decision
+C-012 | UNITIZED | U-012 | run 2 NEW | metacognitive demands (abstrakt)
+C-013 | UNITIZED | U-013 | run 3 NEW | brak affordances w czacie
+C-014 | UNITIZED | U-014 | run 3 NEW | izolacja odpowiedzi
+C-015 | UNITIZED | U-015 | run 3 NEW | implement/evaluate loop
+C-016 | UNITIZED | U-016 | run 3 NEW | no man's land
+C-017 | UNITIZED | U-017 | run 3 NEW | Daemons (Appleton)
+C-018 | UNITIZED | U-018 | run 3 NEW | Branches (Appleton)
+C-019 | UNITIZED | U-019 | run 3 NEW | Epi (Appleton)
+C-020 | UNITIZED | U-020 | run 3 NEW | Loom (Janus)
+C-021 | UNITIZED | U-021 | run 3 NEW | multiverse generators
+
+REJECTED INFERENCES
+NONE
+
+AUDIT DELTA
+- I1 (source fidelity): wszystkie Unit oparte na odczytanych fragmentach źródeł; U-012 nadal CONDITIONAL (abstrakt)
+- I3 (identity): U-013–U-016 odrębne od U-001 (krytyka interfejsu czatu, nie mechanizm LLM)
+- I8 (no universal scoring): brak ocen wartości w SOURCE i EXTRACT
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostałe tropy z katalogu (RZ-08 teoria rozmowy, RZ-09 typologia dialogów, RZ-18 Sensecape, RZ-19 Cells/Generators/Lenses, RZ-23 AI Should Challenge, RZ-24 Cognitive Forcing Functions, RZ-25 Tools for Thought, RZ-26 Augmenting Human Intellect) nie zostały jeszcze otwarte; Simulators (RZ-01) nadal nieotwarty; Tankelevitch et al. (RZ-07) wymaga pełnego tekstu
+
+SYNTHESIS
+OBSERVATION: 21 Unitów w harvestcie; dziewięć z nich (U-013–U-021) pochodzi z krytyki czatu (Wattenberger) i szkiców alternatywnych interfejsów (Appleton, Janus).
+INFERENCE: Wattenberger identyfikuje cztery mechanizmy ograniczające czat: brak affordances, prompt jako pile of context, izolacja odpowiedzi, wymuszony loop implement/evaluate; Appleton i Janus proponują interfejsy, które omijają te ograniczenia (Daemons, Branches, Epi, Loom) przez baked-in controls, working buffer, tree-structured multiverse.
+OPEN_QUESTION: czy interfejsy允许多分支探索（Loom, Sensecape, Cells/Generators/Lenses) są warunkiem koniecznym do traktowania rozmowy jako eksploracji multiverse (U-003, U-021), czy czat liniowy też może pełnić tę rolę przez regenerację odpowiedzi i side-by-side diff?
+ASSESSMENT: priorytet A: otworzyć Simulators (RZ-01) i pełny tekst Tankelevitch et al. (RZ-07) w Runie 4; priorytet B: teoria rozmowy (RZ-08, RZ-09) i interfejsy Sensecape, Cells/Generators/Lenses (RZ-18, RZ-19).
