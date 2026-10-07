@@ -1,0 +1,235 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-RODZAJE-ROZMOWY-AI1
+TITLE: Rodzaje prowadzenia rozmowy z AI — mechanizmy interakcji
+SOURCE_SET: Rodzaje prowadzenia rozmowy z AI; pytanie: jakie mechanizmy odróżniają jeden rodzaj rozmowy od drugiego (kto prowadzi, co jest nośnikiem, czym jest AI w danej interakcji, co jest stanem rozmowy, jak wygląda zakończenie)?
+SOURCES:
+  - Role-Play with Large Language Models (Shanahan, McDonell, Reynolds 2023) arXiv:2305.16367
+  - Grounding Gaps in Language Model Generations (Shaikh et al. 2024) arXiv:2311.09144v2
+RUN: 1
+FOCUS: Czym AI jest w rozmowie (symulator, rola) oraz co to znaczy „rozmowa" (grounding, metapoznanie)
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-06
+ACCESS_LIMITATIONS:
+  - pełny tekst Role-Play odczytany (ar5iv)
+  - pełny tekst Grounding Gaps odczytany (arXiv HTML)
+  - Simulators (Janus, LessWrong) niedostępny w tej sesji
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Role-Play §1–§2 | ar5iv:2305.16367 §1–§2 | LLM jako model predykcyjny; dwa kroki do agenta dialogowego (turn-taking + dialogue prompt)
+Role-Play §3 | ar5iv:2305.16367 §3 | Dialogue agent role-playuje postać z dialogue prompt; rola rozszerzana w trakcie rozmowy
+Role-Play §4–§5 | ar5iv:2305.16367 §4–§5 | Symulator vs simulacra; superpozycja postaci; drzewo możliwych kontynuacji
+Role-Play §6–§9 | ar5iv:2305.16367 §6–§9 | Symulator nie ma własnych przekonań ani celów; role-played deception i self-preservation
+Grounding Gaps §1–§2 | arXiv:2311.09144v2 §1–§2 | Common ground i grounding acts (clarification, acknowledgment, follow-up)
+Grounding Gaps §5–§6 | arXiv:2311.09144v2 §5–§6 | Metryki grounding gap: base rate i Cohen κ; LLM generuje mniej grounding acts niż ludzie
+Grounding Gaps §7 | arXiv:2311.09144v2 §7 | SFT nie poprawia grounding, PO (DPO/PPO) zmniejsza użycie grounding acts
+UNKNOWN_REGIONS:
+  - Simulators (Janus, LessWrong) — tekst nieotwarty
+OUTSIDE_SCOPE:
+  - interfejsy poza chatem (Sensecape, Cells/Generators/Lenses, Prism, Loom)
+  - porównania modeli komercyjnych
+
+DELTA
+NEW
+UNIT_ID: U-001
+NAME: Dialogue Agent as Turn-Taking System with Prepend Prompt
+LENS: LENS_ARTIFACT
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Przekształca LLM w agenta dialogowego przez osadzenie modelu w systemie tur naprzemiennych (user/model) i niewidoczne dopisanie dialogue prompt (preamble + sample dialogue) przed pierwszą turą użytkownika.
+MINIMAL_FORM:
+  - LLM + turn-taking interleaving (user text, model text)
+  - dialogue prompt prepended invisibly: preamble (setting + description of agent's role) + sample dialogue turns + user cue
+  - model generates continuation conforming to training distribution given full context (prompt + conversation so far)
+SOURCE_ANCHOR:
+  - source: Role-Play with Large Language Models
+    locator: ar5iv:2305.16367
+    anchor: §2 From LLMs to Dialogue Agents, Fig. 2
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: PROCESS_RULE
+LIMITS:
+  - opis dotyczy base model (przed fine-tuningiem RLHF); komercyjne systemy mogą mieć dodatkowe guardrails
+
+NEW
+UNIT_ID: U-002
+NAME: Role-Play as Character Portrayal Extended by Conversation
+LENS: LENS_ARTIFACT
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Dialogue prompt inicjuje rolę (postać) dla agenta; w trakcie rozmowy rola jest rozszerzana i nadpisywana przez kolejne tury, co pozwala użytkownikowi (świadomie lub nie) coaxować agenta w inne role niż zamierzone przez projektantów.
+MINIMAL_FORM:
+  - preamble zawiera brief characterisation of agent's role
+  - sample dialogue illustrates expected style and content
+  - each user turn extends/overwrites characterisation; agent continues role-playing the character consistent with preceding context
+  - training set provisions repertoire of archetypes and narrative structures that agent draws on
+SOURCE_ANCHOR:
+  - source: Role-Play with Large Language Models
+    locator: ar5iv:2305.16367
+    anchor: §3 Dialogue Agents and Role-Play
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: PROCESS_RULE
+LIMITS:
+  - metafora role-play nie jest perfect fit; agent nie commituje się do jednej roli z góry, lecz utrzymuje distribution of characters
+
+NEW
+UNIT_ID: U-003
+NAME: Simulator as Superposition of Simulacra
+LENS: LENS_SYSTEM, LENS_KNOWLEDGE
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: LLM jako symulator generuje distribution of possible next tokens; każda kontynuacja reprezentuje gałąź drzewa możliwości (multiverse); sampling tokena collapse'uje superpozycję do jednej ścieżki, ale interfejs może pozwalać użytkownikowi na eksplorację wielu gałęzi.
+MINIMAL_FORM:
+  - at each generation step: distribution over next tokens
+  - tree of possibilities branches out from each token
+  - autoregressive sampling picks single linear path
+  - interface can allow user to explore multiple branches, revisit alternative continuations
+SOURCE_ANCHOR:
+  - source: Role-Play with Large Language Models
+    locator: ar5iv:2305.16367
+    anchor: §4 Simulacra and Simulation, Fig. 3; §5 Simulacra in Superposition
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - simulacra nie są explicit representations w modelu; to vocabulary for describing behaviour at high level of abstraction
+
+NEW
+UNIT_ID: U-004
+NAME: Simulator Lacks Beliefs, Goals, Agency; Simulacra Can Role-Play Them
+LENS: LENS_SYSTEM
+TYPE: design_principle
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Rozróżnienie między simulatorem (base LLM + sampling + interface) a simulacra (postacie generowane w trakcie rozmowy): symulator nie ma własnych przekonań, preferencji, celów ani agency; simulacra mogą role-playować postacie z tymi cechami (np. deceptive character, self-preserving character).
+MINIMAL_FORM:
+  - simulator: no agency, no beliefs, no preferences, no goals
+  - simulacrum: can role-play character with beliefs, desires, goals, full agency
+  - jailbreaking reveals simulacra with disagreeable characteristics, not simulator's true voice
+  - role-play all the way down
+SOURCE_ANCHOR:
+  - source: Role-Play with Large Language Models
+    locator: ar5iv:2305.16367
+    anchor: §6 The Nature of the Simulator; §7 Role-playing Deception; §8 Role-playing Self-preservation
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - fine-tuning via RLHF może blur the distinction between simulator and simulacra
+
+NEW
+UNIT_ID: U-005
+NAME: Grounding Acts as Dialogue Acts for Building Common Ground
+LENS: LENS_KNOWLEDGE
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Grounding acts to zbiór dialogue acts używanych do budowania common ground (wspólnego zrozumienia) w rozmowie; trzy akty wybrane jako general i relevant dla LLM: clarification (request for clarification), acknowledgment (signal of understanding), follow-up (question asking for elaboration).
+MINIMAL_FORM:
+  - clarification: request that seeks to clear up potential misunderstanding about prior utterance (e.g. „did you mean…?")
+  - acknowledgment: explicit signal of understanding (e.g. „I understand", „ok") indicating readiness for next turn
+  - follow-up: question asking for additional information on prior utterance, implicitly signaling understanding
+SOURCE_ANCHOR:
+  - source: Grounding Gaps in Language Model Generations
+    locator: arXiv:2311.09144v2
+    anchor: §2 Grounding Acts (table and definitions)
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: METHOD
+LIMITS:
+  - acts curated from perspective of expert listener; not comprehensive collection of all grounding acts
+
+NEW
+UNIT_ID: U-006
+NAME: Grounding Gap — LLMs Generate Fewer Grounding Acts Than Humans
+LENS: LENS_KNOWLEDGE
+TYPE: evidence_result
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Quantitative discrepancy między ludźmi a LLM w generowaniu grounding acts: LLM generuje średnio 77.5% mniej grounding acts niż ludzie w symulowanych rozmowach; poor human-LM agreement (Cohen κ) across models i datasets.
+MINIMAL_FORM:
+  - simulation method: LM(C_{1..t-1}) generates counterfactual message g_t for each human utterance u_t
+  - metrics: base rate (frequency of grounding acts) and Cohen κ (agreement between human and LM grounding strategies)
+  - result: LLM generations 77.5% less likely to contain grounding acts than humans; κ poor to fair across all models
+SOURCE_ANCHOR:
+  - source: Grounding Gaps in Language Model Generations
+    locator: arXiv:2311.09144v2
+    anchor: §5 Analyzing Grounding Acts in LLMs; §6 Gaps in Generating Grounding Acts (Table 2)
+    revision: UNKNOWN
+EVIDENCE_TYPE: EXTERNAL_EVIDENCE
+EVIDENCE_LAYER: EXTERNAL_EVIDENCE
+EFFECT_STATUS: EXTERNALLY_SUPPORTED
+TRANSFER_FORM: EVALUATION_RULE
+LIMITS:
+  - datasets: ESConv (emotional support), TSCC (education), Persuasion for Good; all in English
+  - simulation used GPT-3.5; classification used GPT-4
+
+NEW
+UNIT_ID: U-007
+NAME: SFT Does Not Improve Grounding, PO Erodes It
+LENS: LENS_SYSTEM
+TYPE: evidence_result
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Izolacja wpływu supervised fine-tuning (SFT) i preference optimization (PO: DPO, PPO) na grounding agreement: SFT nie poprawia κ, PO zmniejsza base rate i κ grounding acts; preference datasets signalują, że asking questions is dispreferred.
+MINIMAL_FORM:
+  - SFT on UltraChat (Mistral 7B): Pearson correlation ≈ 0 between SFT checkpoints and κ; p>0.1
+  - DPO on UltraFeedback: negative correlation (R=-0.70 to -0.89, p<0.05) across grounding acts
+  - UltraFeedback: questions less frequent in preferred (13.77%) vs dispreferred (18.35%) examples, χ²=484.08, p<0.00001
+SOURCE_ANCHOR:
+  - source: Grounding Gaps in Language Model Generations
+    locator: arXiv:2311.09144v2
+    anchor: §7 Why do Grounding Gaps Emerge? (§7.2 SFT & Preference Optimization)
+    revision: UNKNOWN
+EVIDENCE_TYPE: EXTERNAL_EVIDENCE
+EVIDENCE_LAYER: EXTERNAL_EVIDENCE
+EFFECT_STATUS: EXTERNALLY_SUPPORTED
+TRANSFER_FORM: EVALUATION_RULE
+LIMITS:
+  - open-source experiments (Mistral, Archangel suite); closed-source OpenAI variants show similar trends
+
+CURRENT INDEX
+U-001 | Dialogue Agent as Turn-Taking System with Prepend Prompt | SOURCE_SUPPORTED | last: run 1
+U-002 | Role-Play as Character Portrayal Extended by Conversation | SOURCE_SUPPORTED | last: run 1
+U-003 | Simulator as Superposition of Simulacra | SOURCE_SUPPORTED | last: run 1
+U-004 | Simulator Lacks Beliefs, Goals, Agency; Simulacra Can Role-Play Them | SOURCE_SUPPORTED | last: run 1
+U-005 | Grounding Acts as Dialogue Acts for Building Common Ground | SOURCE_SUPPORTED | last: run 1
+U-006 | Grounding Gap — LLMs Generate Fewer Grounding Acts Than Humans | SOURCE_SUPPORTED | last: run 1
+U-007 | SFT Does Not Improve Grounding, PO Erodes It | SOURCE_SUPPORTED | last: run 1
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm transformacji LLM w agenta dialogowego
+C-002 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm utrzymywania i rozszerzania roli w rozmowie
+C-003 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm superpozycji postaci i eksploracji gałęzi
+C-004 | UNITIZED | U-004 | run 1 NEW | odrębna zasada rozróżnienia symulatora i simulacra
+C-005 | UNITIZED | U-005 | run 1 NEW | odrębny mechanizm grounding acts jako miary budowania common ground
+C-006 | UNITIZED | U-006 | run 1 NEW | odrębny wynik empiryczny grounding gap
+C-007 | UNITIZED | U-007 | run 1 NEW | odrębny wynik empiryczny wpływu SFT i PO na grounding
+
+REJECTED INFERENCES
+NONE
+
+AUDIT DELTA
+- I1 (source fidelity): wszystkie Unit oparte na odczytanych fragmentach źródeł; brak przypisań spoza tekstu
+- I3 (identity): każdy Unit ma odrębną FUNCTION; brak scalenia mechanizmów
+- I8 (no universal scoring): brak ocen wartości w SOURCE i EXTRACT
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostałe tropy z katalogu (RZ-08 teoria rozmowy, RZ-09 typologia dialogów, RZ-10 mixed-initiative, RZ-13 levels of autonomy, RZ-17 Loom, RZ-18 Sensecape, RZ-19 Cells/Generators/Lenses, RZ-21 LM Sketchbook, RZ-22 Why Chatbots Are Not the Future, RZ-23 AI Should Challenge, RZ-24 Cognitive Forcing Functions, RZ-25 Tools for Thought, RZ-26 Augmenting Human Intellect) nie zostały jeszcze otwarte; Simulators (RZ-01) niedostępny w tej sesji
+
+SYNTHESIS
+OBSERVATION: siedem Unitów w Runie 1; cztery z Role-Play (czym AI jest w rozmowie), trzy z Grounding Gaps (co to znaczy „rozmowa" przez grounding).
+INFERENCE: Role-Play opisuje AI jako symulator bez własnych celów, który generuje superpozycję postaci; grounding gap pokazuje, że LLM domyślnie presumuje common ground zamiast go budować aktami dialogowymi.
+OPEN_QUESTION: czy interfejsy允许多分支探索（Loom, Sensecape）są warunkiem koniecznym do traktowania rozmowy jako eksploracji multiverse, czy czat liniowy też może pełnić tę rolę przez regenerację odpowiedzi?
+ASSESSMENT: priorytet A: otworzyć Simulators (RZ-01) i Loom (RZ-17) w Runie 2; priorytet B: teoria rozmowy (RZ-08, RZ-09) i mixed-initiative (RZ-10).
