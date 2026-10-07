@@ -1,0 +1,211 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-RODZAJE-ROZMOWY-AI1
+TITLE: Rodzaje prowadzenia rozmowy z AI — mechanizmy interakcji
+SOURCE_SET: Rodzaje prowadzenia rozmowy z AI; pytanie: jakie mechanizmy odróżniają jeden rodzaj rozmowy od drugiego (kto prowadzi, co jest nośnikiem, czym jest AI w danej interakcji, co jest stanem rozmowy, jak wygląda zakończenie)?
+SOURCES:
+  - Role-Play with Large Language Models (Shanahan, McDonell, Reynolds 2023) arXiv:2305.16367
+  - Grounding Gaps in Language Model Generations (Shaikh et al. 2024) arXiv:2311.09144v2
+  - Principles of Mixed-Initiative User Interfaces (Horvitz 1999) CHI '99
+  - Levels of Autonomy for AI Agents (Feng, McDonald, Zhang 2025) arXiv:2506.12469
+  - The Metacognitive Demands and Opportunities of Generative AI (Tankelevitch et al. 2024) CHI '24 — [ABSTRAKT]
+  - Why Chatbots Are Not the Future (Wattenberger 2023) wattenberger.com
+  - Language Model Sketchbook, or Why I Hate Chatbots (Appleton 2023) maggieappleton.com
+  - Loom: Interface to the Multiverse (Janus 2021) generative.ink
+  - Sensecape: Enabling Multilevel Exploration and Sensemaking with Large Language Models (Suh et al. 2023) UIST '23
+  - Cells, Generators, and Lenses: Design Framework for Object-Oriented Interaction with Large Language Models (Kim, Lee, Chang, Kim 2023) UIST '23
+  - AI Should Challenge, Not Obey (Sarkar 2024) CACM
+RUN: 4
+FOCUS: Interfejsy poza czatem (Sensecape, Cells/Generators/Lenses) oraz AI jako prowokator (Sarkar)
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-07
+ACCESS_LIMITATIONS:
+  - pełny tekst Sensecape odczytany (arXiv HTML)
+  - pełny tekst Cells, Generators, and Lenses odczytany (PDF)
+  - pełny tekst AI Should Challenge, Not Obey odczytany (arXiv PDF)
+  - Tankelevitch et al. 2024: tylko [ABSTRAKT] (pełny tekst nieotwarty)
+  - Simulators (Janus, LessWrong; RZ-01) nadal nieotwarty
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Sensecape §1–§2 | arXiv:2305.11483v2 | mismatch linear conversation vs nonlinear information work; foraging loop + sensemaking loop
+Sensecape §3.2 | arXiv:2305.11483v2 | canvas view (infinite whiteboard, nodes, expand bar, text extraction, semantic zoom, semantic dive) + hierarchy view (3D pseudo-space, adding/deleting canvases)
+Sensecape §4–§5 | arXiv:2305.11483v2 | user study: Sensecape vs Baseline (integrated chat+canvas); Sensecape users explore more topics, structure knowledge hierarchically
+Cells, Generators, Lenses §3 | UIST 2023 PDF | framework: cells (input units), generators (model instances), lenses (output visualizations); create, assemble, link, track
+Cells, Generators, Lenses §4 | UIST 2023 PDF | trzy interfejsy: copywriting, email composing, story writing; study N=18: więcej generacji, eksperymentów, użycia outputów
+Sarkar 2024 §AI as Provocateur | arXiv:2411.02263 | AI jako gadfly: krytyka, counter-argument, questions; nie assistant completing tasks
+Sarkar 2024 §Teaching Critical Thinking | arXiv:2411.02263 | Bloom taxonomy, Toulmin model, argument mapping; software implementations improve critical thinking
+UNKNOWN_REGIONS:
+  - Simulators (Janus, LessWrong) — tekst nieotwarty
+OUTSIDE_SCOPE:
+  - porównania modeli komercyjnych
+  - interfejsy Prism, Tools for Thought (RZ-25, RZ-26)
+
+DELTA
+NEW
+UNIT_ID: U-022
+NAME: Sensecape — Multilevel Exploration and Sensemaking via Canvas and Hierarchy Views
+LENS: LENS_ARTIFACT
+TYPE: interface_contract
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Interfejs do eksploracji i sensemaking z LLM przez externalization of levels of abstraction: canvas view (infinite whiteboard z nodes, expand bar, text extraction, semantic zoom, semantic dive) + hierarchy view (3D pseudo-space z canvases, broad topic, subtopics); users switch between foraging i sensemaking loops.
+MINIMAL_FORM:
+  - canvas view: node-first approach (double-click to add node); expand bar (Prompt, Explain, Questions, Subtopics); text extraction (highlight & drag to new node); semantic zoom (All → Summary → Keywords based on zoom level); semantic dive (double-click node to create new canvas layer below)
+  - hierarchy view: overview of information space; add higher-level canvas (Broad Topic), lower-level canvases (shadow underneath); create new hierarchies, connect hierarchies via higher-level topic
+  - LLM used for: summarizing canvas content into topic, generating Questions/Subtopics, recommending subtopics in hierarchy view
+SOURCE_ANCHOR:
+  - source: Sensecape: Enabling Multilevel Exploration and Sensemaking with Large Language Models
+    locator: arXiv:2305.11483v2
+    anchor: §3.2 User Interface & Features (Canvas View, Hierarchy View), §3.1 Motivating Scenario (C1–C6)
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: INTERFACE
+LIMITS:
+  - user study: within-subject N=12; tasks: AI impact on work, global warming on economy; 20 min per task; Sensecape users explored more topics (M=10.8 vs 7.3), structured knowledge more hierarchically (M=4.3 vs 2.6 levels)
+
+NEW
+UNIT_ID: U-023
+NAME: Cells, Generators, Lenses — Object-Oriented Interaction for Iteration and Experimentation
+LENS: LENS_ARTIFACT
+TYPE: design_principle
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Framework do projektowania interfejsów LLM: cells (input units: sentences, phrases, instructions), generators (model instances: engine, temperature, presence penalty, best of), lenses (output visualizations: list, space, rating, plot); interactions: create, copy, modify, assemble, link, track.
+MINIMAL_FORM:
+  - cells: create new cells, copy & edit variations, assemble into inputs (drag-and-drop, linking); minimize cells (font size, keywords) to save space
+  - generators: create multiple model instances, modify parameters, link to cells (many-to-many), track history (parameter changes, outputs)
+  - lenses: link generators to lenses (list, space, rating, plot), assemble lenses (multiple views of same outputs)
+SOURCE_ANCHOR:
+  - source: Cells, Generators, and Lenses: Design Framework for Object-Oriented Interaction with Large Language Models
+    locator: UIST 2023 PDF
+    anchor: §3 Cells, Generators, and Lenses (Fig. 2–4), §4 Applying the Framework (copywriting, email composing interfaces)
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - study N=18: participants using framework-based interface generated more outputs, experimented with more inputs, used outputs more substantially; workshop N=3 designers: framework bootstrapped and inspired
+
+NEW
+UNIT_ID: U-024
+NAME: AI as Provocateur — Critique, Counter-Argument, Questions Instead of Task Completion
+LENS: LENS_SYSTEM, LENS_KNOWLEDGE
+TYPE: design_principle
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Postulat zmiany metafory interakcji: AI nie jako assistant (completing tasks, optimizing efficiency), lecz jako provocateur (critiquing work, offering counter-arguments, asking questions); double-loop learning (inner: correct mistakes, outer: question underlying policies/goals).
+MINIMAL_FORM:
+  - provocateur does not complete report, draft email, write code, generate slides
+  - instead: critiques work (where arguments thin, what assumptions/biases, alternative perspectives, is it worth doing)
+  - engages in discussions, offers counter-arguments, asks questions to stimulate thinking
+  - interfaces less like chat, more like notations (argument maps, Toulmin model, Six Thinking Hats)
+SOURCE_ANCHOR:
+  - source: AI Should Challenge, Not Obey
+    locator: arXiv:2411.02263
+    anchor: §AI as Provocateur, §Teaching Critical Thinking, §Critical Thinking for Knowledge Work
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - esej stanowiskowy (CACM 2024); autor z Microsoft Research; przykłady z historycznego myślenia (Thomas Jefferson), argument mapping, Baloney Detection Kit
+
+NEW
+UNIT_ID: U-025
+NAME: Critical Thinking Tools Embedded in Knowledge Work Software
+LENS: LENS_KNOWLEDGE
+TYPE: method
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Propozycja wbudowania critical thinking tools w software dla knowledge work: word processors (argument maps, highlight claims, link evidence), spreadsheets (explicit reasoning, assumptions, limitations), design tools (interactive dialogue, creative friction, generate alternatives, critique ideas).
+MINIMAL_FORM:
+  - critical thinking hierarchy: knowledge recall, analysis, synthesis, evaluation (Bloom)
+  - Toulmin model: data, warrants, backing, qualifiers, claims, relationships
+  - argument mapping: claims, objections, evidence in hierarchy
+  - software implementations help students construct argumentative essays, evaluate arguments
+SOURCE_ANCHOR:
+  - source: AI Should Challenge, Not Obey
+    locator: arXiv:2411.02263
+    anchor: §Teaching Critical Thinking, §Critical Thinking for Knowledge Work
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: METHOD
+LIMITS:
+  - esej stanowiskowy; autor wskazuje missing pieces: rigorous prompt engineering for critiques, benchmark tasks for provocateur agents, methods for explaining LM behaviour to non-experts
+
+CURRENT INDEX
+U-001 | Dialogue Agent as Turn-Taking System with Prepend Prompt | SOURCE_SUPPORTED | last: run 2
+U-002 | Role-Play as Character Portrayal Extended by Conversation | SOURCE_SUPPORTED | last: run 1
+U-003 | Simulator as Superposition of Simulacra | SOURCE_SUPPORTED | last: run 1
+U-004 | Simulator Lacks Beliefs, Goals, Agency; Simulacra Can Role-Play Them | SOURCE_SUPPORTED | last: run 1
+U-005 | Grounding Acts as Dialogue Acts for Building Common Ground | SOURCE_SUPPORTED | last: run 1
+U-006 | Grounding Gap — LLMs Generate Fewer Grounding Acts Than Humans | SOURCE_SUPPORTED | last: run 1
+U-007 | SFT Does Not Improve Grounding, PO Erodes It | SOURCE_SUPPORTED | last: run 1
+U-008 | Expected Utility Thresholds for Agent Action and Dialog | SOURCE_SUPPORTED | last: run 2
+U-009 | Attention-Based Timing of Automated Service | SOURCE_SUPPORTED | last: run 2
+U-010 | Five Levels of Agent Autonomy Defined by User Role | SOURCE_SUPPORTED | last: run 2
+U-011 | Autonomy as Design Decision Independent of Capability | SOURCE_SUPPORTED | last: run 2
+U-012 | Metacognitive Demands of GenAI — Goal Setting, Output Evaluation, Workflow Optimization | CONDITIONAL | last: run 2
+U-013 | Chat Interface Lacks Affordances and Baked-in Context Controls | SOURCE_SUPPORTED | last: run 3
+U-014 | Responses Are Isolated; No Working Buffer for Comparison | SOURCE_SUPPORTED | last: run 3
+U-015 | Implementation—Evaluation Loop Forced by Chat Interface | SOURCE_SUPPORTED | last: run 3
+U-016 | No Man's Land — Human Required but Not in Control | SOURCE_SUPPORTED | last: run 3
+U-017 | Daemons — Multiple Background Characters with Personalities Suggesting Revisions | SOURCE_SUPPORTED | last: run 3
+U-018 | Branches — Cause/Consequence Chains Exploration with LM Suggestions | SOURCE_SUPPORTED | last: run 3
+U-019 | Epi — Right-Click Context Menu for Research and Non-fiction Writing | SOURCE_SUPPORTED | last: run 3
+U-020 | Loom — Tree-Structured Multiverse Navigation for GPT-3 Writing | SOURCE_SUPPORTED | last: run 3
+U-021 | Language Models as Multiverse Generators; Branching as Power Multiplier | SOURCE_SUPPORTED | last: run 3
+U-022 | Sensecape — Multilevel Exploration and Sensemaking via Canvas and Hierarchy Views | SOURCE_SUPPORTED | last: run 4
+U-023 | Cells, Generators, Lenses — Object-Oriented Interaction for Iteration and Experimentation | SOURCE_SUPPORTED | last: run 4
+U-024 | AI as Provocateur — Critique, Counter-Argument, Questions Instead of Task Completion | SOURCE_SUPPORTED | last: run 4
+U-025 | Critical Thinking Tools Embedded in Knowledge Work Software | SOURCE_SUPPORTED | last: run 4
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 2 EXTENDS | Horvitz 1999 rozszerza mechanizm inicjatywy
+C-002 | UNITIZED | U-002 | run 1 NEW | rola w rozmowie
+C-003 | UNITIZED | U-003 | run 1 NEW | superpozycja
+C-004 | UNITIZED | U-004 | run 1 NEW | symulator vs simulacra
+C-005 | UNITIZED | U-005 | run 1 NEW | grounding acts
+C-006 | UNITIZED | U-006 | run 1 NEW | grounding gap
+C-007 | UNITIZED | U-007 | run 1 NEW | SFT i PO
+C-008 | UNITIZED | U-008 | run 2 NEW | expected utility
+C-009 | UNITIZED | U-009 | run 2 NEW | attention timing
+C-010 | UNITIZED | U-010 | run 2 NEW | five levels autonomy
+C-011 | UNITIZED | U-011 | run 2 NEW | autonomia jako design decision
+C-012 | UNITIZED | U-012 | run 2 NEW | metacognitive demands (abstrakt)
+C-013 | UNITIZED | U-013 | run 3 NEW | brak affordances w czacie
+C-014 | UNITIZED | U-014 | run 3 NEW | izolacja odpowiedzi
+C-015 | UNITIZED | U-015 | run 3 NEW | implement/evaluate loop
+C-016 | UNITIZED | U-016 | run 3 NEW | no man's land
+C-017 | UNITIZED | U-017 | run 3 NEW | Daemons (Appleton)
+C-018 | UNITIZED | U-018 | run 3 NEW | Branches (Appleton)
+C-019 | UNITIZED | U-019 | run 3 NEW | Epi (Appleton)
+C-020 | UNITIZED | U-020 | run 3 NEW | Loom (Janus)
+C-021 | UNITIZED | U-021 | run 3 NEW | multiverse generators
+C-022 | UNITIZED | U-022 | run 4 NEW | Sensecape (multilevel exploration)
+C-023 | UNITIZED | U-023 | run 4 NEW | Cells, Generators, Lenses (object-oriented)
+C-024 | UNITIZED | U-024 | run 4 NEW | AI as provocateur (Sarkar)
+C-025 | UNITIZED | U-025 | run 4 NEW | critical thinking tools embedded
+
+REJECTED INFERENCES
+NONE
+
+AUDIT DELTA
+- I1 (source fidelity): wszystkie Unit oparte na odczytanych fragmentach źródeł; U-012 nadal CONDITIONAL (abstrakt)
+- I3 (identity): U-022–U-025 odrębne od U-013–U-021 (interfejsy poza czatem, AI jako prowokator)
+- I8 (no universal scoring): brak ocen wartości w SOURCE i EXTRACT
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostałe tropy z katalogu (RZ-08 teoria rozmowy, RZ-09 typologia dialogów, RZ-24 Cognitive Forcing Functions, RZ-25 Tools for Thought, RZ-26 Augmenting Human Intellect) nie zostały jeszcze otwarte; Simulators (RZ-01) nadal nieotwarty; Tankelevitch et al. (RZ-07) wymaga pełnego tekstu
+
+SYNTHESIS
+OBSERVATION: 25 Unitów w harvestcie; cztery z nich (U-022–U-025) pochodzą z interfejsów poza czatem (Sensecape, Cells/Generators/Lenses) oraz eseju o AI jako prowokatorze (Sarkar).
+INFERENCE: Sensecape i Cells/Generators/Lenses omijają ograniczenia czatu (izolacja odpowiedzi, brak working buffer, linear conversation) przez externalization of abstraction levels i object-oriented interaction; Sarkar postuluje zmianę metafory z assistant na provocateur, co wymaga interfejsów mniej chat-like, a bardziej notation-like (argument maps, Toulmin model).
+OPEN_QUESTION: czy interfejsy允许多分支探索（Loom, Sensecape, Cells/Generators/Lenses) są warunkiem koniecznym do traktowania rozmowy jako eksploracji multiverse (U-003, U-021), czy czat liniowy też może pełnić tę rolę przez regenerację odpowiedzi i side-by-side diff?
+ASSESSMENT: priorytet A: otworzyć Simulators (RZ-01) i pełny tekst Tankelevitch et al. (RZ-07) w Runie 5; priorytet B: teoria rozmowy (RZ-08, RZ-09) i cognitive forcing functions (RZ-24), Tools for Thought (RZ-25), Augmenting Human Intellect (RZ-26).
