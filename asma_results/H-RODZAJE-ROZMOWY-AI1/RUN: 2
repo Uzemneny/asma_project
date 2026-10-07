@@ -1,0 +1,219 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-RODZAJE-ROZMOWY-AI1
+TITLE: Rodzaje prowadzenia rozmowy z AI — mechanizmy interakcji
+SOURCE_SET: Rodzaje prowadzenia rozmowy z AI; pytanie: jakie mechanizmy odróżniają jeden rodzaj rozmowy od drugiego (kto prowadzi, co jest nośnikiem, czym jest AI w danej interakcji, co jest stanem rozmowy, jak wygląda zakończenie)?
+SOURCES:
+  - Role-Play with Large Language Models (Shanahan, McDonell, Reynolds 2023) arXiv:2305.16367
+  - Grounding Gaps in Language Model Generations (Shaikh et al. 2024) arXiv:2311.09144v2
+  - Principles of Mixed-Initiative User Interfaces (Horvitz 1999) CHI '99
+  - Levels of Autonomy for AI Agents (Feng, McDonald, Zhang 2025) arXiv:2506.12469
+  - The Metacognitive Demands and Opportunities of Generative AI (Tankelevitch et al. 2024) CHI '24 — [ABSTRAKT] (pełny tekst nieotwarty)
+RUN: 2
+FOCUS: Kto prowadzi (inicjatywa, autonomia) oraz metapoznanie użytkownika w interakcji z GenAI
+INPUT_MODE: SOURCE_ONLY
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-07
+ACCESS_LIMITATIONS:
+  - pełny tekst Horvitz 1999 odczytany (PDF)
+  - pełny tekst Feng et al. 2025 odczytany (arXiv HTML)
+  - Tankelevitch et al. 2024: tylko metadane i cytaty w pracach wtórnych; pełny tekst nieotwarty
+  - Simulators (Janus, LessWrong; RZ-01) i Loom (RZ-17) nadal nieotwarte
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Horvitz 1999 §1–§3 | erichorvitz.com/chi99horvitz.pdf | problem: rozbieżność direct manipulation vs interface agents; mixed-initiative jako integracja
+Horvitz 1999 §4 (12 zasad) | erichorvitz.com/chi99horvitz.pdf | zasady przekazywania inicjatywy: value-added automation, uncertainty, timing, expected utility, dialog, invocation/termination, degradation, collaboration, social norms, memory, learning
+Horvitz 1999 §5–§7 | erichorvitz.com/chi99horvitz.pdf | LookOut: value-added service (calendaring), decision making under uncertainty (SVM classifier), multiple modalities (manual, automated, social agent)
+Horvitz 1999 §8–§9 | erichorvitz.com/chi99horvitz.pdf | expected utility thresholds (p*), dialog jako trzecia opcja między inaction a action; attention models i timing of service
+Feng et al. 2025 §1–§2 | arXiv:2506.12469 | autonomia jako design decision; rozróżnienie agency vs autonomy; five user roles (operator, collaborator, consultant, approver, observer)
+Feng et al. 2025 §3.1–§3.5 | arXiv:2506.12469 | L1–L5: mechanizmy kontroli użytkownika na każdym poziomie (planning, delegation, consultation, approval, monitoring + off-switch)
+Feng et al. 2025 §4 | arXiv:2506.12469 | autonomy certificates jako aplikacja frameworka (risk assessment, multi-agent coordination)
+Tankelevitch et al. 2024 [ABSTRAKT] | arXiv:2312.10893 (metadane) | metacognition jako lens: monitoring i control of one's thoughts; GenAI imposes demands (goal setting, output evaluation, workflow optimization)
+UNKNOWN_REGIONS:
+  - Simulators (Janus, LessWrong) — tekst nieotwarty
+  - Loom (generative.ink) — tekst nieotwarty
+OUTSIDE_SCOPE:
+  - interfejsy poza chatem (Sensecape, Cells/Generators/Lenses, Prism)
+  - porównania modeli komercyjnych
+
+DELTA
+EXTENDS
+UNIT_ID: U-001
+ADDED:
+  - Horvitz 1999: mixed-initiative jako elegant coupling automated services + direct manipulation; 12 zasad przekazywania inicjatywy (value-added, uncertainty, timing, expected utility, dialog, invocation/termination, degradation, collaboration, social norms, memory, learning)
+  - LookOut: SVM classifier infers p(G|E); thresholds p* dla action i dialog; timing model (sigmoid dwell time vs message length)
+SOURCE_ANCHOR:
+  - source: Principles of Mixed-Initiative User Interfaces
+    locator: erichorvitz.com/chi99horvitz.pdf
+    anchor: §PRINCIPLES FOR MIXED-INITIATIVE UI (12 zasad), §DECISION MAKING UNDER UNCERTAINTY, §USER ATTENTION AND THE TIMING OF SERVICE
+    revision: UNKNOWN
+
+NEW
+UNIT_ID: U-008
+NAME: Expected Utility Thresholds for Agent Action and Dialog
+LENS: LENS_SYSTEM
+TYPE: algorithm
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Decyzja o autonomii agenta oparta na expected utility: porównanie eu(A|E) i eu(¬A|E) wyznacza threshold probability p*; powyżej p* action, poniżej inaction; dialog jako trzecia opcja z własnymi thresholdami (p*¬A,D i p*D,A).
+MINIMAL_FORM:
+  - compute p(G|E) z observables (np. text classification)
+  - assign utilities: u(A,G), u(A,¬G), u(¬A,G), u(¬A,¬G)
+  - compute eu(A|E) = p(G|E)u(A,G) + [1-p(G|E)]u(A,¬G)
+  - compute eu(¬A|E) = p(G|E)u(¬A,G) + [1-p(¬G|E)]u(¬A,¬G)
+  - threshold p* where eu(A|E) = eu(¬A|E); action if p(G|E) > p*
+  - extend to dialog: u(D,G), u(D,¬G); thresholds p*¬A,D (inaction→dialog) i p*D,A (dialog→action)
+SOURCE_ANCHOR:
+  - source: Principles of Mixed-Initiative User Interfaces
+    locator: erichorvitz.com/chi99horvitz.pdf
+    anchor: §FROM BELIEFS TO ACTIONS (Equations 1–3, Fig. 4–6)
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: ALGORITHM
+LIMITS:
+  - utilities mogą być context-dependent (attention, screen real estate, rush); thresholds mogą być directly assessed by designers or users zamiast explicit computation
+
+NEW
+UNIT_ID: U-009
+NAME: Attention-Based Timing of Automated Service
+LENS: LENS_SYSTEM
+TYPE: process_constraint
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Timing automated services zależy od estimated readiness użytkownika; model attention (np. dwell time vs message length) deferuje akcję do momentu, gdy cost of interruption jest niższy.
+MINIMAL_FORM:
+  - monitor user activity (message size, focus, signs of thinking: "hmmm…")
+  - fit timing model (sigmoid: dwell time = f(message length))
+  - defer service until predicted ready time; increase dwell if user shows signs of thinking
+  - allow fixed delay or custom-tailored model via learning mode
+SOURCE_ANCHOR:
+  - source: Principles of Mixed-Initiative User Interfaces
+    locator: erichorvitz.com/chi99horvitz.pdf
+    anchor: §USER ATTENTION AND THE TIMING OF SERVICE, Fig. 7
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: PROCESS_RULE
+LIMITS:
+  - model domyślny (pretrained) lub custom-tailored via regression on user data; users mogą specify policy for continual learning
+
+NEW
+UNIT_ID: U-010
+NAME: Five Levels of Agent Autonomy Defined by User Role
+LENS: LENS_SYSTEM
+TYPE: design_principle
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Framework pięciu poziomów autonomii agenta, zdefiniowanych przez rolę użytkownika: L1 operator (user-managed planning, invocation/approval before actions), L2 collaborator (shared planning, control transfer, shared representation), L3 consultant (agent plans, consults user for expertise/preferences), L4 approver (agent requests involvement only for blockers/high-risk actions), L5 observer (full autonomy, monitoring + emergency off-switch).
+MINIMAL_FORM:
+  - L1: user performs high-level planning; agent requires invocation or approval before actions; avoids preference-based decision-making
+  - L2: user and agent collaboratively plan, delegate, execute; user can modify agent's work and take control anytime
+  - L3: agent plans and executes most tasks; user consulted for expertise/preferences; user can request changes but not directly take control
+  - L4: agent requests user involvement only when reaching failure or high-risk state; user may specify conditions for seeking approval
+  - L5: agent plans and executes all tasks; user can monitor via activity logs; only control is emergency off-switch
+SOURCE_ANCHOR:
+  - source: Levels of Autonomy for AI Agents
+    locator: arXiv:2506.12469
+    anchor: §3 Five Levels of Autonomy for AI Agents (§3.1–§3.5), Table 1
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - autonomia traktowana jako deliberate design decision, separate from capability; example systems w Table 1 based on public releases as of June 2025
+
+NEW
+UNIT_ID: U-011
+NAME: Autonomy as Design Decision Independent of Capability
+LENS: LENS_SYSTEM
+TYPE: design_principle
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Rozróżnienie agency (capacity to act intentionally) i autonomy (extent to which agent is designed to operate without user involvement); ta sama capability może być użyta na różnych poziomach autonomii przez różne constraints (invocation, approval, consultation).
+MINIMAL_FORM:
+  - agency: set of tools/actions available to agent
+  - autonomy: degree of user involvement required (from full control to monitoring only)
+  - same capable agent can be L1 (requires approval per action) or L5 (fully autonomous) depending on design constraints
+SOURCE_ANCHOR:
+  - source: Levels of Autonomy for AI Agents
+    locator: arXiv:2506.12469
+    anchor: §2.2 Agency and autonomy, §3 Five Levels of Autonomy
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - framework user-centered: autonomy defined by user role, not by model benchmarks
+
+NEW
+UNIT_ID: U-012
+NAME: Metacognitive Demands of GenAI — Goal Setting, Output Evaluation, Workflow Optimization
+LENS: LENS_KNOWLEDGE
+TYPE: claim
+STATUS: CONDITIONAL
+FUNCTION: GenAI systems impose high metacognitive demands on users: muszą monitorować i kontrolować własne myślenie (goal setting, evaluating outputs, optimizing workflows) przy jednoczesnej ekspozycji na fluent, persuasive outputs; metacognition jako lens do zrozumienia usability challenges.
+MINIMAL_FORM:
+  - users must set goals explicitly (prompting)
+  - users must evaluate AI outputs critically (detect hallucinations, bias, relevance)
+  - users must optimize workflows (decide when to delegate, iterate, or stop)
+  - metacognitive support strategies could reduce demands (explainability, customizability)
+SOURCE_ANCHOR:
+  - source: The Metacognitive Demands and Opportunities of Generative AI
+    locator: arXiv:2312.10893
+    anchor: [ABSTRAKT] (metadane: abstract, keywords, citation w pracach wtórnych)
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: DOCUMENTED_DESIGN
+EFFECT_STATUS: CLAIMED
+TRANSFER_FORM: DESIGN_PRINCIPLE
+LIMITS:
+  - pełny tekst nieotwarty; jednostka oparta na abstrakcie i cytatach w pracach wtórnych ([38][39][43][44]); wymaga weryfikacji w Runie z pełnym tekstem
+
+CURRENT INDEX
+U-001 | Dialogue Agent as Turn-Taking System with Prepend Prompt | SOURCE_SUPPORTED | last: run 2
+U-002 | Role-Play as Character Portrayal Extended by Conversation | SOURCE_SUPPORTED | last: run 1
+U-003 | Simulator as Superposition of Simulacra | SOURCE_SUPPORTED | last: run 1
+U-004 | Simulator Lacks Beliefs, Goals, Agency; Simulacra Can Role-Play Them | SOURCE_SUPPORTED | last: run 1
+U-005 | Grounding Acts as Dialogue Acts for Building Common Ground | SOURCE_SUPPORTED | last: run 1
+U-006 | Grounding Gap — LLMs Generate Fewer Grounding Acts Than Humans | SOURCE_SUPPORTED | last: run 1
+U-007 | SFT Does Not Improve Grounding, PO Erodes It | SOURCE_SUPPORTED | last: run 1
+U-008 | Expected Utility Thresholds for Agent Action and Dialog | SOURCE_SUPPORTED | last: run 2
+U-009 | Attention-Based Timing of Automated Service | SOURCE_SUPPORTED | last: run 2
+U-010 | Five Levels of Agent Autonomy Defined by User Role | SOURCE_SUPPORTED | last: run 2
+U-011 | Autonomy as Design Decision Independent of Capability | SOURCE_SUPPORTED | last: run 2
+U-012 | Metacognitive Demands of GenAI — Goal Setting, Output Evaluation, Workflow Optimization | CONDITIONAL | last: run 2
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 2 EXTENDS | Horvitz 1999 rozszerza mechanizm inicjatywy o expected utility i timing
+C-002 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm utrzymywania roli
+C-003 | UNITIZED | U-003 | run 1 NEW | superpozycja postaci
+C-004 | UNITIZED | U-004 | run 1 NEW | rozróżnienie symulatora i simulacra
+C-005 | UNITIZED | U-005 | run 1 NEW | grounding acts
+C-006 | UNITIZED | U-006 | run 1 NEW | grounding gap empiryczny
+C-007 | UNITIZED | U-007 | run 1 NEW | wpływ SFT i PO na grounding
+C-008 | UNITIZED | U-008 | run 2 NEW | expected utility thresholds dla action i dialog
+C-009 | UNITIZED | U-009 | run 2 NEW | attention-based timing service
+C-010 | UNITIZED | U-010 | run 2 NEW | five levels of autonomy by user role
+C-011 | UNITIZED | U-011 | run 2 NEW | autonomia jako design decision independent of capability
+C-012 | UNITIZED | U-012 | run 2 NEW | metacognitive demands GenAI (abstrakt)
+
+REJECTED INFERENCES
+NONE
+
+AUDIT DELTA
+- I1 (source fidelity): U-012 oznaczony CONDITIONAL z powodu [ABSTRAKT]; pełny tekst Tankelevitch et al. nieotwarty
+- I3 (identity): U-008 i U-009 odrębne od U-001 (inicjatywa w LLM vs mixed-initiative w agentach pre-LLM)
+- I8 (no universal scoring): brak ocen wartości w SOURCE i EXTRACT
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: pozostałe tropy z katalogu (RZ-08 teoria rozmowy, RZ-09 typologia dialogów, RZ-13 levels of autonomy już odczytane, RZ-17 Loom, RZ-18 Sensecape, RZ-19 Cells/Generators/Lenses, RZ-21 LM Sketchbook, RZ-22 Why Chatbots Are Not the Future, RZ-23 AI Should Challenge, RZ-24 Cognitive Forcing Functions, RZ-25 Tools for Thought, RZ-26 Augmenting Human Intellect) nie zostały jeszcze otwarte; Simulators (RZ-01) i Loom (RZ-17) nadal nieotwarte; Tankelevitch et al. (RZ-07) wymaga pełnego tekstu
+
+SYNTHESIS
+OBSERVATION: 12 Unitów w harvestcie; cztery z nich (U-008–U-011) pochodzą z literatury pre-LLM i post-LLM o inicjatywie i autonomii (Horvitz 1999, Feng et al. 2025).
+INFERENCE: Horvitz 1999 opisuje mechanizm przekazywania inicjatywy przez expected utility thresholds i attention-based timing; Feng et al. 2025 rozszerza to o pięć ról użytkownika (operator→observer) jako suwak autonomii; oba źródła traktują inicjatywę/autonomię jako design decision, nie emergentną własność modelu.
+OPEN_QUESTION: czy interfejsy允许多分支探索（Loom, Sensecape）są warunkiem koniecznym do traktowania rozmowy jako eksploracji multiverse (U-003), czy czat liniowy też może pełnić tę rolę przez regenerację odpowiedzi?
+ASSESSMENT: priorytet A: otworzyć Simulators (RZ-01), Loom (RZ-17) i pełny tekst Tankelevitch et al. (RZ-07) w Runie 3; priorytet B: teoria rozmowy (RZ-08, RZ-09) i interfejsy poza chatem (RZ-18, RZ-19, RZ-21, RZ-22).
