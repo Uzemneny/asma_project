@@ -1,0 +1,176 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-HOMO1
+TITLE: Anti-Homogenization Mechanisms in Human-AI and Multi-Agent Systems
+SOURCE_SET: Mechanizmy przeciwdziałania homogenizacji w AI; pytanie: jakie struktury, metody lub protokoły realnie zmniejszają utratę różnorodności w głosie człowieka i w grupach agentów AI
+SOURCES:
+  - arXiv:2604.18005 (Diversity Collapse in Multi-Agent LLM Systems)
+  - arXiv:2606.29270 (Minority Sentinel: When to Overturn Majority Voting)
+  - arXiv:2609.00683 (Creative Generation via Multi-Agent Debate)
+  - arXiv:2604.24444 (Post-Editing LLM-Generated Drafts for Style)
+RUN: 1
+FOCUS: Strukturalne interwencje w generacji, debacie wieloagentowej i redakcji tekstu
+INPUT_MODE: SOURCE_PLUS_CONTEXT
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-08
+ACCESS_LIMITATIONS:
+  - wybrane preprinty i artykuły z lat 2025–2026 zweryfikowane pod kątem mechanizmów
+  - skuteczność w języku polskim nie została bezpośrednio zmierzona w przytoczonych źródłach
+TARGET_PROFILE:
+  id: TP-HOMO1
+  version: 1.0
+  target: Zachowanie autentycznego głosu użytkownika w redakcji AI oraz zapewnienie realnej, a nie kosmetycznej, różnorodności wniosków w grupie około 12 agentów na jednym modelu.
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Multi-Agent Independence | arXiv:2604.18005, sekcja interventions | Wdrożenie Nominal Group Technique (NGT) z fazą "blind-writing" redukuje wczesną konwergencję.
+Minority Protection | arXiv:2606.29270, sekcja method | Meta-klasyfikator LightGBM analizujący 22-wymiarowy "debate fingerprint" do odwracania błędnych decyzji większości.
+Cognitive Diversity | arXiv:2609.00683, sekcja Creative-MAD | Szablony "cognitive lens" wymuszające odmienny tok rozumowania, przeciwdziałające "identity drift".
+Human Voice Preservation | arXiv:2604.24444, sekcja study design | Post-edycja kierowana zasadą "nie przepisuj, sugeruj" zwiększa zgodność stylistyczną z oryginałem.
+UNKNOWN_REGIONS: NONE
+OUTSIDE_SCOPE:
+  - trening lub dostrajanie (fine-tuning) modeli bazowych
+  - ogólne porady kreatywne bez zdefiniowanego procesu
+
+DELTA
+NEW
+UNIT_ID: U-001
+NAME: Independent Blind-Writing Phase
+LENS: LENS_SYSTEM, LENS_KNOWLEDGE
+TYPE: process_constraint
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Wymusza niezależne generowanie idei lub rozwiązań przez agentów przed jakąkolwiek interakcją, zapobiegając efektowi "majority pull" i wczesnej konwergencji semantycznej.
+MINIMAL_FORM:
+  - Krok 1: Każdy agent generuje N rozwiązań w izolacji (brak dostępu do stanu lub wyjść innych agentów).
+  - Krok 2: Agregacja wszystkich wyjść do wspólnej puli.
+  - Krok 3: Dopiero po agregacji uruchomienie debaty, oceny lub dalszego przetwarzania.
+SOURCE_ANCHOR:
+  - source: arXiv:2604.18005
+    locator: Diversity Collapse in Multi-Agent LLM Systems
+    anchor: sekcja opisująca Nominal Group Technique (NGT) jako interwencję strukturalną
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: TESTED_BEHAVIOR
+DEPENDENCIES:
+  - mechanizm orkiestracji zdolny do izolowania kontekstu agentów w fazie generacji
+MUST_BE_TRUE: Agenci nie mają dostępu do tokenów wygenerowanych przez innych agentów w fazie 1.
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: PROCESS_RULE, WORKFLOW
+LIMITS:
+  - nie eliminuje zbieżności, jeśli pula zadań lub model bazowy są silnie biasowane
+  - zwiększa koszt obliczeniowy o fazę izolowaną
+
+NEW
+UNIT_ID: U-002
+NAME: Multi-Dimensional Debate Fingerprinting
+LENS: LENS_SYSTEM, LENS_ARTIFACT
+TYPE: evaluation_rule
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Wykrywa sytuacje, w których mniejszościowa opinia w debacie wieloagentowej jest uzasadniona, i odwraca decyzję większości, używając lekkiego klasyfikatora na podstawie logów debaty, bez modyfikacji wag modelu.
+MINIMAL_FORM:
+  - Ekstrakcja 22-wymiarowego wektora cech ("debate fingerprint") z logów debaty.
+  - Ocena przez zewnętrzny meta-klasyfikator (np. LightGBM).
+  - Warunkowe odwrócenie wyniku głosowania większościowego, jeśli fingerprint wskazuje na błąd konwergencji (np. "artificial hivemind").
+SOURCE_ANCHOR:
+  - source: arXiv:2606.29270
+    locator: Minority Sentinel: When to Overturn Majority Voting in Multi-Agent LLM Debates
+    anchor: opis architektury Minority Sentinel i wektora cech
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: TESTED_BEHAVIOR
+DEPENDENCIES:
+  - dostęp do pełnych logów debaty (nie tylko finalnych głosów)
+  - wytrenowany meta-klasyfikator dla danej domeny zadań
+MUST_BE_TRUE: Meta-klasyfikator został wytrenowany na reprezentatywnych przykładach błędów konwergencji.
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: ALGORITHM, EVALUATION_RULE
+LIMITS:
+  - wymaga fazy treningowej meta-klasyfikatora
+  - skuteczność zależy od jakości ekstraktora cech z logów
+
+NEW
+UNIT_ID: U-003
+NAME: Cognitive Lens Template Assignment
+LENS: LENS_SYSTEM
+TYPE: routing
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Przeciwdziała "identity drift" w debatach wieloagentowych przez przypisanie każdemu agentowi sztywnego, formalnego szablonu poznawczego, który wymusza odmienny tok rozumowania niezależnie od bazowego modelu.
+MINIMAL_FORM:
+  - Przypisanie unikalnego szablonu "cognitive lens" (np. analityk danych, krytyk założenia, optymalizator zasobów) do każdego agenta przed debatą.
+  - Wymuszenie generowania odpowiedzi wyłącznie przez pryzmat przypisanej soczewki (np. przez system prompt).
+  - Agregacja wyników z zachowaniem metadanych źródłowej soczewki.
+SOURCE_ANCHOR:
+  - source: arXiv:2609.00683
+    locator: Creative Generation via Multi-Agent Debate
+    anchor: opis mechanizmu Creative-MAD i szablonów soczewek poznawczych
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: TESTED_BEHAVIOR
+DEPENDENCIES:
+  - system prompt lub mechanizm wstrzykiwania kontekstu na poziomie żądania
+MUST_BE_TRUE: Szablony soczewek są wzajemnie wykluczające się w zakresie perspektywy analitycznej.
+ENFORCEMENT: SCHEMA_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: PROMPT_FRAGMENT, PROCESS_RULE
+LIMITS:
+  - nie zapobiega zbieżności, jeśli model bazowy silnie ignoruje instrukcje soczewki na rzecz dominującego wzorca w danych treningowych
+
+NEW
+UNIT_ID: U-004
+NAME: Voice DNA Extraction and Master Lock Prompting
+LENS: LENS_SYSTEM, LENS_ARTIFACT
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Zabezpiecza autentyczny głos użytkownika przed homogenizacją przez AI, tworząc stały wzorzec stylistyczny na podstawie próbki tekstu lub mowy, który jest wstrzykiwany jako ograniczenie przed redakcją.
+MINIMAL_FORM:
+  - Krok 1: Analiza próbki niezmienionego tekstu lub transkrypcji mowy użytkownika w celu wydobycia "DNA głosu" (słownictwo, rytm, celowe błędy, skróty).
+  - Krok 2: Generowanie jednostronicowej "Voice Card" lub bloku kontekstowego.
+  - Krok 3: Instrukcja dla AI: "Sugeruj edycje zachowujące ten wzorzec, nie przepisuj tekstu, jeśli nie jest to konieczne do poprawy jasności".
+SOURCE_ANCHOR:
+  - source: arXiv:2604.24444
+    locator: Can You Make It Sound Like You? Post-Editing LLM-Generated Drafts
+    anchor: wyniki badania pokazujące zwiększenie podobieństwa stylistycznego przy post-edycji
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: TESTED_BEHAVIOR
+DEPENDENCIES:
+  - próbka tekstu lub mowy reprezentatywna dla docelowego stylu
+  - model zdolny do przestrzegania negatywnych instrukcji ("nie przepisuj")
+MUST_BE_TRUE: Instrukcja "Voice Lock" jest dołączana do każdego żądania redakcyjnego.
+ENFORCEMENT: SCHEMA_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: PROMPT_FRAGMENT, PROCESS_RULE
+LIMITS:
+  - skuteczność w języku polskim nie została bezpośrednio zweryfikowana w przytoczonym badaniu
+  - wymaga wstępnej pracy użytkownika w celu przygotowania próbki
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm wymuszający niezależność generacji
+C-002 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm oceny i odwracania decyzji większości
+C-003 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm routingu perspektyw poznawczych
+C-004 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm ekstrakcji i blokowania stylu
+C-005 | DEFER | - | run 1 DEFER | BUDGET: limit pogłębień z §31 wyczerpany; kandydat "Audio-Anchor Technique" wymaga weryfikacji implementacji poza opisem katalogowym
+
+REJECTED INFERENCES
+- instrukcja w system prompt ("bądź kreatywny") ≠ dowód na zwiększenie różnorodności semantycznej
+- różnica w opisie persony (np. "jesteś surowym krytykiem") ≠ realna różnica w wnioskowaniu, jeśli model bazowy dominuje nad instrukcją
+- obecność mechanizmu debaty ≠ automatyczne zwiększenie różnorodności (standardowa debata może prowadzić do "majority pull")
+
+AUDIT DELTA
+- I1: Każdy kandydat ma przypisaną dyspozycję w ledgerze.
+- I3: Każdy Unit posiada co najmniej jeden `SOURCE_ANCHOR`.
+- I4: `EVIDENCE_TYPE` i `EVIDENCE_LAYER` odpowiadają zweryfikowanym zachowaniom w źródłach (`TESTED_BEHAVIOR`).
+- I8: Pola nieistotne dla danego Unitu zostały pominięte zgodnie z §13.1.
+
+SOURCE_GATE: CONTINUE
+GATE_BASIS: dostępny jest materiał do pogłębienia w zakresie weryfikacji mechanizmów w języku polskim oraz implementacji "Audio-Anchor Technique" (C-005).
+
+SYNTHESIS
+OBSERVATION: Wszystkie zidentyfikowane mechanizmy przeciwdziałające homogenizacji wymagają strukturalnego wymuszenia (`RUNTIME_CONSTRAINED` lub `SCHEMA_CONSTRAINED`), a nie jedynie zmiany opisu słownego.
+INFERENCE: Zbieżność wniosków w grupie 12 agentów na jednym modelu jest przewidywalnym skutkiem braku izolacji w fazie generacji (U-001) oraz braku formalnych soczewek poznawczych (U-003).
+OPEN_QUESTION: Czy mechanizm "Voice DNA Extraction" (U-004) zachowuje swoją skuteczność przy specyficznych cechach języka polskiego (np. fleksja, celowe błędy ortograficzne), które nie były przedmiotem przytoczonych badań.
+ASSESSMENT: Priorytetem dla profilu celu jest wdrożenie U-001 i U-003 w orkiestracji agentów, ponieważ adresują one bezpośrednio obserwowany problem zbieżności wniosków mimo różnych opisów person.
