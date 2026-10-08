@@ -1,0 +1,134 @@
+[ASMA ARTIFACT]
+
+HARVEST HEADER
+HARVEST_ID: H-HOMO1
+TITLE: Anti-Homogenization Mechanisms in Human-AI and Multi-Agent Systems
+SOURCE_SET: Mechanizmy przeciwdziałania homogenizacji w AI; pytanie: jakie struktury, metody lub protokoły realnie zmniejszają utratę różnorodności w głosie człowieka i w grupach agentów AI
+SOURCES:
+  - arXiv:2604.18005 (Diversity Collapse in Multi-Agent LLM Systems)
+  - arXiv:2606.29270 (Minority Sentinel: When to Overturn Majority Voting)
+  - arXiv:2609.00683 (Creative Generation via Multi-Agent Debate)
+  - arXiv:2604.24444 (Post-Editing LLM-Generated Drafts for Style)
+  - arXiv:2502.21092 / openreview.net (DeLLMphi: A Multi-Turn Method for Multi-Agent Forecasting)
+  - genaicreativity.org (Structured Creativity Methods for Multi-Agent LLMs)
+  - arXiv:2610.01518v1 (Who Thinks First? Designing Productive Friction)
+  - arXiv:2505.02410v1 / openreview.net (Bielik 11B v2 / Balancing Transfer and Cultural Erasure)
+RUN: 3
+FOCUS: Produktywne tarcie (szkic przed AI) oraz zabezpieczenia przed konwergencją międzyjęzyczną w języku polskim
+INPUT_MODE: SOURCE_PLUS_CONTEXT
+DEPTH_BUDGET: TARGETED
+DATE: 2026-10-08
+ACCESS_LIMITATIONS:
+  - wybrane preprinty i artykuły z lat 2025–2026 zweryfikowane pod kątem mechanizmów
+  - skuteczność w języku polskim oparta na raportach technicznych modeli dedykowanych, a nie na niezależnych testach porównawczych homogenizacji
+TARGET_PROFILE:
+  id: TP-HOMO1
+  version: 1.0
+  target: Zachowanie autentycznego głosu użytkownika w redakcji AI oraz zapewnienie realnej, a nie kosmetycznej, różnorodności wniosków w grupie około 12 agentów na jednym modelu.
+
+SOURCE MAP
+REGION | LOCATOR | SIGNAL
+Productive Friction | arXiv:2610.01518v1, sekcja mechanism | Wdrożenie "Engage-to-Unlock" wymusza wstępny szkic użytkownika przed generowaniem AI.
+Cross-Lingual Guardrails | arXiv:2505.02410v1 / openreview.net | Optymalizacja pod kątem języka polskiego i jawne zakotwiczenie w lokalnych korpusach przeciwdziałają "cultural erasure".
+UNKNOWN_REGIONS: NONE
+OUTSIDE_SCOPE:
+  - trening lub dostrajanie (fine-tuning) modeli bazowych
+  - ogólne porady kreatywne bez zdefiniowanego procesu
+
+DELTA
+NEW
+UNIT_ID: U-007
+NAME: Productive Friction via Engage-to-Unlock
+LENS: LENS_SYSTEM, LENS_KNOWLEDGE
+TYPE: process_constraint
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Zapobiega homogenizacji twórczości poprzez wymuszenie wstępnego, samodzielnego szkicowania pomysłów przez użytkownika przed udostępnieniem mu generatywnych możliwości AI, co zachowuje aktywne myślenie i unikalny kontekst.
+MINIMAL_FORM:
+  - Krok 1: Użytkownik tworzy "messy bullet points" lub wstępny szkic bez pomocy AI.
+  - Krok 2: System AI wymaga od użytkownika potwierdzenia lub uzupełnienia kluczowych punktów przed generowaniem pełnego tekstu.
+  - Krok 3: AI działa wyłącznie jako redaktor lub rozszerzacz dostarczonego szkicu, z instrukcją "nie przepisuj, sugeruj".
+SOURCE_ANCHOR:
+  - source: arXiv:2610.01518v1
+    locator: Who Thinks First? Designing Productive Friction with Engage-to-Unlock GenAI
+    anchor: Engage-to-Unlock mechanism, productive friction preserves active thinking
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: TESTED_BEHAVIOR
+DEPENDENCIES:
+  - interfejs lub protokół wymuszający kolejność "człowiek pierwszy, AI drugi"
+MUST_BE_TRUE: AI nie generuje pełnego tekstu od zera, dopóki użytkownik nie dostarczy własnego wkładu.
+ENFORCEMENT: RUNTIME_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: PROCESS_RULE, WORKFLOW
+LIMITS:
+  - wymaga zmiany nawyków użytkownika (odporność na pokusę "szybkiego" generowania)
+  - może być postrzegane jako spowolnienie pracy, choć zwiększa autentyczność wyniku
+
+NEW
+UNIT_ID: U-008
+NAME: Cross-Lingual Alignment Guardrails
+LENS: LENS_KNOWLEDGE, LENS_SYSTEM
+TYPE: mechanism
+STATUS: SOURCE_SUPPORTED
+FUNCTION: Przeciwdziała stylizacyjnej konwergencji w kierunku dominujących wzorców (np. angielskich) w językach mniej reprezentowanych (jak polski), poprzez jawne zakotwiczenie w lokalnych korpusach lub użycie modeli optymalizowanych pod kątem danego języka.
+MINIMAL_FORM:
+  - Krok 1: Identyfikacja ryzyka "cross-lingual homogenization" (utrata niuansów kulturowych i składniowych).
+  - Krok 2: Użycie modelu z explicitzną optymalizacją dla języka docelowego lub dostarczenie w promptcie przykładów stylizacyjnych wyłącznie z lokalnych, wiarygodnych źródeł.
+  - Krok 3: Weryfikacja wyjścia pod kątem "kulturowego wygładzania" przez porównanie z bazowym tekstem użytkownika.
+SOURCE_ANCHOR:
+  - source: arXiv:2505.02410v1 / openreview.net
+    locator: Bielik 11B v2 Technical Report / Balancing Transfer and Cultural Erasure in Multilingual LLMs
+    anchor: optimization for Polish text processing, preventing cultural erasure in cross-lingual alignment
+    revision: UNKNOWN
+EVIDENCE_TYPE: SOURCE_FACT
+EVIDENCE_LAYER: TESTED_BEHAVIOR
+DEPENDENCIES:
+  - dostęp do modelu z silnym wsparciem języka docelowego lub do reprezentatywnych próbek tekstu
+MUST_BE_TRUE: Prompt lub model bazowy zawiera wystarczające dane w języku docelowym, aby przeciwdziałać domyślnemu przesuwowi ku wzorcom angielskim.
+ENFORCEMENT: HOST_CONSTRAINED
+EFFECT_STATUS: TESTED_IN_SOURCE
+TRANSFER_FORM: DESIGN_PRINCIPLE, PROCESS_RULE
+LIMITS:
+  - nie eliminuje całkowicie zjawiska, jeśli model bazowy był trenowany głównie na danych angielskojęzycznych
+  - wymaga świadomego wyboru modelu lub dostarczenia wysokiej jakości przykładów w języku polskim
+
+CURRENT INDEX
+U-001 | Independent Blind-Writing Phase | SOURCE_SUPPORTED | last: run 1
+U-002 | Multi-Dimensional Debate Fingerprinting | SOURCE_SUPPORTED | last: run 1
+U-003 | Cognitive Lens Template Assignment | SOURCE_SUPPORTED | last: run 1
+U-004 | Voice DNA Extraction and Master Lock Prompting | SOURCE_SUPPORTED | last: run 2
+U-005 | Multi-Turn Delphi Consensus for LLM Agents | SOURCE_SUPPORTED | last: run 2
+U-006 | Sequential Role Assignment (Walt Disney Method) | SOURCE_SUPPORTED | last: run 2
+U-007 | Productive Friction via Engage-to-Unlock | SOURCE_SUPPORTED | last: run 3
+U-008 | Cross-Lingual Alignment Guardrails | SOURCE_SUPPORTED | last: run 3
+
+CANDIDATE LEDGER
+CANDIDATE_ID | STATE | UNIT_ID | LAST_CHANGE | REASON
+C-001 | UNITIZED | U-001 | run 1 NEW | odrębny mechanizm wymuszający niezależność generacji
+C-002 | UNITIZED | U-002 | run 1 NEW | odrębny mechanizm oceny i odwracania decyzji większości
+C-003 | UNITIZED | U-003 | run 1 NEW | odrębny mechanizm routingu perspektyw poznawczych
+C-004 | UNITIZED | U-004 | run 1 NEW | odrębny mechanizm ekstrakcji i blokowania stylu
+C-005 | UNITIZED | U-004 | run 2 EXTENDS | dodano technikę "Audio-Anchor" i "Voice Card" do ekstrakcji DNA głosu
+C-006 | UNITIZED | U-005 | run 2 NEW | odrębny mechanizm wielorundowej anonimizacji i konsensusu
+C-007 | UNITIZED | U-006 | run 2 NEW | odrębny mechanizm sekwencyjnego oddzielania ról generatywnych i ewaluacyjnych
+C-008 | UNITIZED | U-007 | run 3 NEW | odrębny mechanizm wymuszający wstępny szkic użytkownika przed generowaniem AI
+C-009 | UNITIZED | U-008 | run 3 NEW | odrębny mechanizm przeciwdziałania konwergencji stylów w językach mniej reprezentowanych
+
+REJECTED INFERENCES
+- zmiana opisu persony w promptcie (np. "jesteś surowym krytykiem") wystarcza do trwałej zmiany zachowania modelu przy generowaniu wniosków
+- jednoczesna debata wszystkich agentów automatycznie zwiększa różnorodność, a nie prowadzi do zjawiska "majority pull"
+- modele wielojęzyczne automatycznie zachowują lokalne niuanse stylistyczne bez jawnych zabezpieczeń w promptcie lub architekturze
+
+AUDIT DELTA
+- I1: Każdy kandydat ma przypisaną dyspozycję w ledgerze.
+- I3: Każdy Unit posiada co najmniej jeden `SOURCE_ANCHOR`.
+- I10: `UNIT_ID` są stabilne w obrębie harvestu, nowe mechanizmy otrzymały nowe identyfikatory.
+
+SOURCE_GATE: STOP
+GATE_BASIS: wszystkie główne obszary zapytania (generacja, wieloagentowość, człowiek, analogie, język) zostały zmapowane do zweryfikowanych mechanizmów strukturalnych, a dalsze pogłębianie bez nowych źródeł pierwotnych nie wniesie prawdopodobnie nowych Unitów.
+
+SYNTHESIS
+OBSERVATION: Wszystkie zidentyfikowane skuteczne mechanizmy przeciwdziałające homogenizacji (U-001 do U-008) opierają się na strukturalnym wymuszeniu (`RUNTIME_CONSTRAINED` lub `HOST_CONSTRAINED`), a nie na samych zmianach w opisach słownych person.
+INFERENCE: Problem zbieżności wniosków u 12 agentów na jednym modelu jest bezpośrednim skutkiem natychmiastowej wzajemnej widoczności ich wyjść; rozwiązanie wymaga wymuszenia niezależnych rund (U-005), sekwencyjnych ról (U-006) lub wstępnego szkicu człowieka (U-007).
+OPEN_QUESTION: Czy wdrożenie "Engage-to-Unlock" (U-007) w codziennej pracy z AI spotka się z oporem użytkownika przyzwyczajonego do natychmiastowego generowania pełnych tekstów.
+ASSESSMENT: Priorytetem dla profilu celu jest połączenie U-004 (Voice DNA) z U-007 (szkic przed AI) dla zachowania głosu użytkownika, oraz wdrożenie U-005 (Delphi) lub U-006 (Walt Disney) dla rady 12 agentów, aby zastąpić kosmetyczną różnorodność realną różnicą w wnioskowaniu.
